@@ -4,8 +4,8 @@
 	<views>34000</views>
 	<backgroundcolor>FF2F2F2F</backgroundcolor>
 	<controls>
-		<!-- left -->
 		<control type="image">
+			<description>Left container</description>
 			<visible>Control.isVisible(34000)</visible>
 			<description>underlay image</description>
 			<posx>0</posx>
@@ -18,8 +18,8 @@
 			<animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
 			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
 		</control>
-		<!-- right -->
 		<control type="image">
+			<description>Right container</description>
 			<description>underlay image</description>
 			<posx>280</posx>
 			<posy>0</posy>
@@ -28,7 +28,6 @@
 			<texture>background/background.jpg</texture>
 			<aspectratio>stretch</aspectratio>
 		</control>
-
 		<!-- content -->
 		<control type="group">
 			<visible>Control.IsVisible(34000)</visible>
@@ -36,22 +35,20 @@
 				<effect type="fade" start="0" time="400" />
 			</animation>
 			<animation effect="fade" end="100" time="200" delay="400">Visible</animation>
-			<!-- menu bar -->
 			<control type="list" id="34000">
+				<description>Menu bar on left</description>
 				<posy>108</posy>
 				<posx>0</posx>
 				<width>280</width>
 				<height>320</height>
 				<orientation>vertical</orientation>
-				<onup>-</onup>
-				<ondown>-</ondown>
 				<onright>SetFocus(8000)</onright>
-				<onleft>-</onleft>
 				<focusposition>0</focusposition>
 					<itemlayout height="40" width="180">
 						<control type="group">
 							<!-- <visible>StringCompare(Window.Property(Container.Content),ListItem.Label)</visible> -->
-							<control type="image">	<!-- back -->			
+							<control type="image">
+								<description>Containter for Icon + Text. Represents one menu item</description>		
 								<posx>0</posx>
 								<posy>0</posy>
 								<width>280</width>
@@ -59,10 +56,9 @@
 								<texture>common/container-item.png</texture>
 								<colordiffuse>FF2F2F2F</colordiffuse>
 								<aspectratio>stretch</aspectratio>
-								<!-- <animation effect="fade" end="0" time="400">Hidden</animation> -->
-								<!-- <animation effect="fade" end="100" time="400">Visible</animation> -->
 							</control>
 							<control type="textbox">
+								<description>Name of the menu item</description>
 								<posy>4</posy>
 								<posx>64</posx>
 								<width>180</width>
@@ -73,7 +69,8 @@
 								<align>left</align>
 							</control>
 						</control>
-						<control type="image">	<!-- icon -->			
+						<control type="image">
+							<description>Icon of the menu item</description>		
 							<posx>16</posx>
 							<posy>4</posy>
 							<width>32</width>
@@ -85,7 +82,8 @@
 					<focusedlayout height="40" width="180">
 						<control type="group">
 							<visible>Control.HasFocus(34000)</visible>
-							<control type="image">	<!-- back -->			
+							<control type="image">
+								<description>Containter for Icon + Text. Represents one menu item</description>				
 								<posx>0</posx>
 								<posy>0</posy>
 								<width>280</width>
@@ -93,10 +91,9 @@
 								<texture>common/container-item.png</texture>
 								<colordiffuse>FFF1F1F1</colordiffuse>
 								<aspectratio>stretch</aspectratio>
-								<!-- <animation effect="fade" end="0" time="400">Hidden</animation> -->
-								<!-- <animation effect="fade" end="100" time="400">Visible</animation> -->
 							</control>
 							<control type="textbox">
+								<description>Name of the menu item</description>
 								<posy>4</posy>
 								<posx>64</posx>
 								<width>180</width>
@@ -107,7 +104,8 @@
 								<align>left</align>
 							</control>
 						</control>
-						<control type="image">	<!-- icon -->			
+						<control type="image">	
+							<description>Icon of the menu item</description>		
 							<posx>16</posx>
 							<posy>4</posy>
 							<width>32</width>
@@ -117,37 +115,31 @@
 						</control>
 					</focusedlayout>
 			</control>
-			<!-- videos -->
 			<control type="group" id="8000">
 				<posx>312</posx>
 				<posy>0</posy>
-				<!-- video containers -->
-				<cotrol type="grouplist" id="34001">
+				<control type="grouplist" id="34001">
+					<description>Container for movies/TV shows</description>
 					<!-- <visible>!StringCompare(Container(34000).listItem.Property(content),search)</visible> -->
 					<posx>0</posx>
-					<posy>112</posy>
-					<height>532</height>
+					<posy>40</posy>
+					<height>660</height>
 					<onleft>34000</onleft>
-					<ondown>-</ondown>
-					<onup>-</onup>
-					<align>bottom</align>
-					<control type="label" id="34100"><!-- being watched -->
+					<control type="label" id="34100">
+						<description>Label for name of movie list</description>
 						<posx>4</posx>
-						<!-- <posy>0</posy> -->
 						<width>420</width>
 						<height>24</height>
-						<label>Test</label>
+						<label>In Theatres</label>
 						<font>font.14</font>
 						<textcolor>white</textcolor>
 						<align>left</align>
 					</control>
-					<control type="panel" id="34200"><!--  -->
-						<!-- <posy>24</posy> -->
+					<control type="panel" id="34200">
+						<description>Container for list of movies</description>
 						<posx>4</posx>
 						<width>936</width>
-						<height>232</height>
-						<!-- <onup>300</onup> -->
-						<!-- <ondown>34112</ondown> -->
+						<height>320</height>
 						<onleft></onleft>
 						<onright></onright>
 						<focusposition>1</focusposition>
@@ -156,212 +148,578 @@
 						<viewtype>list</viewtype>
 						<orientation>horizontal</orientation>
 						<autoscroll delay="12000" time="3000" repeat="12000">!Control.HasFocus(35111)</autoscroll>
-							<itemlayout width="234" height="232">
-								<control type="group">
-									<posx>4</posx>
-									<posy>4</posy>
-									<animation effect="fade" start="100" end="50" time="400" condition="!Control.HasFocus(34000)">Conditional</animation>
-									
-									<control type="image">	<!-- background -->
-										<posy>0</posy>
-										<posx>0</posx>
-										<width>226</width>
-										<height>232</height>
-										<aspectratio>stretch</aspectratio>
-										<!-- <texture>common/transparency.png</texture> -->
-										<texture>common/container-item.png</texture>
-										<!-- <colordiffuse>FFFFFFFF</colordiffuse> -->
-									</control>
-									<control type="image">	<!-- icon -->
-										<posy>6</posy>
-										<posx>6</posx>
-										<width>214</width>
-										<height>120</height>
-										<aspectratio>scale</aspectratio>
-										<texture background="true">icons/cover.png</texture>
-										<fadetime>400</fadetime> 
-									</control>
-									
-									<control type="image">	<!-- duration background -->
-										<posx>158</posx>
-										<posy>12</posy>
-										<width>56</width>
-										<height>20</height>
-										<!-- <texture background="false">common/transparency.png</texture> -->
-										<texture>common/container-item.png</texture>
-										<aspectratio>stretch</aspectratio>
-									</control>
-									<control type="label"><!-- duration -->
-										<posx>158</posx>
-										<posy>12</posy>
-										<width>56</width>
-										<height>20</height>
-										<label>[B]2:22[/B]</label>
-										<font>font.10</font>
-										<textcolor>FFE62118</textcolor>
-										<align>center</align>
-									</control>
-									
-									<control type="textbox">	<!-- label -->
-										<posy>134</posy>
-										<posx>6</posx>
-										<width>216</width>
-										<height>40</height>
-										<label>[UPPERCASE][B]The Matrix Ressurection[/B][/UPPERCASE]</label>
-										<font>font.10</font>
-										<textcolor>black</textcolor>
-										<align>left</align>
-									</control>
-									
-									<control type="label">	<!-- label -->
-										<posy>180</posy>
-										<posx>6</posx>
-										<width>218</width>
-										<label>By: TMDB</label>
-										<font>font.10</font>
-										<textcolor>FF505050</textcolor>
-										<align>left</align>
-									</control>
-									<control type="label">	<!-- label -->
-										<posy>200</posy>
-										<posx>6</posx>
-										<width>218</width>
-										<height>16</height>
-										<label>Rating: 5.7 • 23.12.2021</label>
-										<font>font.10</font>
-										<textcolor>FF505050</textcolor>
-										<align>left</align>
-									</control>
+						<itemlayout width="234" height="320">
+							<control type="group">
+								<description>Container for one movie</description>
+								<posx>4</posx>
+								<posy>4</posy>
+								<animation effect="fade" start="100" end="50" time="400" condition="!Control.HasFocus(34000)">Conditional</animation>
+								<control type="image">
+									<description>Container background</description>
+									<posy>0</posy>
+									<posx>0</posx>
+									<width>226</width>
+									<height>320</height>
+									<aspectratio>stretch</aspectratio>
+									<texture>common/container-item.png</texture>
+									<colordiffuse>FFFFFFFF</colordiffuse>
 								</control>
-							</itemlayout>
-							<focusedlayout width="234" height="232">
-								<control type="group">
-									<posx>4</posx>
-									<posy>4</posy>
-									<!-- 
-									<animation effect="zoom" center="auto" tween="sine" easing="inout" start="100" end="108" time="200">Focus</animation>
-									<animation effect="zoom" center="auto" tween="sine" easing="inout" start="108" end="100" time="200">UnFocus</animation>
-									 -->
-									<control type="image">	<!-- background -->
-										<posy>0</posy>
-										<posx>0</posx>
-										<width>226</width>
-										<height>232</height>
-										<aspectratio>stretch</aspectratio>
-										<!-- <texture>common/transparency.png</texture> -->
-										<texture>common/container-item.png</texture>
-										<colordiffuse>FFE62118</colordiffuse>
-									</control>
-									<control type="image">	<!-- icon -->
-										<posy>6</posy>
-										<posx>6</posx>
-										<width>214</width>
-										<height>120</height>
-										<aspectratio>scale</aspectratio>
-										<texture background="true">icons/cover.png</texture>
-										<fadetime>400</fadetime> 
-									</control>
-									
-									<control type="image">	<!-- duration background -->
-										<posx>158</posx>
-										<posy>12</posy>
-										<width>56</width>
-										<height>20</height>
-										<!-- <texture background="false">common/transparency.png</texture> -->
-										<texture>common/container-item.png</texture>
-										<colordiffuse>FFE62118s</colordiffuse>
-										<aspectratio>stretch</aspectratio>
-									</control>
-									<control type="label"><!-- duration -->
-										<posx>158</posx>
-										<posy>12</posy>
-										<width>56</width>
-										<height>20</height>
-										<label>[B]2:20[/B]</label>
-										<font>font.10</font>
-										<textcolor>FFFFFFFF</textcolor>
-										<align>center</align>
-									</control>
-									
-									<control type="textbox">	<!-- label -->
-										<posy>134</posy>
-										<posx>6</posx>
-										<width>216</width>
-										<height>40</height>
-										<label>[UPPERCASE][B]The Matrix Ressurection[/B][/UPPERCASE]</label>
-										<font>font.10</font>
-										<textcolor>white</textcolor>
-										<align>left</align>
-									</control>
-									
-									<control type="label">	<!-- label -->
-										<posy>180</posy>
-										<posx>6</posx>
-										<width>218</width>
-										<label>By: TMDB</label>
-										<font>font.10</font>
-										<textcolor>FFF1F1F1</textcolor>
-										<align>left</align>
-									</control>
-									<control type="label">	<!-- label -->
-										<posy>200</posy>
-										<posx>6</posx>
-										<width>218</width>
-										<height>16</height>
-										<label>Rating: 5.7 • 23.12.2021</label>
-										<font>font.10</font>
-										<textcolor>FFF1F1F1</textcolor>
-										<align>left</align>
-									</control>
+								<control type="image">
+									<description>Poster image</description>
+									<posy>6</posy>
+									<posx>6</posx>
+									<width>214</width>
+									<height>250</height>
+									<aspectratio>stretch</aspectratio>
+									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<fadetime>400</fadetime> 
 								</control>
-							</focusedlayout>
+								<control type="label">
+									<description>Label for movie/tv show name</description>
+									<posy>260</posy>
+									<posx>6</posx>
+									<width>220</width>
+									<label>[B]$INFO[ListItem.Label][/B]</label>
+									<font>font.10</font>
+									<textcolor>black</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for rating</description>
+									<posy>285</posy>
+									<posx>6</posx>
+									<width>150</width>
+									<height>16</height>
+									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<font>font.28</font>
+									<textcolor>FF505050</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for year</description>
+									<posy>285</posy>
+									<posx>175</posx>
+									<width>50</width>
+									<height>100</height>
+									<label>$INFO[ListItem.Label2]</label>
+									<font>font.28</font>
+									<textcolor>FF505050</textcolor>
+								</control>
+							</control>
+						</itemlayout>
+						<focusedlayout width="234" height="320">
+							<control type="group">
+								<description>Container for one movie</description>
+								<posx>4</posx>
+								<posy>4</posy>
+								<control type="image">
+									<description>Container background</description>
+									<posy>0</posy>
+									<posx>0</posx>
+									<width>226</width>
+									<height>320</height>
+									<aspectratio>stretch</aspectratio>
+									<texture>common/container-item.png</texture>
+									<colordiffuse>FFE62118</colordiffuse>
+								</control>
+								<control type="image">
+									<description>Poster image</description>
+									<posy>6</posy>
+									<posx>6</posx>
+									<width>214</width>
+									<height>250</height>
+									<aspectratio>stretch</aspectratio>
+									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<fadetime>400</fadetime> 
+								</control>
+								<control type="label">
+									<description>Label for movie/tv show name</description>
+									<posy>260</posy>
+									<posx>6</posx>
+									<width>220</width>
+									<height>40</height>
+									<label>[B]$INFO[ListItem.Label][/B]</label>
+									<font>font.10</font>
+									<textcolor>white</textcolor>
+									<scroll>true</scroll>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for rating</description>
+									<posy>285</posy>
+									<posx>6</posx>
+									<width>150</width>
+									<height>16</height>
+									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<font>font.28</font>
+									<textcolor>FFF1F1F1</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for year</description>
+									<posy>285</posy>
+									<posx>175</posx>
+									<width>50</width>
+									<height>100</height>
+									<label>$INFO[ListItem.Label2]</label>
+									<font>font.28</font>
+									<textcolor>FFF1F1F1</textcolor>
+								</control>
+							</control>
+						</focusedlayout>
 					</control>
-				</cotrol>
+					<control type="label" id="34101">
+						<description>Label for name of movie list</description>
+						<posx>4</posx>
+						<width>420</width>
+						<height>24</height>
+						<label>Popular Movies</label>
+						<font>font.14</font>
+						<textcolor>white</textcolor>
+						<align>left</align>
+					</control>
+					<control type="panel" id="34201">
+						<description>Container for list of movies</description>
+						<posx>4</posx>
+						<width>936</width>
+						<height>320</height>
+						<onleft></onleft>
+						<onright></onright>
+						<focusposition>1</focusposition>
+						<fadetime>400</fadetime>
+						<scrolltime>600</scrolltime>
+						<viewtype>list</viewtype>
+						<orientation>horizontal</orientation>
+						<autoscroll delay="12000" time="3000" repeat="12000">!Control.HasFocus(35111)</autoscroll>
+						<itemlayout width="234" height="320">
+							<control type="group">
+								<description>Container for one movie</description>
+								<posx>4</posx>
+								<posy>4</posy>
+								<animation effect="fade" start="100" end="50" time="400" condition="!Control.HasFocus(34000)">Conditional</animation>
+								<control type="image">
+									<description>Container background</description>
+									<posy>0</posy>
+									<posx>0</posx>
+									<width>226</width>
+									<height>320</height>
+									<aspectratio>stretch</aspectratio>
+									<texture>common/container-item.png</texture>
+									<colordiffuse>FFFFFFFF</colordiffuse>
+								</control>
+								<control type="image">
+									<description>Poster image</description>
+									<posy>6</posy>
+									<posx>6</posx>
+									<width>214</width>
+									<height>250</height>
+									<aspectratio>stretch</aspectratio>
+									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<fadetime>400</fadetime> 
+								</control>
+								<control type="label">
+									<description>Label for movie/tv show name</description>
+									<posy>260</posy>
+									<posx>6</posx>
+									<width>220</width>
+									<label>[B]$INFO[ListItem.Label][/B]</label>
+									<font>font.10</font>
+									<textcolor>black</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for rating</description>
+									<posy>285</posy>
+									<posx>6</posx>
+									<width>150</width>
+									<height>16</height>
+									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<font>font.28</font>
+									<textcolor>FF505050</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for year</description>
+									<posy>285</posy>
+									<posx>175</posx>
+									<width>50</width>
+									<height>100</height>
+									<label>$INFO[ListItem.Label2]</label>
+									<font>font.28</font>
+									<textcolor>FF505050</textcolor>
+								</control>
+							</control>
+						</itemlayout>
+						<focusedlayout width="234" height="320">
+							<control type="group">
+								<description>Container for one movie</description>
+								<posx>4</posx>
+								<posy>4</posy>
+								<control type="image">
+									<description>Container background</description>
+									<posy>0</posy>
+									<posx>0</posx>
+									<width>226</width>
+									<height>320</height>
+									<aspectratio>stretch</aspectratio>
+									<texture>common/container-item.png</texture>
+									<colordiffuse>FFE62118</colordiffuse>
+								</control>
+								<control type="image">
+									<description>Poster image</description>
+									<posy>6</posy>
+									<posx>6</posx>
+									<width>214</width>
+									<height>250</height>
+									<aspectratio>stretch</aspectratio>
+									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<fadetime>400</fadetime> 
+								</control>
+								<control type="label">
+									<description>Label for movie/tv show name</description>
+									<posy>260</posy>
+									<posx>6</posx>
+									<width>220</width>
+									<height>40</height>
+									<label>[B]$INFO[ListItem.Label][/B]</label>
+									<font>font.10</font>
+									<textcolor>white</textcolor>
+									<scroll>true</scroll>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for rating</description>
+									<posy>285</posy>
+									<posx>6</posx>
+									<width>150</width>
+									<height>16</height>
+									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<font>font.28</font>
+									<textcolor>FFF1F1F1</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for year</description>
+									<posy>285</posy>
+									<posx>175</posx>
+									<width>50</width>
+									<height>100</height>
+									<label>$INFO[ListItem.Label2]</label>
+									<font>font.28</font>
+									<textcolor>FFF1F1F1</textcolor>
+								</control>
+							</control>
+						</focusedlayout>
+					</control>
+					<control type="label" id="34102">
+						<description>Label for name of movie list</description>
+						<posx>4</posx>
+						<width>420</width>
+						<height>24</height>
+						<label>Upcoming Movies</label>
+						<font>font.14</font>
+						<textcolor>white</textcolor>
+						<align>left</align>
+					</control>
+					<control type="panel" id="34202">
+						<description>Container for list of movies</description>
+						<posx>4</posx>
+						<width>936</width>
+						<height>320</height>
+						<onleft></onleft>
+						<onright></onright>
+						<focusposition>1</focusposition>
+						<fadetime>400</fadetime>
+						<scrolltime>600</scrolltime>
+						<viewtype>list</viewtype>
+						<orientation>horizontal</orientation>
+						<autoscroll delay="12000" time="3000" repeat="12000">!Control.HasFocus(35111)</autoscroll>
+						<itemlayout width="234" height="320">
+							<control type="group">
+								<description>Container for one movie</description>
+								<posx>4</posx>
+								<posy>4</posy>
+								<animation effect="fade" start="100" end="50" time="400" condition="!Control.HasFocus(34000)">Conditional</animation>
+								<control type="image">
+									<description>Container background</description>
+									<posy>0</posy>
+									<posx>0</posx>
+									<width>226</width>
+									<height>320</height>
+									<aspectratio>stretch</aspectratio>
+									<texture>common/container-item.png</texture>
+									<colordiffuse>FFFFFFFF</colordiffuse>
+								</control>
+								<control type="image">
+									<description>Poster image</description>
+									<posy>6</posy>
+									<posx>6</posx>
+									<width>214</width>
+									<height>250</height>
+									<aspectratio>stretch</aspectratio>
+									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<fadetime>400</fadetime> 
+								</control>
+								<control type="label">
+									<description>Label for movie/tv show name</description>
+									<posy>260</posy>
+									<posx>6</posx>
+									<width>220</width>
+									<label>[B]$INFO[ListItem.Label][/B]</label>
+									<font>font.10</font>
+									<textcolor>black</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for rating</description>
+									<posy>285</posy>
+									<posx>6</posx>
+									<width>150</width>
+									<height>16</height>
+									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<font>font.28</font>
+									<textcolor>FF505050</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for year</description>
+									<posy>285</posy>
+									<posx>175</posx>
+									<width>50</width>
+									<height>100</height>
+									<label>$INFO[ListItem.Label2]</label>
+									<font>font.28</font>
+									<textcolor>FF505050</textcolor>
+								</control>
+							</control>
+						</itemlayout>
+						<focusedlayout width="234" height="320">
+							<control type="group">
+								<description>Container for one movie</description>
+								<posx>4</posx>
+								<posy>4</posy>
+								<control type="image">
+									<description>Container background</description>
+									<posy>0</posy>
+									<posx>0</posx>
+									<width>226</width>
+									<height>320</height>
+									<aspectratio>stretch</aspectratio>
+									<texture>common/container-item.png</texture>
+									<colordiffuse>FFE62118</colordiffuse>
+								</control>
+								<control type="image">
+									<description>Poster image</description>
+									<posy>6</posy>
+									<posx>6</posx>
+									<width>214</width>
+									<height>250</height>
+									<aspectratio>stretch</aspectratio>
+									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<fadetime>400</fadetime> 
+								</control>
+								<control type="label">
+									<description>Label for movie/tv show name</description>
+									<posy>260</posy>
+									<posx>6</posx>
+									<width>220</width>
+									<height>40</height>
+									<label>[B]$INFO[ListItem.Label][/B]</label>
+									<font>font.10</font>
+									<textcolor>white</textcolor>
+									<scroll>true</scroll>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for rating</description>
+									<posy>285</posy>
+									<posx>6</posx>
+									<width>150</width>
+									<height>16</height>
+									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<font>font.28</font>
+									<textcolor>FFF1F1F1</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for year</description>
+									<posy>285</posy>
+									<posx>175</posx>
+									<width>50</width>
+									<height>100</height>
+									<label>$INFO[ListItem.Label2]</label>
+									<font>font.28</font>
+									<textcolor>FFF1F1F1</textcolor>
+								</control>
+							</control>
+						</focusedlayout>
+					</control>
+					<control type="label" id="34103">
+						<description>Label for name of movie list</description>
+						<posx>4</posx>
+						<width>420</width>
+						<height>24</height>
+						<label>Top Rated</label>
+						<font>font.14</font>
+						<textcolor>white</textcolor>
+						<align>left</align>
+					</control>
+					<control type="panel" id="34203">
+						<description>Container for list of movies</description>
+						<posx>4</posx>
+						<width>936</width>
+						<height>320</height>
+						<onleft></onleft>
+						<onright></onright>
+						<focusposition>1</focusposition>
+						<fadetime>400</fadetime>
+						<scrolltime>600</scrolltime>
+						<viewtype>list</viewtype>
+						<orientation>horizontal</orientation>
+						<autoscroll delay="12000" time="3000" repeat="12000">!Control.HasFocus(35111)</autoscroll>
+						<itemlayout width="234" height="320">
+							<control type="group">
+								<description>Container for one movie</description>
+								<posx>4</posx>
+								<posy>4</posy>
+								<animation effect="fade" start="100" end="50" time="400" condition="!Control.HasFocus(34000)">Conditional</animation>
+								<control type="image">
+									<description>Container background</description>
+									<posy>0</posy>
+									<posx>0</posx>
+									<width>226</width>
+									<height>320</height>
+									<aspectratio>stretch</aspectratio>
+									<texture>common/container-item.png</texture>
+									<colordiffuse>FFFFFFFF</colordiffuse>
+								</control>
+								<control type="image">
+									<description>Poster image</description>
+									<posy>6</posy>
+									<posx>6</posx>
+									<width>214</width>
+									<height>250</height>
+									<aspectratio>stretch</aspectratio>
+									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<fadetime>400</fadetime> 
+								</control>
+								<control type="label">
+									<description>Label for movie/tv show name</description>
+									<posy>260</posy>
+									<posx>6</posx>
+									<width>220</width>
+									<label>[B]$INFO[ListItem.Label][/B]</label>
+									<font>font.10</font>
+									<textcolor>black</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for rating</description>
+									<posy>285</posy>
+									<posx>6</posx>
+									<width>150</width>
+									<height>16</height>
+									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<font>font.28</font>
+									<textcolor>FF505050</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for year</description>
+									<posy>285</posy>
+									<posx>175</posx>
+									<width>50</width>
+									<height>100</height>
+									<label>$INFO[ListItem.Label2]</label>
+									<font>font.28</font>
+									<textcolor>FF505050</textcolor>
+								</control>
+							</control>
+						</itemlayout>
+						<focusedlayout width="234" height="320">
+							<control type="group">
+								<description>Container for one movie</description>
+								<posx>4</posx>
+								<posy>4</posy>
+								<control type="image">
+									<description>Container background</description>
+									<posy>0</posy>
+									<posx>0</posx>
+									<width>226</width>
+									<height>320</height>
+									<aspectratio>stretch</aspectratio>
+									<texture>common/container-item.png</texture>
+									<colordiffuse>FFE62118</colordiffuse>
+								</control>
+								<control type="image">
+									<description>Poster image</description>
+									<posy>6</posy>
+									<posx>6</posx>
+									<width>214</width>
+									<height>250</height>
+									<aspectratio>stretch</aspectratio>
+									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<fadetime>400</fadetime> 
+								</control>
+								<control type="label">
+									<description>Label for movie/tv show name</description>
+									<posy>260</posy>
+									<posx>6</posx>
+									<width>220</width>
+									<height>40</height>
+									<label>[B]$INFO[ListItem.Label][/B]</label>
+									<font>font.10</font>
+									<textcolor>white</textcolor>
+									<scroll>true</scroll>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for rating</description>
+									<posy>285</posy>
+									<posx>6</posx>
+									<width>150</width>
+									<height>16</height>
+									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<font>font.28</font>
+									<textcolor>FFF1F1F1</textcolor>
+									<align>left</align>
+								</control>
+								<control type="label">
+									<description>Label for year</description>
+									<posy>285</posy>
+									<posx>175</posx>
+									<width>50</width>
+									<height>100</height>
+									<label>$INFO[ListItem.Label2]</label>
+									<font>font.28</font>
+									<textcolor>FFF1F1F1</textcolor>
+								</control>
+							</control>
+						</focusedlayout>
+					</control>
+				</control>
 			</control>
-		</control>
-		<!-- window labels + addon icon  -->
-		<control type="group">
-			<posy>0</posy>
-			<posx>1160</posx>
-			<!-- <visible>!Window.IsVisible(DialogVideoInfo.xml)</visible> -->
-			<control type="image">	<!-- addon icon -->			
-				<posx>16</posx>
-				<posy>32</posy>
-				<width>72</width>
-				<height>72</height>
-				<texture>icons/icon.png</texture>
-				<aspectration>scale</aspectration>
-				<animation effect="fade" end="0" time="400">Hidden</animation>
-				<animation effect="fade" end="100" time="400">Visible</animation>
-			</control>		
-			<control type="label" id="34002">	<!-- window.title -->
-				<posy>28</posy>
-				<posx>0</posx>
-				<width>600</width>
-				<height>24</height>
-				<font>font.28</font>
-				<textcolor>white</textcolor>
-				<shadowcolor>black</shadowcolor>
-				<align>right</align>
-				<label>Movies</label>
-				<visible>!Window.IsVisible(2003)</visible>
-			</control>
-				<control type="label" id="34004">	<!-- items: xx | page x of x pages -->
-					<posy>78</posy>
-					<posx>0</posx>
-					<width>640</width>
-					<font>font.12</font>
-					<height>60</height>
+			<control type="group">
+				<description>Label for right top corner</description>
+				<posy>0</posy>
+				<posx>1160</posx>
+				<!-- <visible>!Window.IsVisible(DialogVideoInfo.xml)</visible> -->		
+				<control type="label" id="34002">
+					<posy>16</posy>
+					<posx>74</posx>
+					<width>600</width>
+					<height>24</height>
+					<font>font.28</font>
 					<textcolor>white</textcolor>
 					<shadowcolor>black</shadowcolor>
-					<label>TODO PageNumber</label>
-					<!-- <label>$INFO[Container.NumItems,, items | ]$INFO[Container.CurrentPage,page , of ]$INFO[Container.NumPages]</label> -->
-					<!-- <label>$INFO[Container(8002).Position,Position: ] $INFO[Control.GetLabel(8002),GetLabel: ]$INFO[Container(8002).CurrentPage,CurrentPage: ]$INFO[Container(8002).NumItems,NumItems: ]</label> -->
 					<align>right</align>
+					<label>Movies</label>
+					<!-- <visible>!Window.IsVisible(2003)</visible> -->
 				</control>
+			</control>
 		</control>
-		<!-- xbmc/xbox branding -->
 		<control type="group">
+			<description>XBMC/XBOX Branding</description>
 			<posy>32</posy>
 			<posx>32</posx>
 			<control type="image">
@@ -370,7 +728,6 @@
 				<width>40</width>
 				<height>40</height>
 				<texture>common/xbox_logo/xbox.png</texture>
-				<!-- <animation effect="fade" start="0" end="100" time="250">VisibleChange</animation> -->
 			</control>
 			<control type="label">
 				<posy>10</posy>
@@ -380,11 +737,10 @@
 				<font>font.16</font>
 				<label>XBox Media Center</label>
 				<textcolor>white</textcolor>
-				<!-- <animation effect="slide" start="0" end="0,-24" time="250" condition="Player.HasAudio">Conditional</animation> -->
 			</control>
 		</control>
-		<!-- gamepad buttons -->
-		<control type="group">	
+		<control type="group">
+			<description>Gamepad buttons</description>	
 			<posx>32</posx>
 			<posy>656</posy>
 			<!-- a.button -->

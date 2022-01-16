@@ -13,16 +13,64 @@ def getMovieByIMDBId(id):
     response = requests.get("https://yts.mx/api/v2/list_movies.json?query_term=%s" % id)
     data = response.json()
 
-def getPopularMovies():
-    response = requests.get("%s/movie/popular?api_key=%s&language=en-US&page=1" % (API, API_KEY))
+def getMoviesInTheatres(page):
+    response = requests.get("%s/movie/now_playing?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
     data = response.json()
     movies = []
     for movie in data['results']:
         movies.append(Movie(movie))
     return movies
 
-def getPopularTvShows():
-    response = requests.get("%s/tv/popular?api_key=%s&language=en-US&page=1" % (API, API_KEY))
+def getPopularMovies(page):
+    response = requests.get("%s/movie/popular?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
+    data = response.json()
+    movies = []
+    for movie in data['results']:
+        movies.append(Movie(movie))
+    return movies
+
+def getUpcomingMovies(page):
+    response = requests.get("%s/movie/upcoming?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
+    data = response.json()
+    movies = []
+    for movie in data['results']:
+        movies.append(Movie(movie))
+    return movies
+
+def getTopRatedMovies(page):
+    response = requests.get("%s/movie/top_rated?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
+    data = response.json()
+    movies = []
+    for movie in data['results']:
+        movies.append(Movie(movie))
+    return movies
+
+def getOnTheAirTvShows(page):
+    response = requests.get("%s/tv/on_the_air?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
+    data = response.json()
+    tv_shows = []
+    for tv_show in data['results']:
+        tv_shows.append(TvShow(tv_show))
+    return tv_shows
+
+def getPopularTvShows(page):
+    response = requests.get("%s/tv/popular?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
+    data = response.json()
+    tv_shows = []
+    for tv_show in data['results']:
+        tv_shows.append(TvShow(tv_show))
+    return tv_shows
+
+def getAiringTodayTvShows(page):
+    response = requests.get("%s/tv/airing_today?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
+    data = response.json()
+    tv_shows = []
+    for tv_show in data['results']:
+        tv_shows.append(TvShow(tv_show))
+    return tv_shows
+
+def getTopRatedTvShows(page):
+    response = requests.get("%s/tv/top_rated?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
@@ -40,7 +88,7 @@ class Movie:
         self.overview = dict.get('overview')
         self.popularity = dict.get('popularity')
         self.poster_path = "%s%s" % (IMAGE_POSTER, dict.get('poster_path'))
-        self.release_date = dict.get('release_date')
+        self.release_date = dict.get('release_date').split('-')[0]
         self.title = dict.get('title')
         self.video = dict.get('video')
         self.vote_average = dict.get('vote_average')
