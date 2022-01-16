@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.streaming" name="Streaming" version="0.0.1" provider-name="antonic901">
+	<requires>
+		<import addon="xbmc.python" version="2.7.11" />
+	</requires>
+	<extension point="xbmc.python.script" library="default.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+			<summary lang="en">Streaming service for Xbox</summary>
+			<description lang="en">This script is used for streaming movies and TV shows on Xbox.</description>
+			<platform>all</platform>
+	</extension>
+</addon>

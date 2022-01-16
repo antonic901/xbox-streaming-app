@@ -1,0 +1,182 @@
+<window id="743" type="dialog">
+	<defaultcontrol>50</defaultcontrol>
+	<controls>
+		<control type="image">				<!-- window background -->
+			<posy>0</posy>
+			<posx>0</posx>
+			<width>1280</width>
+			<height>720</height>
+			<texture>common/transparency.png</texture>
+			<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="300" delay="400">WindowClose</animation>
+		</control>
+		<control type="group">
+			<posx>500</posx>
+			<width>280</width>
+			<animation type="WindowOpen" reversible="false">
+				<effect type="zoom" start="150" end="100" center="auto" tween="quadratic" easing="out" time="200" />
+				<effect type="fade" start="0" time="400" />
+			</animation>
+			<animation type="WindowClose" reversible="false">
+				<effect type="zoom" start="100" end="150" center="auto" tween="quadratic" easing="out" time="250" />
+				<effect type="fade" start="100" end="0" time="300" />
+			</animation>
+				<control type="image">				<!-- menu background top -->
+					<posy>0</posy>
+					<posx>0</posx>
+					<width>280</width>
+					<height>400</height>
+					<texture>common/container-item.png</texture>
+					<colordiffuse>FF222222</colordiffuse>
+				</control>
+				<control type="image">				<!-- menu background bottom -->
+					<posy>400</posy>
+					<posx>0</posx>
+					<width>280</width>
+					<height>320</height>
+					<texture>common/container-item.png</texture>
+					<colordiffuse>FFE62118</colordiffuse>
+				</control>
+				
+				<control type="image">		<!-- thumb -->
+					<posy>68</posy>
+					<posx>16</posx>
+					<width>248</width>
+					<height>140</height>
+					<texture fallback="common/transparency.png">$INFO[Window.Property(listItem.thumb)]</texture>
+					<aspectratio aligny="center">scale</aspectratio>
+					<bordersize>4</bordersize>
+					<bordertexture>common/container-item.png</bordertexture>
+				</control>
+				<control type="textbox">		<!-- showTitle -->
+					<posy>235</posy>
+					<posx>20</posx>
+					<width>220</width>
+					<height>120</height>
+					<font>font.12</font>
+					<label>[UPPERCASE]$INFO[Window.Property(listItem.label)][/UPPERCASE]</label>
+					<align>left</align>
+					<textcolor>FFFFFFFF</textcolor>
+				</control>
+			<control type="group">
+				<posy>-20</posy>
+				<visible>false</visible>
+				<control type="label">		<!-- created -->
+					<posy>255</posy>
+					<posx>20</posx>
+					<width>220</width>
+					<height>20</height>
+					<font>font.10</font>
+					<label>$INFO[Window.Property(listItem.created)]</label>
+					<align>left</align>
+					<textcolor>white</textcolor>
+				</control>
+				<control type="textbox">	<!-- title -->
+					<posy>275</posy>
+					<posx>20</posx>
+					<width>248</width>
+					<height>120</height>
+					<font>font.10</font>
+					<label>$INFO[Window.Property(listItem.tagLine)][CR][CR]$INFO[Window.Property(listItem.showDate)]</label>
+					<align>left</align>
+					<textcolor>white</textcolor>
+				</control>
+				<control type="textbox">	<!-- title -->
+					<posy>335</posy>
+					<posx>20</posx>
+					<width>248</width>
+					<height>60</height>
+					<font>font.10</font>
+					<label>$INFO[Window.Property(listItem.showDate)]</label>
+					<align>left</align>
+					<textcolor>white</textcolor>
+					<visible>false</visible>
+				</control>
+			</control>
+				
+				<control type="image">				<!-- window app logo -->
+					<posy>0</posy>
+					<posx>0</posx>
+					<width>280</width>
+					<height>64</height>
+					<texture>common\logo_white.png</texture>
+					<aspectratio>keep</aspectratio>
+					<align>center</align>
+				</control>
+				
+				<control type="list" id="50">		<!-- main menu -->
+					<posy>400</posy>
+					<posx>0</posx>
+					<width>280</width>
+					<height>320</height>
+					<orientation>vertical</orientation>
+					<focusposition>0</focusposition>
+						<itemlayout height="40" width="180">
+							<control type="image">	<!-- back -->			
+								<posx>0</posx>
+								<posy>0</posy>
+								<width>280</width>
+								<height>40</height>
+								<texture>_assets/youtube/common/container-item.png</texture>
+								<colordiffuse>FFF1F1F1</colordiffuse>
+								<aspectratio>stretch</aspectratio>
+								<!-- <animation effect="fade" end="0" time="400">Hidden</animation> -->
+								<!-- <animation effect="fade" end="100" time="400">Visible</animation> -->
+								<visible>false</visible>
+							</control>
+							<control type="image">	<!-- icon -->			
+								<posx>16</posx>
+								<posy>4</posy>
+								<width>32</width>
+								<height>32</height>
+								<!-- <info>ListItem.Icon</info> -->
+								<texture>icons/option.png</texture>
+								<aspectratio>keep</aspectratio>
+							</control>
+							<control type="label">
+								<posy>0</posy>
+								<posx>56</posx>
+								<width>208</width>
+								<height>40</height>
+								<font>font.12</font>
+								<info>ListItem.Label</info>
+								<textcolor>white</textcolor>
+								<aligny>center</aligny>
+							</control>
+						</itemlayout>
+						<focusedlayout height="40" width="180">
+							<control type="image">	<!-- back -->			
+								<posx>0</posx>
+								<posy>0</posy>
+								<width>280</width>
+								<height>40</height>
+								<texture>common/container-item.png</texture>
+								<colordiffuse>FFF1F1F1</colordiffuse>
+								<aspectratio>stretch</aspectratio>
+								<!-- <animation effect="fade" end="0" time="400">Hidden</animation> -->
+								<!-- <animation effect="fade" end="100" time="400">Visible</animation> -->
+							</control>
+							<control type="label">
+								<posy>0</posy>
+								<posx>56</posx>
+								<width>208</width>
+								<height>40</height>
+								<font>font.12</font>
+								<info>ListItem.Label</info>
+								<textcolor>black</textcolor>
+								<aligny>center</aligny>
+							</control>
+							<control type="image">	<!-- icon -->			
+								<posx>16</posx>
+								<posy>4</posy>
+								<width>32</width>
+								<height>32</height>
+								<!-- <info>ListItem.Icon</info> -->
+								<texture>icons/option.png</texture>
+								<aspectratio>keep</aspectratio>
+							</control>
+						</focusedlayout>
+				</control>
+		</control>
+	</controls>
+</window>
