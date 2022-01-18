@@ -30,9 +30,15 @@ if (__name__ == "__main__"):
 	log('Addon Ver.	: %s' % __addon_ver__)
 	log('Language	: %s' % __language__)
 	log('==================================')
-	
+
 	import resources.lib.__init__ as __init__
-	ui = __init__.GUI('main.xml', __cwd__, 'default')
+	ui = __init__.GUI('main.xml', __cwd__, 'default', __cwd__=__cwd__)
 	ui.doModal()
 	del ui
-	
+
+	# import resources.lib.CGUISearch as CGUISearch
+	# import resources.lib.service as service
+	# movies = service.searchMovies('matrix', 1)
+	# ui = CGUISearch.CGUISearch('search.xml', __cwd__, 'default', __cwd__=__cwd__, query='matrix', type='Movies', items=movies)
+	# ui.doModal()
+	# del ui

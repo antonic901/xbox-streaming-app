@@ -2,15 +2,16 @@ import os, sys
 import xbmc
 import xbmcgui
 import service
+import CGUISearch
 
 class GUI(xbmcgui.WindowXML):
 
 	def __init__(self, *args, **kwargs):
+		self.__cwd__ = kwargs['__cwd__']
 		xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
 	def onInit(self):
 		self.action_exitkeys_id = [10, 92]
-		xbmc.executebuiltin('Container.SetViewMode(34000)')
 		createLeftMenu(self)
 		createRightMenu(self)
 		# xbmc.sleep(100)
@@ -40,15 +41,33 @@ class GUI(xbmcgui.WindowXML):
 				getTvShowsForHomeScreen(self)
 				self.getControl(self.control_id_label1).setLabel(item.getLabel())
 				changeLabelsForPanels(self, 'On The Air', 'Popular TV Shows', 'Airing Today', 'Top Rated')
-			elif "Search" in item.getLabel():
+			elif "Search Movi" in item.getLabel():
 				keyboard = xbmc.Keyboard()
 				keyboard.doModal()
-				if(keyboard.isConfirmed() and keyboard.getText() != ""):
-					enteredText = keyboard.getText()
-					self.getControl(self.control_id_label1).setLabel('Results for %s' % enteredText)
-				else:
-					self.getControl(self.control_id_label1).setLabel('User cancelled search')
+				keyboardConfirmed = keyboard.isConfirmed()
+				enteredText = keyboard.getText()
 				del keyboard
+				if(keyboardConfirmed and enteredText != ""):		
+					movies = service.searchMovies(enteredText, 1)
+					if movies:
+						ui = CGUISearch.CGUISearch('search.xml', self.__cwd__, 'default', __cwd__=self.__cwd__, query=enteredText, type='Movies', items=movies)
+						ui.doModal()
+						del ui
+				else:
+					xbmc.executebuiltin('Notification(Searching is cancelled,User cancelled search,5000,DefaultIconInfo.png)')
+			elif "Search TV" in item.getLabel():
+				keyboard = xbmc.Keyboard()
+				keyboard.doModal()
+				keyboardConfirmed = keyboard.isConfirmed()
+				enteredText = keyboard.getText()
+				del keyboard
+				if(keyboardConfirmed and enteredText != ""):
+					tv_shows = service.searchTvShows(enteredText, 1)
+					ui = CGUISearch.CGUISearch('search.xml', self.__cwd__, 'default', __cwd__=self.__cwd__, query=enteredText, type='TV Shows', items=tv_shows)
+					ui.doModal()
+					del ui
+				else:
+					xbmc.executebuiltin('Notification(Searching is cancelled,User cancelled search,5000,DefaultIconInfo.png)')
 
 def createLeftMenu(self):
 		self.control_id_menu = 34000

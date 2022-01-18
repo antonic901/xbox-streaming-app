@@ -1,0 +1,393 @@
+<window id="723">
+	<allowoverlay>yes</allowoverlay>
+	<backgroundcolor>FF2F2F2F</backgroundcolor>
+    <controls>
+        <control type="image">
+            <description>Background image</description>
+            <posx>0</posx>
+            <posy>0</posy>
+            <width>1280</width>
+            <height>720</height>
+            <texture>background/actor.jpg</texture>
+            <aspectratio>stretch</aspectratio>
+            <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+        </control>
+        <control type="image">
+            <description>Actor image</description>
+            <posx>30</posx>
+            <posy>50</posy>
+            <width>250</width>
+            <height>350</height>
+            <aspectratio>stretch</aspectratio>
+            <texture>http://www.themoviedb.org/t/p/h632/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg</texture>
+        </control>
+        <control type="grouplist" id="34000">
+            <posx>30</posx>
+            <posy>400</posy>
+            <height>280</height>
+            <onleft>5000</onleft>
+            <onup>5000</onup>
+            <control type="label" id="34100">
+                <description>Label for list of movies</description>
+                <width>420</width>
+                <height>24</height>
+                <label>Movies</label>
+                <font>font.14</font>
+                <textcolor>white</textcolor>
+                <align>left</align>
+            </control>
+            <control type="panel" id="34200">
+                <description>Container for list of movies</description>
+                <width>1220</width>
+                <height>250</height>
+                <focusposition>1</focusposition>
+                <fadetime>400</fadetime>
+                <scrolltime>600</scrolltime>
+                <viewtype>list</viewtype>
+                <orientation>horizontal</orientation>
+                <autoscroll delay="12000" time="3000" repeat="12000">!Control.HasFocus(35111)</autoscroll>
+                <itemlayout width="165" height="250">
+                    <control type="group">
+                        <description>Container for one movie</description>
+                        <posx>4</posx>
+                        <posy>4</posy>
+                        <animation effect="fade" start="100" end="50" time="400" condition="Control.HasFocus(34000)">Conditional</animation>
+                        <control type="image">
+                            <description>Container background</description>
+                            <posy>0</posy>
+                            <posx>0</posx>
+                            <width>145</width>
+                            <height>230</height>
+                            <aspectratio>stretch</aspectratio>
+                            <texture>common/container-item.png</texture>
+                            <colordiffuse>FFFFFFFF</colordiffuse>
+                        </control>
+                        <control type="image">
+                            <description>Poster image</description>
+                            <posy>6</posy>
+                            <posx>6</posx>
+                            <width>133</width>
+                            <height>200</height>
+                            <aspectratio>stretch</aspectratio>
+                            <texture background="true">$INFO[ListItem.Icon]</texture>
+                            <fadetime>400</fadetime> 
+                        </control>
+                        <control type="label">
+                            <description>Label for rating</description>
+                            <posy>206</posy>
+                            <posx>6</posx>
+                            <width>133</width>
+                            <height>16</height>
+                            <label>$INFO[ListItem.Label]</label>
+                            <font>font10</font>
+                            <textcolor>black</textcolor>
+                        </control>
+                    </control>
+                </itemlayout>
+                <focusedlayout width="234" height="320">
+                    <control type="group">
+                        <description>Container for one movie</description>
+                        <posx>4</posx>
+                        <posy>0</posy>
+                        <control type="image">
+                            <description>Container background</description>
+                            <posy>0</posy>
+                            <posx>0</posx>
+                            <width>145</width>
+                            <height>230</height>
+                            <aspectratio>stretch</aspectratio>
+                            <texture>common/container-item.png</texture>
+                            <colordiffuse>FFE62118</colordiffuse>
+                        </control>
+                        <control type="image">
+                            <description>Poster image</description>
+                            <posy>6</posy>
+                            <posx>6</posx>
+                            <width>133</width>
+                            <height>200</height>
+                            <aspectratio>stretch</aspectratio>
+                            <texture background="true">$INFO[ListItem.Icon]</texture>
+                            <fadetime>400</fadetime> 
+                        </control>
+                        <control type="label">
+                            <description>Label for rating</description>
+                            <posy>206</posy>
+                            <posx>6</posx>
+                            <width>133</width>
+                            <height>16</height>
+                            <label>$INFO[ListItem.Label]</label>
+                            <font>font10</font>
+                            <scroll>true</scroll>
+                            <textcolor>white</textcolor>
+                        </control>
+                    </control>
+                </focusedlayout>
+            </control>
+            <control type="label" id="34101">
+                <description>Label for list of movies</description>
+                <width>420</width>
+                <height>24</height>
+                <label>TV Shows</label>
+                <font>font.14</font>
+                <textcolor>white</textcolor>
+                <align>left</align>
+            </control>
+            <control type="panel" id="34201">
+                <description>Container for list of movies</description>
+                <width>1175</width>
+                <height>250</height>
+                <onup>5000</onup>
+                <focusposition>1</focusposition>
+                <fadetime>400</fadetime>
+                <scrolltime>600</scrolltime>
+                <viewtype>list</viewtype>
+                <orientation>horizontal</orientation>
+                <autoscroll delay="12000" time="3000" repeat="12000">!Control.HasFocus(35111)</autoscroll>
+                <itemlayout width="165" height="250">
+                    <control type="group">
+                        <description>Container for one movie</description>
+                        <posx>4</posx>
+                        <posy>4</posy>
+                        <animation effect="fade" start="100" end="50" time="400" condition="Control.HasFocus(34000)">Conditional</animation>
+                        <control type="image">
+                            <description>Container background</description>
+                            <posy>0</posy>
+                            <posx>0</posx>
+                            <width>145</width>
+                            <height>230</height>
+                            <aspectratio>stretch</aspectratio>
+                            <texture>common/container-item.png</texture>
+                            <colordiffuse>FFFFFFFF</colordiffuse>
+                        </control>
+                        <control type="image">
+                            <description>Poster image</description>
+                            <posy>6</posy>
+                            <posx>6</posx>
+                            <width>133</width>
+                            <height>200</height>
+                            <aspectratio>stretch</aspectratio>
+                            <texture background="true">$INFO[ListItem.Icon]</texture>
+                            <fadetime>400</fadetime> 
+                        </control>
+                        <control type="label">
+                            <description>Label for rating</description>
+                            <posy>206</posy>
+                            <posx>6</posx>
+                            <width>133</width>
+                            <height>16</height>
+                            <label>$INFO[ListItem.Label]</label>
+                            <font>font10</font>
+                            <textcolor>black</textcolor>
+                            <scroll>true</scroll>
+                        </control>
+                    </control>
+                </itemlayout>
+                <focusedlayout width="234" height="320">
+                    <control type="group">
+                        <description>Container for one movie</description>
+                        <posx>4</posx>
+                        <posy>0</posy>
+                        <control type="image">
+                            <description>Container background</description>
+                            <posy>0</posy>
+                            <posx>0</posx>
+                            <width>145</width>
+                            <height>230</height>
+                            <aspectratio>stretch</aspectratio>
+                            <texture>common/container-item.png</texture>
+                            <colordiffuse>FFE62118</colordiffuse>
+                        </control>
+                        <control type="image">
+                            <description>Poster image</description>
+                            <posy>6</posy>
+                            <posx>6</posx>
+                            <width>133</width>
+                            <height>200</height>
+                            <aspectratio>stretch</aspectratio>
+                            <texture background="true">$INFO[ListItem.Icon]</texture>
+                            <fadetime>400</fadetime> 
+                        </control>
+                        <control type="label">
+                            <description>Label for rating</description>
+                            <posy>206</posy>
+                            <posx>6</posx>
+                            <width>133</width>
+                            <height>16</height>
+                            <label>$INFO[ListItem.Label]</label>
+                            <font>font10</font>
+                            <scroll>true</scroll>
+                            <textcolor>white</textcolor>
+                        </control>
+                    </control>
+                </focusedlayout>
+            </control>
+        </control>
+        <control type="group">
+            <control type="group">
+                <posx>310</posx>
+                <posy>40</posy>
+                <control type="label">
+                    <description>Actor name</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>850</width>
+                    <height>50</height>
+                    <label>Zendaya</label>
+                    <font>font_MainMenu</font>
+                    <textcolor>white</textcolor>
+                    <align>left</align>
+                </control>
+                <control type="label">
+                    <description>Basic informations about actor</description>
+                    <posx>0</posx>
+                    <posy>70</posy>
+                    <label>Female  •  Known for: Actring  •  22 Movies  •  10 TV Shows</label>
+                    <font>font20</font>
+                    <textcolor>white</textcolor>
+                </control>
+                <control type="image">
+                    <description>TMDB icon</description>
+                    <posx>790</posx>
+                    <posy>0</posy>
+                    <width>128</width>
+                    <height>128</height>
+                    <aspectratio>stretch</aspectratio>
+                    <texture>icons/128/tmdb.png</texture>
+                </control>
+            </control>
+            <control type="group">
+                <posx>306</posx>
+                <posy>170</posy>
+                <!-- <control type="image">
+                    <description>Container for description</description>
+                    <posx>0</posx>
+                    <posy>0</posy>	
+                    <width>560</width>
+                    <height>170</height>
+                    <texture>common/container-item.png</texture>
+                    <colordiffuse>FF2F2F2F</colordiffuse>
+                    <aspectratio>stretch</aspectratio>
+                </control> -->
+                <control type="textbox">
+                    <description>Biography</description>
+                    <posx>4</posx>
+                    <posy>0</posy>
+                    <width>550</width>
+                    <height>170</height>
+                    <label>Zendaya Maree Stoermer Coleman (born September 1, 1996) is an American actress and singer. She began her career as a child model and backup dancer. She rose to mainstream prominence for her role as Rocky Blue on the Disney Channel sitcom Shake It Up (2010–2013). In 2013, Zendaya was a contestant on the 16th season of the dance competition series Dancing with the Stars. She produced and starred as the titular spy, K.C. Cooper, in the sitcom K.C. Undercover (2015–2018). Her film roles include the musical drama The Greatest Showman (2017), the superhero film Spider-Man: Homecoming (2017) and its sequels, the computer-animated musical comedy Smallfoot (2018), the romantic drama Malcolm Marie (2021), the live-action/animation hybrid sports comedy Space Jam: A New Legacy (2021), and the science fiction epic Dune (2021).</label>
+                    <font>font20</font>
+                    <textcolor>white</textcolor>
+                    <autoscroll delay="3000" time="1000" repeat="10000">true</autoscroll>
+                    <align>justify</align>
+                </control>
+            </control>
+            <control type="group">
+                <posx>310</posx>
+                <posy>360</posy>
+                <control type="button" id="5000">
+                    <description>Close button</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>120</width>
+                    <height>40</height>
+                    <texturefocus>common/color/red.png</texturefocus>
+                    <texturenofocus>common/color/darkgrey.png</texturenofocus>
+                    <label>Close</label>
+                    <font>font20</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <ondown>SetFocus(34000)</ondown>
+                    <onright>5001</onright>
+                </control>
+                <control type="button" id="5001">
+                    <description>Biography button</description>
+                    <posx>140</posx>
+                    <posy>0</posy>
+                    <width>120</width>
+                    <height>40</height>
+                    <texturefocus>common/color/red.png</texturefocus>
+                    <texturenofocus>common/color/darkgrey.png</texturenofocus>
+                    <label>Biography</label>
+                    <font>font20</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <ondown>SetFocus(34000)</ondown>
+                    <onleft>5000</onleft>
+                </control>
+            </control>
+            <control type="grouplist">
+                <posx>900</posx>
+                <posy>190</posy>
+                <description>Facts</description>
+                <control type="label">
+                    <description>Age</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <height>40</height>
+                    <label>Age: 25</label>
+                    <font>font20</font>
+                </control>
+                <control type="label">
+                    <description>Born</description>
+                    <posx>0</posx>
+                    <posy>45</posy>
+                    <height>40</height>
+                    <label>Born: 01-09-1996</label>
+                    <font>font20</font>
+                </control>
+                <control type="label">
+                    <description>Place of birth</description>
+                    <posx>0</posx>
+                    <posy>100</posy>
+                    <height>40</height>
+                    <label>Place of birth: Oakland, California, USA</label>
+                    <font>font20</font>
+                </control>
+            </control>
+        </control>
+        <control type="group">
+			<description>Gamepad buttons</description>	
+			<posx>32</posx>
+			<posy>670</posy>
+			<!-- a.button -->
+			<control type="image">
+				<posy>0</posy>
+				<posx>0</posx>
+				<width>32</width>
+				<height>32</height>
+				<texture>buttons/gamepad/a.png</texture>
+			</control>
+			<control type="label">
+				<posy>-3</posy>
+				<posx>34</posx>
+				<width>580</width>
+				<height>35</height>
+				<font>font.13</font>
+				<textcolor>white</textcolor>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>Select</label>
+			</control>
+			<!-- b.button -->
+			<control type="image">			
+				<posy>0</posy>
+				<posx>126</posx>
+				<width>32</width>
+				<height>32</height>
+				<texture>buttons/gamepad/b.png</texture>
+			</control>
+			<control type="label">
+				<posy>-3</posy>
+				<posx>160</posx>
+				<width>580</width>
+				<height>35</height>
+				<font>font.13</font>
+				<textcolor>white</textcolor>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>Back</label>
+			</control>
+		</control>
+    </controls>
+</window>

@@ -77,6 +77,23 @@ def getTopRatedTvShows(page):
         tv_shows.append(TvShow(tv_show))
     return tv_shows
 
+def searchMovies(input, page):
+    response = requests.get("%s/search/movie?api_key=%s&language=en-US&query=%s&page=%s" % (API,API_KEY, input, page))
+    data = response.json()
+    movies = []
+    for movie in data['results']:
+        movies.append(Movie(movie))
+    return movies
+
+def searchTvShows(input, page):
+    response = requests.get("%s/search/tv?api_key=%s&language=en-US&query=%s&page=%s" % (API,API_KEY, input, page))
+    data = response.json()
+    tv_shows = []
+    for tv_show in data['results']:
+        tv_shows.append(TvShow(tv_show))
+    return tv_shows
+
+
 class Movie:
     def __init__(self, dict):
         self.adult = dict.get('adult')
@@ -88,7 +105,7 @@ class Movie:
         self.overview = dict.get('overview')
         self.popularity = dict.get('popularity')
         self.poster_path = "%s%s" % (IMAGE_POSTER, dict.get('poster_path'))
-        self.release_date = dict.get('release_date').split('-')[0]
+        self.release_date = dict.get('release_date')
         self.title = dict.get('title')
         self.video = dict.get('video')
         self.vote_average = dict.get('vote_average')

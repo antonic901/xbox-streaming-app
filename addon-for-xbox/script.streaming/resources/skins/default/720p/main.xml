@@ -1,13 +1,10 @@
 <window id="721">
-	<defaultcontrol>34000</defaultcontrol>
 	<allowoverlay>yes</allowoverlay>
-	<views>34000</views>
 	<backgroundcolor>FF2F2F2F</backgroundcolor>
 	<controls>
 		<control type="image">
 			<description>Left container</description>
 			<visible>Control.isVisible(34000)</visible>
-			<description>underlay image</description>
 			<posx>0</posx>
 			<posy>0</posy>
 			<width>280</width>
@@ -20,7 +17,6 @@
 		</control>
 		<control type="image">
 			<description>Right container</description>
-			<description>underlay image</description>
 			<posx>280</posx>
 			<posy>0</posy>
 			<width>1000</width>
@@ -179,8 +175,8 @@
 									<posy>260</posy>
 									<posx>6</posx>
 									<width>220</width>
-									<label>[B]$INFO[ListItem.Label][/B]</label>
-									<font>font.10</font>
+									<label>$INFO[ListItem.Label]</label>
+									<font>font12_title</font>
 									<textcolor>black</textcolor>
 									<align>left</align>
 								</control>
@@ -191,7 +187,7 @@
 									<width>150</width>
 									<height>16</height>
 									<label>Rating: $INFO[ListItem.Property(rating)]</label>
-									<font>font.28</font>
+									<font>font10</font>
 									<textcolor>FF505050</textcolor>
 									<align>left</align>
 								</control>
@@ -202,7 +198,7 @@
 									<width>50</width>
 									<height>100</height>
 									<label>$INFO[ListItem.Label2]</label>
-									<font>font.28</font>
+									<font>font10</font>
 									<textcolor>FF505050</textcolor>
 								</control>
 							</control>
@@ -238,8 +234,8 @@
 									<posx>6</posx>
 									<width>220</width>
 									<height>40</height>
-									<label>[B]$INFO[ListItem.Label][/B]</label>
-									<font>font.10</font>
+									<label>$INFO[ListItem.Label]</label>
+									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<scroll>true</scroll>
 									<align>left</align>
@@ -251,7 +247,7 @@
 									<width>150</width>
 									<height>16</height>
 									<label>Rating: $INFO[ListItem.Property(rating)]</label>
-									<font>font.28</font>
+									<font>font10</font>
 									<textcolor>FFF1F1F1</textcolor>
 									<align>left</align>
 								</control>
@@ -262,7 +258,7 @@
 									<width>50</width>
 									<height>100</height>
 									<label>$INFO[ListItem.Label2]</label>
-									<font>font.28</font>
+									<font>font10</font>
 									<textcolor>FFF1F1F1</textcolor>
 								</control>
 							</control>
