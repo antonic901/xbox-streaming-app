@@ -14,7 +14,7 @@ class GUI(xbmcgui.WindowXML):
 		self.action_exitkeys_id = [10, 92]
 		createLeftMenu(self)
 		createRightMenu(self)
-		# xbmc.sleep(100)
+		xbmc.sleep(1000)
 		self.setFocusId(34000)
 
 		self.control_id_label1 = 34002
