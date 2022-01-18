@@ -164,7 +164,7 @@
 									<width>198</width>
 									<height>230</height>
 									<aspectratio>stretch</aspectratio>
-									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<texture background="true">$INFO[ListItem.Icon]</texture>
 									<fadetime>400</fadetime> 
 								</control>
 								<control type="label">
@@ -172,7 +172,7 @@
 									<posy>240</posy>
 									<posx>6</posx>
 									<width>198</width>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.title]</label>
 									<font>font12_title</font>
 									<textcolor>black</textcolor>
 									<align>left</align>
@@ -182,7 +182,7 @@
 									<posy>265</posy>
 									<posx>6</posx>
 									<width>99</width>
-									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<label>Rating: $INFO[ListItem.rating]</label>
 									<font>font12</font>
 									<textcolor>FF505050</textcolor>
 									<align>left</align>
@@ -192,7 +192,7 @@
 									<posy>265</posy>
 									<posx>115</posx>
 									<width>99</width>
-									<label>$INFO[ListItem.Label2]</label>
+									<label>$INFO[ListItem.premiered]</label>
 									<font>font12</font>
 									<textcolor>FF505050</textcolor>
 								</control>
@@ -220,7 +220,7 @@
 									<width>198</width>
 									<height>230</height>
 									<aspectratio>stretch</aspectratio>
-									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<texture background="true">$INFO[ListItem.Icon]</texture>
 									<fadetime>400</fadetime> 
 								</control>
 								<control type="label">
@@ -228,7 +228,7 @@
 									<posy>240</posy>
 									<posx>6</posx>
 									<width>198</width>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.title]</label>
 									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<align>left</align>
@@ -238,7 +238,7 @@
 									<posy>265</posy>
 									<posx>6</posx>
 									<width>99</width>
-									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<label>Rating: $INFO[ListItem.rating]</label>
 									<font>font12</font>
 									<textcolor>FFF1F1F1</textcolor>
 									<align>left</align>
@@ -248,7 +248,7 @@
 									<posy>265</posy>
 									<posx>115</posx>
 									<width>99</width>
-									<label>$INFO[ListItem.Label2]</label>
+									<label>$INFO[ListItem.premiered]</label>
 									<font>font12</font>
 									<textcolor>FFF1F1F1</textcolor>
 								</control>
@@ -301,7 +301,7 @@
 									<width>198</width>
 									<height>230</height>
 									<aspectratio>stretch</aspectratio>
-									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<texture background="true">$INFO[ListItem.Icon]</texture>
 									<fadetime>400</fadetime> 
 								</control>
 								<control type="label">
@@ -309,7 +309,7 @@
 									<posy>240</posy>
 									<posx>6</posx>
 									<width>198</width>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.title]</label>
 									<font>font12_title</font>
 									<textcolor>black</textcolor>
 									<align>left</align>
@@ -319,7 +319,7 @@
 									<posy>265</posy>
 									<posx>6</posx>
 									<width>99</width>
-									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<label>Rating: $INFO[ListItem.rating]</label>
 									<font>font12</font>
 									<textcolor>FF505050</textcolor>
 									<align>left</align>
@@ -329,7 +329,7 @@
 									<posy>265</posy>
 									<posx>115</posx>
 									<width>99</width>
-									<label>$INFO[ListItem.Label2]</label>
+									<label>$INFO[ListItem.premiered]</label>
 									<font>font12</font>
 									<textcolor>FF505050</textcolor>
 								</control>
@@ -357,7 +357,7 @@
 									<width>198</width>
 									<height>230</height>
 									<aspectratio>stretch</aspectratio>
-									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<texture background="true">$INFO[ListItem.Icon]</texture>
 									<fadetime>400</fadetime> 
 								</control>
 								<control type="label">
@@ -365,7 +365,7 @@
 									<posy>240</posy>
 									<posx>6</posx>
 									<width>198</width>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.title]</label>
 									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<align>left</align>
@@ -375,7 +375,7 @@
 									<posy>265</posy>
 									<posx>6</posx>
 									<width>99</width>
-									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<label>Rating: $INFO[ListItem.rating]</label>
 									<font>font12</font>
 									<textcolor>FFF1F1F1</textcolor>
 									<align>left</align>
@@ -385,13 +385,13 @@
 									<posy>265</posy>
 									<posx>115</posx>
 									<width>99</width>
-									<label>$INFO[ListItem.Label2]</label>
+									<label>$INFO[ListItem.premiered]</label>
 									<font>font12</font>
 									<textcolor>FFF1F1F1</textcolor>
 								</control>
 							</control>
 						</focusedlayout>
-					</control>		
+					</control>
 					<control type="label" id="34102">
 						<description>Label for name of movie list</description>
 						<posx>4</posx>
@@ -438,7 +438,7 @@
 									<width>198</width>
 									<height>230</height>
 									<aspectratio>stretch</aspectratio>
-									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<texture background="true">$INFO[ListItem.Icon]</texture>
 									<fadetime>400</fadetime> 
 								</control>
 								<control type="label">
@@ -446,7 +446,7 @@
 									<posy>240</posy>
 									<posx>6</posx>
 									<width>198</width>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.title]</label>
 									<font>font12_title</font>
 									<textcolor>black</textcolor>
 									<align>left</align>
@@ -456,7 +456,7 @@
 									<posy>265</posy>
 									<posx>6</posx>
 									<width>99</width>
-									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<label>Rating: $INFO[ListItem.rating]</label>
 									<font>font12</font>
 									<textcolor>FF505050</textcolor>
 									<align>left</align>
@@ -466,7 +466,7 @@
 									<posy>265</posy>
 									<posx>115</posx>
 									<width>99</width>
-									<label>$INFO[ListItem.Label2]</label>
+									<label>$INFO[ListItem.premiered]</label>
 									<font>font12</font>
 									<textcolor>FF505050</textcolor>
 								</control>
@@ -494,7 +494,7 @@
 									<width>198</width>
 									<height>230</height>
 									<aspectratio>stretch</aspectratio>
-									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<texture background="true">$INFO[ListItem.Icon]</texture>
 									<fadetime>400</fadetime> 
 								</control>
 								<control type="label">
@@ -502,7 +502,7 @@
 									<posy>240</posy>
 									<posx>6</posx>
 									<width>198</width>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.title]</label>
 									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<align>left</align>
@@ -512,7 +512,7 @@
 									<posy>265</posy>
 									<posx>6</posx>
 									<width>99</width>
-									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<label>Rating: $INFO[ListItem.rating]</label>
 									<font>font12</font>
 									<textcolor>FFF1F1F1</textcolor>
 									<align>left</align>
@@ -522,7 +522,7 @@
 									<posy>265</posy>
 									<posx>115</posx>
 									<width>99</width>
-									<label>$INFO[ListItem.Label2]</label>
+									<label>$INFO[ListItem.premiered]</label>
 									<font>font12</font>
 									<textcolor>FFF1F1F1</textcolor>
 								</control>
@@ -575,7 +575,7 @@
 									<width>198</width>
 									<height>230</height>
 									<aspectratio>stretch</aspectratio>
-									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<texture background="true">$INFO[ListItem.Icon]</texture>
 									<fadetime>400</fadetime> 
 								</control>
 								<control type="label">
@@ -583,7 +583,7 @@
 									<posy>240</posy>
 									<posx>6</posx>
 									<width>198</width>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.title]</label>
 									<font>font12_title</font>
 									<textcolor>black</textcolor>
 									<align>left</align>
@@ -593,7 +593,7 @@
 									<posy>265</posy>
 									<posx>6</posx>
 									<width>99</width>
-									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<label>Rating: $INFO[ListItem.rating]</label>
 									<font>font12</font>
 									<textcolor>FF505050</textcolor>
 									<align>left</align>
@@ -603,7 +603,7 @@
 									<posy>265</posy>
 									<posx>115</posx>
 									<width>99</width>
-									<label>$INFO[ListItem.Label2]</label>
+									<label>$INFO[ListItem.premiered]</label>
 									<font>font12</font>
 									<textcolor>FF505050</textcolor>
 								</control>
@@ -631,7 +631,7 @@
 									<width>198</width>
 									<height>230</height>
 									<aspectratio>stretch</aspectratio>
-									<texture background="true">$INFO[ListItem.Thumb]</texture>
+									<texture background="true">$INFO[ListItem.Icon]</texture>
 									<fadetime>400</fadetime> 
 								</control>
 								<control type="label">
@@ -639,7 +639,7 @@
 									<posy>240</posy>
 									<posx>6</posx>
 									<width>198</width>
-									<label>$INFO[ListItem.Label]</label>
+									<label>$INFO[ListItem.title]</label>
 									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<align>left</align>
@@ -649,7 +649,7 @@
 									<posy>265</posy>
 									<posx>6</posx>
 									<width>99</width>
-									<label>Rating: $INFO[ListItem.Property(rating)]</label>
+									<label>Rating: $INFO[ListItem.rating]</label>
 									<font>font12</font>
 									<textcolor>FFF1F1F1</textcolor>
 									<align>left</align>
@@ -659,7 +659,7 @@
 									<posy>265</posy>
 									<posx>115</posx>
 									<width>99</width>
-									<label>$INFO[ListItem.Label2]</label>
+									<label>$INFO[ListItem.premiered]</label>
 									<font>font12</font>
 									<textcolor>FFF1F1F1</textcolor>
 								</control>

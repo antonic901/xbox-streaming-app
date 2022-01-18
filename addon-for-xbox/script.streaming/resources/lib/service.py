@@ -2,23 +2,17 @@ import os, sys
 import requests
 import urllib
 import json
+import ListItemCreator as create
 
 API = 'http://api.themoviedb.org/3'
 API_KEY = 'b05365fc9e6222647f949031cbb9f759'
-IMAGE_BACKDROP = 'http://image.tmdb.org/t/p/w780'
-IMAGE_POSTER = 'http://image.tmdb.org/t/p/w185'
-
-
-def getMovieByIMDBId(id):
-    response = requests.get("https://yts.mx/api/v2/list_movies.json?query_term=%s" % id)
-    data = response.json()
 
 def getMoviesInTheatres(page):
     response = requests.get("%s/movie/now_playing?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(Movie(movie))
+        movies.append(create.createBasicMovieListItem(movie))
     return movies
 
 def getPopularMovies(page):
@@ -26,7 +20,7 @@ def getPopularMovies(page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(Movie(movie))
+        movies.append(create.createBasicMovieListItem(movie))
     return movies
 
 def getUpcomingMovies(page):
@@ -34,7 +28,7 @@ def getUpcomingMovies(page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(Movie(movie))
+        movies.append(create.createBasicMovieListItem(movie))
     return movies
 
 def getTopRatedMovies(page):
@@ -42,7 +36,7 @@ def getTopRatedMovies(page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(Movie(movie))
+        movies.append(create.createBasicMovieListItem(movie))
     return movies
 
 def getOnTheAirTvShows(page):
@@ -50,7 +44,7 @@ def getOnTheAirTvShows(page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(TvShow(tv_show))
+        tv_shows.append(create.createBasicTvShowItem(tv_show))
     return tv_shows
 
 def getPopularTvShows(page):
@@ -58,7 +52,7 @@ def getPopularTvShows(page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(TvShow(tv_show))
+        tv_shows.append(create.createBasicTvShowItem(tv_show))
     return tv_shows
 
 def getAiringTodayTvShows(page):
@@ -66,7 +60,7 @@ def getAiringTodayTvShows(page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(TvShow(tv_show))
+        tv_shows.append(create.createBasicTvShowItem(tv_show))
     return tv_shows
 
 def getTopRatedTvShows(page):
@@ -74,7 +68,7 @@ def getTopRatedTvShows(page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(TvShow(tv_show))
+        tv_shows.append(create.createBasicTvShowItem(tv_show))
     return tv_shows
 
 def searchMovies(input, page):
@@ -82,7 +76,7 @@ def searchMovies(input, page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(Movie(movie))
+        movies.append(create.createBasicMovieListItem(movie))
     return movies
 
 def searchTvShows(input, page):
@@ -90,7 +84,7 @@ def searchTvShows(input, page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(TvShow(tv_show))
+        tv_shows.append(create.createBasicTvShowItem(tv_show))
     return tv_shows
 
 

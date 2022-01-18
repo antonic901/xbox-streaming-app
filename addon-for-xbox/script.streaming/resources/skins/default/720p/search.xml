@@ -48,7 +48,7 @@
                         <width>194</width>
                         <height>230</height>
                         <aspectratio>stretch</aspectratio>
-                        <texture background="true">$INFO[ListItem.Thumb]</texture>
+                        <texture background="true">$INFO[ListItem.Icon]</texture>
                         <fadetime>400</fadetime> 
                     </control>
                     <control type="label">
@@ -56,7 +56,7 @@
                         <posy>240</posy>
                         <posx>6</posx>
                         <width>194</width>
-                        <label>$INFO[ListItem.Label]</label>
+                        <label>$INFO[ListItem.title]</label>
                         <font>font12_title</font>
                         <textcolor>black</textcolor>
                         <align>left</align>
@@ -67,7 +67,7 @@
                         <posx>6</posx>
                         <width>103</width>
                         <height>16</height>
-                        <label>Rating: $INFO[ListItem.Property(rating)]</label>
+                        <label>Rating: $INFO[ListItem.rating]</label>
                         <font>font10</font>
                         <textcolor>FF505050</textcolor>
                         <align>left</align>
@@ -78,7 +78,7 @@
                         <posx>130</posx>
                         <width>103</width>
                         <height>16</height>
-                        <label>$INFO[ListItem.Label2]</label>
+                        <label>$INFO[ListItem.premiered]</label>
                         <font>font10</font>
                         <textcolor>FF505050</textcolor>
                     </control>
@@ -106,7 +106,7 @@
                         <width>194</width>
                         <height>230</height>
                         <aspectratio>stretch</aspectratio>
-                        <texture background="true">$INFO[ListItem.Thumb]</texture>
+                        <texture background="true">$INFO[ListItem.Icon]</texture>
                         <fadetime>400</fadetime> 
                     </control>
                     <control type="label">
@@ -114,7 +114,7 @@
                         <posy>240</posy>
                         <posx>6</posx>
                         <width>194</width>
-                        <label>$INFO[ListItem.Label]</label>
+                        <label>$INFO[ListItem.title]</label>
                         <font>font12_title</font>
                         <textcolor>white</textcolor>
                         <align>left</align>
@@ -126,7 +126,7 @@
                         <posx>6</posx>
                         <width>103</width>
                         <height>16</height>
-                        <label>Rating: $INFO[ListItem.Property(rating)]</label>
+                        <label>Rating: $INFO[ListItem.rating]</label>
                         <font>font10</font>
                         <textcolor>FFF1F1F1</textcolor>
                         <align>left</align>
@@ -137,7 +137,7 @@
                         <posx>130</posx>
                         <width>103</width>
                         <height>16</height>
-                        <label>$INFO[ListItem.Label2]</label>
+                        <label>$INFO[ListItem.premiered]</label>
                         <font>font10</font>
                         <textcolor>FFF1F1F1</textcolor>
                     </control>

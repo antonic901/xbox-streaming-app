@@ -15,15 +15,11 @@ class CGUISearch(xbmcgui.WindowXML):
         self.action_exitkeys_id = [10, 92]
 
         self.control_id_container = 34200
-        self.control_container = self.getControl(self.control_id_container)
 
         self.getControl(34100).setLabel("Search results for: %s" % self.query)
         self.getControl(34002).setLabel("%s" % self.type)
 
-        if "Movie" in self.type:
-            createListItemsForMovies(self)
-        elif "TV" in self.type:
-            createListItemsForTvShows(self)
+        populateContainer(self, self.control_id_container, self.items)
 
         self.setFocusId(34200)
 
@@ -35,21 +31,12 @@ class CGUISearch(xbmcgui.WindowXML):
         pass
 
     def onClick(self, id):
-        if(id == 5000):
-            self.close()
+        if(id == self.control_id_container):
+            item = self.getControl(id).getSelectedItem()
+            xbmcgui.Dialog().ok("Stream Movies and TV Shows", "This function is in development.")
 
-def createListItemsForMovies(self):
-    self.control_container.reset()
-
-    for movie in self.items:
-        item = xbmcgui.ListItem(movie.title, movie.release_date, iconImage=movie.poster_path, thumbnailImage=movie.poster_path)
-        item.setProperty('rating', movie.vote_average)
-        self.control_container.addItem(item)
-
-def createListItemsForTvShows(self):
-    self.control_container.reset()
-
-    for tv_show in self.items:
-        item = xbmcgui.ListItem(tv_show.name, tv_show.first_air_date, iconImage=tv_show.poster_path, thumbnailImage=tv_show.poster_path)
-        item.setProperty('rating', tv_show.vote_average)
-        self.control_container.addItem(item)
+def populateContainer(self, id, items):
+	container = self.getControl(id)
+	container.reset()
+	for item in items:
+		container.addItem(item)
