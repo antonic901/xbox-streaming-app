@@ -232,6 +232,7 @@
 									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<align>left</align>
+									<scroll>true</scroll>
 								</control>
 								<control type="label">
 									<description>Label for rating</description>
@@ -369,6 +370,7 @@
 									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<align>left</align>
+									<scroll>true</scroll>
 								</control>
 								<control type="label">
 									<description>Label for rating</description>
@@ -506,6 +508,7 @@
 									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<align>left</align>
+									<scroll>true</scroll>
 								</control>
 								<control type="label">
 									<description>Label for rating</description>
@@ -643,6 +646,7 @@
 									<font>font12_title</font>
 									<textcolor>white</textcolor>
 									<align>left</align>
+									<scroll>true</scroll>
 								</control>
 								<control type="label">
 									<description>Label for rating</description>

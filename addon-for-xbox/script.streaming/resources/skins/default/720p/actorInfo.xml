@@ -13,7 +13,7 @@
             <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
             <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
         </control>
-        <control type="image">
+        <control type="image" id="3000">
             <description>Actor image</description>
             <posx>30</posx>
             <posy>50</posy>
@@ -79,7 +79,7 @@
                             <posx>6</posx>
                             <width>133</width>
                             <height>16</height>
-                            <label>$INFO[ListItem.Label]</label>
+                            <label>$INFO[ListItem.title]</label>
                             <font>font10</font>
                             <textcolor>black</textcolor>
                         </control>
@@ -95,7 +95,7 @@
                             <posy>0</posy>
                             <posx>0</posx>
                             <width>145</width>
-                            <height>230</height>
+                            <height>235</height>
                             <aspectratio>stretch</aspectratio>
                             <texture>common/container-item.png</texture>
                             <colordiffuse>FFE62118</colordiffuse>
@@ -116,8 +116,8 @@
                             <posx>6</posx>
                             <width>133</width>
                             <height>16</height>
-                            <label>$INFO[ListItem.Label]</label>
-                            <font>font10</font>
+                            <label>$INFO[ListItem.title]</label>
+                            <font>font12</font>
                             <scroll>true</scroll>
                             <textcolor>white</textcolor>
                         </control>
@@ -125,7 +125,7 @@
                 </focusedlayout>
             </control>
             <control type="label" id="34101">
-                <description>Label for list of movies</description>
+                <description>Label for list of TV Shows</description>
                 <width>420</width>
                 <height>24</height>
                 <label>TV Shows</label>
@@ -134,7 +134,7 @@
                 <align>left</align>
             </control>
             <control type="panel" id="34201">
-                <description>Container for list of movies</description>
+                <description>Container for list of tv shows</description>
                 <width>1175</width>
                 <height>250</height>
                 <onup>5000</onup>
@@ -146,7 +146,7 @@
                 <autoscroll delay="12000" time="3000" repeat="12000">!Control.HasFocus(35111)</autoscroll>
                 <itemlayout width="165" height="250">
                     <control type="group">
-                        <description>Container for one movie</description>
+                        <description>Container for one tv show</description>
                         <posx>4</posx>
                         <posy>4</posy>
                         <animation effect="fade" start="100" end="50" time="400" condition="Control.HasFocus(34000)">Conditional</animation>
@@ -176,7 +176,7 @@
                             <posx>6</posx>
                             <width>133</width>
                             <height>16</height>
-                            <label>$INFO[ListItem.Label]</label>
+                            <label>$INFO[ListItem.title]</label>
                             <font>font10</font>
                             <textcolor>black</textcolor>
                             <scroll>true</scroll>
@@ -185,7 +185,7 @@
                 </itemlayout>
                 <focusedlayout width="234" height="320">
                     <control type="group">
-                        <description>Container for one movie</description>
+                        <description>Container for one tv show</description>
                         <posx>4</posx>
                         <posy>0</posy>
                         <control type="image">
@@ -193,7 +193,7 @@
                             <posy>0</posy>
                             <posx>0</posx>
                             <width>145</width>
-                            <height>230</height>
+                            <height>235</height>
                             <aspectratio>stretch</aspectratio>
                             <texture>common/container-item.png</texture>
                             <colordiffuse>FFE62118</colordiffuse>
@@ -214,8 +214,8 @@
                             <posx>6</posx>
                             <width>133</width>
                             <height>16</height>
-                            <label>$INFO[ListItem.Label]</label>
-                            <font>font10</font>
+                            <label>$INFO[ListItem.title]</label>
+                            <font>font12</font>
                             <scroll>true</scroll>
                             <textcolor>white</textcolor>
                         </control>
@@ -227,7 +227,7 @@
             <control type="group">
                 <posx>310</posx>
                 <posy>40</posy>
-                <control type="label">
+                <control type="label" id="1000">
                     <description>Actor name</description>
                     <posx>0</posx>
                     <posy>0</posy>
@@ -238,11 +238,11 @@
                     <textcolor>white</textcolor>
                     <align>left</align>
                 </control>
-                <control type="label">
+                <control type="label" id="1001">
                     <description>Basic informations about actor</description>
                     <posx>0</posx>
                     <posy>70</posy>
-                    <label>Female  •  Known for: Actring  •  22 Movies  •  10 TV Shows</label>
+                    <label>Female  •  Known for: Acting  •  22 Movies  •  10 TV Shows</label>
                     <font>font20</font>
                     <textcolor>white</textcolor>
                 </control>
@@ -269,16 +269,16 @@
                     <colordiffuse>FF2F2F2F</colordiffuse>
                     <aspectratio>stretch</aspectratio>
                 </control> -->
-                <control type="textbox">
+                <control type="textbox" id="2000">
                     <description>Biography</description>
                     <posx>4</posx>
                     <posy>0</posy>
-                    <width>550</width>
+                    <width>700</width>
                     <height>170</height>
                     <label>Zendaya Maree Stoermer Coleman (born September 1, 1996) is an American actress and singer. She began her career as a child model and backup dancer. She rose to mainstream prominence for her role as Rocky Blue on the Disney Channel sitcom Shake It Up (2010–2013). In 2013, Zendaya was a contestant on the 16th season of the dance competition series Dancing with the Stars. She produced and starred as the titular spy, K.C. Cooper, in the sitcom K.C. Undercover (2015–2018). Her film roles include the musical drama The Greatest Showman (2017), the superhero film Spider-Man: Homecoming (2017) and its sequels, the computer-animated musical comedy Smallfoot (2018), the romantic drama Malcolm Marie (2021), the live-action/animation hybrid sports comedy Space Jam: A New Legacy (2021), and the science fiction epic Dune (2021).</label>
                     <font>font20</font>
                     <textcolor>white</textcolor>
-                    <autoscroll delay="3000" time="1000" repeat="10000">true</autoscroll>
+                    <autoscroll delay="3000" time="2500" repeat="10000">true</autoscroll>
                     <align>justify</align>
                 </control>
             </control>
@@ -320,7 +320,8 @@
                 <posx>900</posx>
                 <posy>190</posy>
                 <description>Facts</description>
-                <control type="label">
+                <control type="label" id="1002">
+                    <visible>false</visible>
                     <description>Age</description>
                     <posx>0</posx>
                     <posy>0</posy>
@@ -328,7 +329,8 @@
                     <label>Age: 25</label>
                     <font>font20</font>
                 </control>
-                <control type="label">
+                <control type="label" id="1003">
+                    <visible>false</visible>
                     <description>Born</description>
                     <posx>0</posx>
                     <posy>45</posy>
@@ -336,7 +338,8 @@
                     <label>Born: 01-09-1996</label>
                     <font>font20</font>
                 </control>
-                <control type="label">
+                <control type="label" id="1004">
+                    <visible>false</visible>
                     <description>Place of birth</description>
                     <posx>0</posx>
                     <posy>100</posy>

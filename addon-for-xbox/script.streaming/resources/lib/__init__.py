@@ -2,7 +2,7 @@ import os, sys
 import xbmc
 import xbmcgui
 import service
-import CGUISearch
+import CGUISearch, CGUIMovieInfo
 
 class GUI(xbmcgui.WindowXML):
 
@@ -81,9 +81,9 @@ def populateContainer(self, id, items):
 #called when 'Movies' button is pressed
 def getMoviesForHomeScreen(self):
 	populateContainer(self, self.control_id_panel_in_theatres, service.getMoviesInTheatres(1))
-	populateContainer(self, self.control_id_panel_popular, service.getMoviesInTheatres(1))
-	populateContainer(self, self.control_id_panel_upcoming, service.getMoviesInTheatres(1))
-	populateContainer(self, self.control_id_panel_top_rated, service.getMoviesInTheatres(1))
+	populateContainer(self, self.control_id_panel_popular, service.getPopularMovies(1))
+	populateContainer(self, self.control_id_panel_upcoming, service.getUpcomingMovies(1))
+	populateContainer(self, self.control_id_panel_top_rated, service.getTopRatedMovies(1))
 
 #called when 'TV Shows' button is pressed
 def getTvShowsForHomeScreen(self):
@@ -133,4 +133,8 @@ def onClickControlPanelMenu(self):
 
 def onClickControlPanelContainer(self, id):
 	item = self.getControl(id).getSelectedItem()
-	xbmcgui.Dialog().ok("Stream Movies and TV Shows", "This function is in development.")
+	entity = service.getInfoAboutMovie(item.getProperty("id"))
+	actors = service.getActorsForMovie(item.getProperty("id"))
+	ui = CGUIMovieInfo.CGUIMovieInfo("movieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+	ui.doModal()
+	del ui

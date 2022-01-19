@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <window>
-	<views>50</views>
+	<!-- <views>50</views> -->
 	<controls>
-		<control type="list" id="50">
+		<control type="panel" id="50">
 			<left>500</left>
 			<top>200</top>
 			<width>1000</width>

@@ -1,50 +1,76 @@
+# -*- coding: utf-8 -*-
 import os, sys
 import xbmc
 import xbmcgui
+import service
+import CGUIActorInfo
 
 class CGUIMovieInfo(xbmcgui.WindowXML):
 
     def __init__(self, *args, **kwargs):
+        self.__cwd__ = kwargs['__cwd__']
+        self.entity = kwargs['entity']
+        self.actors = kwargs['actors']
         xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
     def onInit(self):
         self.action_exitkeys_id = [10, 92]
-        # xbmc.executebuiltin('Container.SetViewMode(34000)')
-        createLeftMenu(self)
-
-        self.setFocusId(5000)
+        assignIDs(self)
+        populateWithContent(self)
+        populateContainer(self, self.cContainerActors, self.actors)
+        self.setFocusId(4000)
+        xbmc.sleep(2000)
 
     def onAction(self, action):
         if action in self.action_exitkeys_id:
             self.close()
 
+    def onClick(self, id):
+        if id == self.cButtonWatch:
+            xbmcgui.Dialog().ok("Stream Movies and TV Shows", "This function is in development.")
+        elif id == self.cContainerActors:
+            item = self.getControl(id).getSelectedItem()
+            actor = service.getInfoAboutActor(item.getProperty('id'))
+            movies = service.getMoviesForActor(item.getProperty('id'))
+            tv_shows = service.getTvShowsForActor(item.getProperty('id'))
+            ui = CGUIActorInfo.CGUIActorInfo("actorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
+            ui.doModal()
+            del ui
     def onFocus(self, controlId):
         pass
 
-def createLeftMenu(self):
-    self.control_id_menu1 = 34200
-    # self.control_id_menu2 = 34201
-    self.control_menu1 = self.getControl(self.control_id_menu1)
-    # self.control_menu2 = self.getControl(self.control_id_menu2)
-    listitems = [
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='https://www.themoviedb.org/t/p/h632/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='https://www.themoviedb.org/t/p/h632/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg'),
-        xbmcgui.ListItem('Zendaya', iconImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg', thumbnailImage='http://www.themoviedb.org/t/p/w185/so3GqzuvXbYkNzQYNliAMB5rZzT.jpg')
-    ]
-    self.control_menu1.reset()
-    # self.control_menu2.reset()
-    for item in listitems:
-        self.control_menu1.addItem(item)
-        # self.control_menu2.addItem(item)
+#1000 - labels
+#2000 - textboxs
+#3000 - images
+#4000 - buttons
+def assignIDs(self):
+    self.cLabelTitle = 1000
+    self.cLabelBasicInformation = 1001
+    self.cLabelDot = 1002
+    self.cLabelRating = 1003
+    self.cLabelAudioLanguage = 1004
+    self.cTextBoxDescription = 2000
+    self.cImageBackground = 3000
+    self.cImagePoster = 3001
+    self.cImageIMDB = 3002
+    self.cImageAudio = 3003
+    self.cButtonWatch = 4000
+    self.cContainerActors = 34200
+
+def populateWithContent(self):
+    self.getControl(self.cLabelTitle).setLabel(self.entity.getProperty('title'))
+    self.getControl(self.cLabelBasicInformation).setLabel(createTextForBasicInformation(self))
+    self.getControl(self.cLabelDot).setLabel("•")
+    self.getControl(self.cLabelRating).setLabel(self.entity.getProperty('vote_average'))
+    self.getControl(self.cImageBackground).setImage(self.entity.getProperty('thumbImage'))
+    self.getControl(self.cImagePoster).setImage(self.entity.getProperty('iconImage'))
+    self.getControl(self.cTextBoxDescription).setText(self.entity.getProperty('overview'))
+
+def populateContainer(self, id, items):
+    container = self.getControl(id)
+    container.reset()
+    for item in items:
+        container.addItem(item)
+
+def createTextForBasicInformation(self):
+    return "%s  •  %s min  •  %s  •  %s" % (self.entity.getProperty('release_date'),self.entity.getProperty('runtime'),self.entity.getProperty('genres'), self.entity.getProperty('status'))

@@ -1,6 +1,8 @@
 import os, sys
 import xbmc
 import xbmcgui
+import service
+import CGUIMovieInfo
 
 class CGUISearch(xbmcgui.WindowXML):
 
@@ -31,12 +33,20 @@ class CGUISearch(xbmcgui.WindowXML):
         pass
 
     def onClick(self, id):
-        if(id == self.control_id_container):
+        if id == self.control_id_container:
             item = self.getControl(id).getSelectedItem()
-            xbmcgui.Dialog().ok("Stream Movies and TV Shows", "This function is in development.")
+            onClickControlPanelContainer(self, id)
 
 def populateContainer(self, id, items):
 	container = self.getControl(id)
 	container.reset()
 	for item in items:
 		container.addItem(item)
+
+def onClickControlPanelContainer(self, id):
+	item = self.getControl(id).getSelectedItem()
+	entity = service.getInfoAboutMovie(item.getProperty("id"))
+	actors = service.getActorsForMovie(item.getProperty("id"))
+	ui = CGUIMovieInfo.CGUIMovieInfo("movieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+	ui.doModal()
+	del ui

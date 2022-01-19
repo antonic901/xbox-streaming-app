@@ -13,7 +13,7 @@ __its_xbox__ 	= xbmc.getCondVisibility( 'System.Platform.Xbox' )
 # sys.path.append( __resources__ )
 
 def log( msg ):
-	print '::Streaming:Default:%s' % msg
+	print ('::Streaming:Default: ' + msg)
 	message = '::Streaming:Default:%s' % msg
 	xbmc.log(msg=message, level=xbmc.LOGDEBUG)
 
@@ -36,9 +36,7 @@ if (__name__ == "__main__"):
 	ui.doModal()
 	del ui
 
-	# import resources.lib.CGUISearch as CGUISearch
-	# import resources.lib.service as service
-	# movies = service.searchMovies('matrix', 1)
-	# ui = CGUISearch.CGUISearch('search.xml', __cwd__, 'default', __cwd__=__cwd__, query='matrix', type='Movies', items=movies)
+	# import resources.lib.test as test
+	# ui = test.TestWindow('test.xml', __cwd__, 'default')
 	# ui.doModal()
 	# del ui

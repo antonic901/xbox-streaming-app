@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.streaming" name="Streaming" version="0.0.1" provider-name="antonic901">
+<addon id="PopCorn Box" name="PopCorn Box" version="0.0.1" provider-name="antonic901">
 	<requires>
 		<import addon="xbmc.python" version="2.7.11" />
 	</requires>
