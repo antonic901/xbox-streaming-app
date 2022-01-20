@@ -81,7 +81,35 @@ def createBasicTvShowItem(dict):
     return item
 
 def createFullTvShowListItem(entity):
-    pass
+    item = xbmcgui.ListItem('TV Show',
+        iconImage="%s%s" % (IMAGE_POSTER, entity.poster_path),
+        thumbnailImage="%s%s" % (IMAGE_BACKDROP, entity.backdrop_path))
+
+    item.setInfo('video', {
+        'genre': extractNamesFromList(entity.genres),
+        'audiolanguage': entity.original_language,
+        'plot': entity.overview,
+        'premiered': entity.first_air_date,
+        'duration': entity.episode_run_time[0],
+        'title': entity.name,
+        'rating': entity.vote_average
+    })
+    
+    item.setProperty("iconImage", "%s%s" % (IMAGE_POSTER,entity.poster_path))
+    item.setProperty('thumbImage', "%s%s" % (IMAGE_POSTER, entity.backdrop_path))
+    item.setProperty('runtime', entity.episode_run_time[0])
+    item.setProperty('release_date', entity.first_air_date)
+    item.setProperty('genres', extractNamesFromList(entity.genres))
+    item.setProperty('id', entity.id)
+    item.setProperty('status', entity.in_production)
+    item.setProperty('title', entity.name)
+    item.setProperty('number_of_episodes', entity.number_of_episodes)
+    item.setProperty('number_of_seasons', entity.number_of_seasons)
+    item.setProperty('overview', entity.overview)
+    item.setProperty('seasons', entity.seasons)
+    item.setProperty('vote_average', entity.vote_average)
+
+    return item
 
 def createBasicActorListItem(dict):
     item = xbmcgui.ListItem('Actor',
@@ -108,6 +136,16 @@ def createFullActorListItem(entity):
     item.setProperty('place_of_birth', entity.place_of_birth)
     item.setProperty('profile_path', "%s%s" % (IMAGE_BACKDROP, entity.profile_path))
     
+    return item
+
+def createEpisodeListItem(entity):
+    item = xbmcgui.ListItem(entity.name)
+
+    item.setProperty('name', entity.name)
+    item.setProperty('overview', entity.overview)
+    item.setProperty('episode_number', entity.episode_number)
+    item.setProperty('season_number', entity.season_number)
+
     return item
 
 def extractNamesFromList(list):

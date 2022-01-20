@@ -29,13 +29,7 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
         if id == self.cButtonWatch:
             xbmcgui.Dialog().ok("Stream Movies and TV Shows", "This function is in development.")
         elif id == self.cContainerActors:
-            item = self.getControl(id).getSelectedItem()
-            actor = service.getInfoAboutActor(item.getProperty('id'))
-            movies = service.getMoviesForActor(item.getProperty('id'))
-            tv_shows = service.getTvShowsForActor(item.getProperty('id'))
-            ui = CGUIActorInfo.CGUIActorInfo("actorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
-            ui.doModal()
-            del ui
+            onClickContainerActors(self, id)
     def onFocus(self, controlId):
         pass
 
@@ -71,6 +65,15 @@ def populateContainer(self, id, items):
     container.reset()
     for item in items:
         container.addItem(item)
+
+def onClickContainerActors(self, id):
+    item = self.getControl(id).getSelectedItem()
+    actor = service.getInfoAboutActor(item.getProperty('id'))
+    movies = service.getMoviesForActor(item.getProperty('id'))
+    tv_shows = service.getTvShowsForActor(item.getProperty('id'))
+    ui = CGUIActorInfo.CGUIActorInfo("actorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
+    ui.doModal()
+    del ui
 
 def createTextForBasicInformation(self):
     return "%s  •  %s min  •  %s  •  %s" % (self.entity.getProperty('release_date'),self.entity.getProperty('runtime'),self.entity.getProperty('genres'), self.entity.getProperty('status'))

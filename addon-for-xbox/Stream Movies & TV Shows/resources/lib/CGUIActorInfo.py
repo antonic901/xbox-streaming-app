@@ -3,7 +3,7 @@ import os, sys
 import xbmc
 import xbmcgui
 import service
-import CGUIMovieInfo
+import CGUIMovieInfo, CGUITvShowInfo
 
 class CGUIActorInfo(xbmcgui.WindowXML):
 
@@ -35,11 +35,8 @@ class CGUIActorInfo(xbmcgui.WindowXML):
             self.close()
         elif(id == 5001):
             xbmcgui.Dialog().ok('Biography', self.entity.getProperty('biography'))
-        elif id == self.cPanelMovies:
+        elif id in [self.cPanelMovies, self.cPanelTvShows]:
             onClickControlPanelContainer(self, id)
-        elif id == self.cPanelTvShows:
-            xbmcgui.Dialog().ok('Stream Movies & TV Shows', "This funcionality is in development.")
-
 
 #1000 - labels
 #2000 - textboxs
@@ -67,9 +64,17 @@ def populateWithContent(self):
 
 def onClickControlPanelContainer(self, id):
 	item = self.getControl(id).getSelectedItem()
-	entity = service.getInfoAboutMovie(item.getProperty("id"))
-	actors = service.getActorsForMovie(item.getProperty("id"))
-	ui = CGUIMovieInfo.CGUIMovieInfo("movieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+	entity = []
+	actors = []
+	ui = None
+	if "Movie" in item.getLabel():
+		entity = service.getInfoAboutMovie(item.getProperty("id"))
+		actors = service.getActorsForMovie(item.getProperty("id"))
+		ui = CGUIMovieInfo.CGUIMovieInfo("movieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+	else:
+		entity = service.getInfoAboutTvShow(item.getProperty("id"))
+		actors = service.getActorsForTvShow(item.getProperty("id"))
+		ui = CGUITvShowInfo.CGUITvShowInfo("tvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
 	ui.doModal()
 	del ui
 

@@ -134,3 +134,12 @@ def getTvShowsForActor(id):
     for movie in dict.get('cast'):
         listitems.append(create.createBasicTvShowItem(movie))
     return listitems
+
+def getInfoAboutSeason(id, number):
+    response = requests.get("%s/tv/%s/season/%s?api_key=%s&language=en-US" % (API, id, number, API_KEY))
+    season = utils.createObject(response.text)
+    listitems = []
+    for episode in season.episodes:
+        listitems.append(create.createEpisodeListItem(episode))
+    return listitems
+    

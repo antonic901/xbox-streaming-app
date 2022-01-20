@@ -2,7 +2,7 @@ import os, sys
 import xbmc
 import xbmcgui
 import service
-import CGUISearch, CGUIMovieInfo
+import CGUISearch, CGUIMovieInfo, CGUITvShowInfo
 
 class GUI(xbmcgui.WindowXML):
 
@@ -52,7 +52,7 @@ def createLeftMenu(self):
 		listitems = [
 			xbmcgui.ListItem('Movies', iconImage='icons/32/movies.png'), 
 			xbmcgui.ListItem('TV Shows', iconImage='icons/32/tvshows.png'),
-			xbmcgui.ListItem('Search Movies...', iconImage='icons/32/music.png'),
+			xbmcgui.ListItem('Search Movies...', iconImage='icons/32/searchtvshows.png'),
 			xbmcgui.ListItem('Search TV Shows...', iconImage='icons/32/searchtvshows.png')
 		]
 		self.control_menu.reset()
@@ -133,8 +133,16 @@ def onClickControlPanelMenu(self):
 
 def onClickControlPanelContainer(self, id):
 	item = self.getControl(id).getSelectedItem()
-	entity = service.getInfoAboutMovie(item.getProperty("id"))
-	actors = service.getActorsForMovie(item.getProperty("id"))
-	ui = CGUIMovieInfo.CGUIMovieInfo("movieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+	entity = []
+	actors = []
+	ui = None
+	if "Movie" in item.getLabel():
+		entity = service.getInfoAboutMovie(item.getProperty("id"))
+		actors = service.getActorsForMovie(item.getProperty("id"))
+		ui = CGUIMovieInfo.CGUIMovieInfo("movieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+	else:
+		entity = service.getInfoAboutTvShow(item.getProperty("id"))
+		actors = service.getActorsForTvShow(item.getProperty("id"))
+		ui = CGUITvShowInfo.CGUITvShowInfo("tvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
 	ui.doModal()
 	del ui

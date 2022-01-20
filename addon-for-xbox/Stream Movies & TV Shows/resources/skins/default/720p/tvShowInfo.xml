@@ -1,0 +1,535 @@
+<window id="724">
+	<allowoverlay>yes</allowoverlay>
+	<backgroundcolor>FF2F2F2F</backgroundcolor>
+    <controls>
+        <control type="image" id="3000">
+            <description>Background image</description>
+            <posx>0</posx>
+            <posy>0</posy>
+            <width>1280</width>
+            <height>720</height>
+            <texture>https://image.tmdb.org/t/p/w780//1Rr5SrvHxMXHu5RjKpaMba8VTzi.jpg</texture>
+            <aspectratio>stretch</aspectratio>
+            <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+        </control>
+        <control type="image">
+            <description>Background image</description>
+            <posx>0</posx>
+            <posy>0</posy>
+            <width>1280</width>
+            <height>720</height>
+            <texture>common/transparency.png</texture>
+            <colordiffuse>FFFFFFFF</colordiffuse>
+            <aspectratio>stretch</aspectratio>
+            <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+        </control>
+        <control type="group" id="8000">
+            <posx>30</posx>
+            <posy>50</posy>
+            <control type="grouplist" id="34001">
+                <description>Container for Poster image and list of Actors</description>
+                <itemgap>15</itemgap>
+                <onup>4000</onup>
+                <control type="image" id="3001">
+                    <description>Poster image</description>
+                    <posx>30</posx>
+                    <posy>50</posy>
+                    <width>250</width>
+                    <height>350</height>
+                    <aspectratio>stretch</aspectratio>
+                    <texture>https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg</texture>
+                </control>
+                <control type="panel" id="34200">
+                    <description>Container for list of actors</description>
+                    <posx>30</posx>
+                    <posy>500</posy>
+                    <width>1215</width>
+                    <height>320</height>
+                    <focusposition>1</focusposition>
+                    <fadetime>400</fadetime>
+                    <scrolltime>600</scrolltime>
+                    <viewtype>list</viewtype>
+                    <orientation>horizontal</orientation>
+                    <autoscroll delay="12000" time="3000" repeat="12000">!Control.HasFocus(35111)</autoscroll>
+                    <itemlayout width="165" height="250">
+                        <control type="group">
+                            <description>Container for one movie</description>
+                            <posx>4</posx>
+                            <posy>4</posy>
+                            <animation effect="fade" start="100" end="50" time="400" condition="Control.HasFocus(34200)">Conditional</animation>
+                            <control type="image">
+                                <description>Container background</description>
+                                <posy>0</posy>
+                                <posx>0</posx>
+                                <width>145</width>
+                                <height>230</height>
+                                <aspectratio>stretch</aspectratio>
+                                <texture>common/container-item.png</texture>
+                                <colordiffuse>FFFFFFFF</colordiffuse>
+                            </control>
+                            <control type="image">
+                                <description>Poster image</description>
+                                <posy>6</posy>
+                                <posx>6</posx>
+                                <width>133</width>
+                                <height>200</height>
+                                <aspectratio>stretch</aspectratio>
+                                <texture background="true">$INFO[ListItem.Icon]</texture>
+                                <fadetime>400</fadetime> 
+                            </control>
+                            <control type="label" id="1005">
+                                <description>Label for name</description>
+                                <posy>206</posy>
+                                <posx>6</posx>
+                                <width>133</width>
+                                <height>16</height>
+                                <label>$INFO[ListItem.Property(name)]</label>
+                                <font>font10</font>
+                                <textcolor>black</textcolor>
+                            </control>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="234" height="320">
+                        <control type="group">
+                            <description>Container for one movie</description>
+                            <posx>4</posx>
+                            <posy>0</posy>
+                            <control type="image">
+                                <description>Container background</description>
+                                <posy>0</posy>
+                                <posx>0</posx>
+                                <width>145</width>
+                                <height>235</height>
+                                <aspectratio>stretch</aspectratio>
+                                <texture>common/container-item.png</texture>
+                                <colordiffuse>FFE62118</colordiffuse>
+                            </control>
+                            <control type="image">
+                                <description>Poster image</description>
+                                <posy>6</posy>
+                                <posx>6</posx>
+                                <width>133</width>
+                                <height>200</height>
+                                <aspectratio>stretch</aspectratio>
+                                <texture background="true">$INFO[ListItem.Icon]</texture>
+                                <fadetime>400</fadetime> 
+                            </control>
+                            <control type="label">
+                                <description>Label for rating</description>
+                                <posy>206</posy>
+                                <posx>6</posx>
+                                <width>133</width>
+                                <height>16</height>
+                                <label>$INFO[ListItem.Property(name)]</label>
+                                <font>font12</font>
+                                <textcolor>white</textcolor>
+                                <scroll>true</scroll>
+                            </control>
+                        </control>
+                    </focusedlayout>
+                </control>
+            </control>
+        </control>
+        <control type="group">
+            <control type="group">
+                <posx>310</posx>
+                <posy>40</posy>
+                <control type="label" id="1000">
+                    <description>Title</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>850</width>
+                    <height>50</height>
+                    <label>Spider-Man: Far from Home</label>
+                    <font>font_MainMenu</font>
+                    <textcolor>white</textcolor>
+                    <align>left</align>
+                </control>
+                <control type="label" id="1001">
+                    <description>Basic informations</description>
+                    <posx>0</posx>
+                    <posy>70</posy>
+                    <label>2019  •  129 min  •  action/adventure/sci-fi  •  PG-13</label>
+                    <font>font20</font>
+                    <textcolor>white</textcolor>
+                </control>
+                <control type="image" id="3002">
+                    <description>IMDB icon</description>
+                    <posx>830</posx>
+                    <posy>68</posy>
+                    <width>32</width>
+                    <height>32</height>
+                    <aspectratio>stretch</aspectratio>
+                    <texture>icons/imdb.png</texture>
+                </control>
+                <control type="label" id="1002">
+                    <description>dot</description>
+                    <posx>870</posx>
+                    <posy>70</posy>
+                    <label>•</label>
+                    <font>font20</font>
+                    <textcolor>white</textcolor>
+                </control>
+                <control type="label" id="1003">
+                    <description>rating</description>
+                    <posx>905</posx>
+                    <posy>70</posy>
+                    <label>5.7</label>
+                    <font>font20</font>
+                    <textcolor>white</textcolor>
+                </control>
+            </control>
+            <control type="group" id="6000">
+                <visible>!Control.isVisible(6001)</visible>
+                <posx>306</posx>
+                <posy>160</posy>
+                <!-- <control type="image">
+                    <description>Container for description</description>
+                    <posx>0</posx>
+                    <posy>0</posy>	
+                    <width>920</width>
+                    <height>230</height>
+                    <texture>common/container-item.png</texture>
+                    <colordiffuse>FF2F2F2F</colordiffuse>
+                    <aspectratio>stretch</aspectratio>
+                </control> -->
+                <control type="list" id="34201">
+                    <description>Container for list of seasons</description>
+                    <posx>0</posx>
+                    <posy>0</posy>
+                    <width>460</width>
+                    <height>240</height>
+                    <focusposition>1</focusposition>
+                    <orientation>vertical</orientation>
+                    <onleft></onleft>
+                    <onright>34202</onright>
+                    <itemlayout width="165" height="40">
+                        <control type="group">
+                            <description>Container for one season</description>
+                            <control type="group">
+                                <control type="image">
+                                    <description>Containter for Icon + Text. Represents one menu item</description>		
+                                    <posx>0</posx>
+                                    <posy>0</posy>
+                                    <width>165</width>
+                                    <height>35</height>
+                                    <texture>common/container-item.png</texture>
+                                    <colordiffuse>FF2F2F2F</colordiffuse>
+                                    <aspectratio>stretch</aspectratio>
+                                </control>
+                                <control type="textbox">
+                                    <description>Name of the menu item</description>
+                                    <posy>0</posy>
+                                    <posx>4</posx>
+                                    <width>165</width>
+                                    <height>35</height>
+                                    <font>font14</font>
+                                    <label>Season $INFO[ListItem.Property(season_number)]</label>
+                                    <textcolor>white</textcolor>
+                                    <align>left</align>
+                                </control>
+                            </control>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="234" height="40">
+                        <control type="group">
+                            <visible>Control.hasFocus(34201)</visible>
+                            <description>Container for one season</description>
+                            <control type="group">
+                                <control type="image">
+                                    <description>Containter for Icon + Text. Represents one menu item</description>		
+                                    <posx>0</posx>
+                                    <posy>0</posy>
+                                    <width>175</width>
+                                    <height>35</height>
+                                    <texture>common/container-item.png</texture>
+                                    <colordiffuse>FFE62118</colordiffuse>
+                                    <aspectratio>stretch</aspectratio>
+                                </control>
+                                <control type="textbox">
+                                    <description>Name of the menu item</description>
+                                    <posy>0</posy>
+                                    <posx>4</posx>
+                                    <width>234</width>
+                                    <height>35</height>
+                                    <font>font14</font>
+                                    <label>Season $INFO[ListItem.Property(season_number)]</label>
+                                    <textcolor>white</textcolor>
+                                    <align>left</align>
+                                </control>
+                            </control>
+                        </control>
+                        <control type="group">
+                            <visible>!Control.hasFocus(34201)</visible>
+                            <description>Container for one season</description>
+                            <control type="group">
+                                <control type="image">
+                                    <description>Containter for Icon + Text. Represents one menu item</description>		
+                                    <posx>0</posx>
+                                    <posy>0</posy>
+                                    <width>175</width>
+                                    <height>35</height>
+                                    <texture>common/container-item.png</texture>
+                                    <colordiffuse>FFFF4D4D</colordiffuse>
+                                    <aspectratio>stretch</aspectratio>
+                                </control>
+                                <control type="textbox">
+                                    <description>Name of the menu item</description>
+                                    <posy>0</posy>
+                                    <posx>4</posx>
+                                    <width>234</width>
+                                    <height>35</height>
+                                    <font>font14</font>
+                                    <label>Season $INFO[ListItem.Property(season_number)]</label>
+                                    <textcolor>white</textcolor>
+                                    <align>left</align>
+                                </control>
+                            </control>
+                        </control>
+                    </focusedlayout>
+                </control>
+                <control type="list" id="34202">
+                    <description>Container for list of episodes</description>
+                    <posx>250</posx>
+                    <posy>0</posy>
+                    <width>460</width>
+                    <height>240</height>
+                    <focusposition>1</focusposition>
+                    <orientation>vertical</orientation>
+                    <onleft>34201</onleft>
+                    <onright>4001</onright>
+                    <itemlayout width="260" height="40">
+                        <control type="group">
+                            <description>Container for one season</description>
+                            <control type="group">
+                                <control type="image">
+                                    <description>Containter for Icon + Text. Represents one menu item</description>		
+                                    <posx>0</posx>
+                                    <posy>0</posy>
+                                    <width>260</width>
+                                    <height>35</height>
+                                    <texture>common/container-item.png</texture>
+                                    <colordiffuse>FF2F2F2F</colordiffuse>
+                                    <aspectratio>stretch</aspectratio>
+                                </control>
+                                <control type="label">
+                                    <description>Name of the menu item</description>
+                                    <posy>0</posy>
+                                    <posx>4</posx>
+                                    <width>250</width>
+                                    <height>35</height>
+                                    <font>font14</font>
+                                    <label>$INFO[ListItem.Property(episode_number)]. $INFO[ListItem.Property(name)]</label>
+                                    <textcolor>white</textcolor>
+                                    <align>left</align>
+                                </control>
+                            </control>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="260" height="40">
+                        <control type="group">
+                            <description>Container for one season</description>
+                            <control type="group">
+                                <visible>Control.hasFocus(34202)</visible>
+                                <control type="image">
+                                    <description>Containter for Icon + Text. Represents one menu item</description>		
+                                    <posx>0</posx>
+                                    <posy>0</posy>
+                                    <width>270</width>
+                                    <height>35</height>
+                                    <texture>common/container-item.png</texture>
+                                    <colordiffuse>FFE62118</colordiffuse>
+                                    <aspectratio>stretch</aspectratio>
+                                </control>
+                                <control type="label">
+                                    <description>Name of the menu item</description>
+                                    <posy>0</posy>
+                                    <posx>4</posx>
+                                    <width>250</width>
+                                    <height>35</height>
+                                    <font>font14</font>
+                                    <label>$INFO[ListItem.Property(episode_number)]. $INFO[ListItem.Property(name)]</label>
+                                    <textcolor>white</textcolor>
+                                    <align>left</align>
+                                    <scroll>true</scroll>
+                                </control>
+                            </control>
+                            <control type="group">
+                                <visible>!Control.hasFocus(34202)</visible>
+                                <control type="image">
+                                    <description>Containter for Icon + Text. Represents one menu item</description>		
+                                    <posx>0</posx>
+                                    <posy>0</posy>
+                                    <width>270</width>
+                                    <height>35</height>
+                                    <texture>common/container-item.png</texture>
+                                    <colordiffuse>FFFF4D4D</colordiffuse>
+                                    <aspectratio>stretch</aspectratio>
+                                </control>
+                                <control type="label">
+                                    <description>Name of the menu item</description>
+                                    <posy>0</posy>
+                                    <posx>4</posx>
+                                    <width>250</width>
+                                    <height>35</height>
+                                    <font>font14</font>
+                                    <label>$INFO[ListItem.Property(episode_number)]. $INFO[ListItem.Property(name)]</label>
+                                    <textcolor>white</textcolor>
+                                    <align>left</align>
+                                    <scroll>true</scroll>
+                                </control>
+                            </control>
+                        </control>
+                    </focusedlayout>
+                </control>
+                <control type="group">
+                    <posx>530</posx>
+                    <posy>0</posy>
+                    <!-- <control type="image">
+                        <description>Container for description</description>
+                        <posx>0</posx>
+                        <posy>0</posy>	
+                        <width>400</width>
+                        <height>240</height>
+                        <texture>common/container-item.png</texture>
+                        <colordiffuse>FF2F2F2F</colordiffuse>
+                        <aspectratio>stretch</aspectratio>
+                    </control> -->
+                    <control type="textbox" id="2001">
+                        <description>Overview of episode</description>
+                        <posx>4</posx>
+                        <posy>0</posy>
+                        <width>400</width>
+                        <height>190</height>
+                        <label>Not available</label>
+                        <font>font20</font>
+                        <textcolor>white</textcolor>
+                        <autoscroll delay="3000" time="2500" repeat="10000">true</autoscroll>
+                        <align>justify</align>
+                    </control>
+                    <control type="button" id="4001">
+                        <description>Watch episode</description>
+                        <posx>280</posx>
+                        <posy>200</posy>
+                        <width>120</width>
+                        <height>40</height>
+                        <texturefocus>common/color/red.png</texturefocus>
+                        <texturenofocus>common/color/darkgrey.png</texturenofocus>
+                        <label>Watch Now</label>
+                        <font>font20</font>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <onright>34201</onright>
+                        <onleft>34202</onleft>
+                    </control>
+                </control>
+            </control>
+            <control type="group" id="6001">
+                <posx>306</posx>
+                <posy>170</posy>
+                <!-- <control type="image">
+                    <description>Container for description</description>
+                    <posx>0</posx>
+                    <posy>0</posy>	
+                    <width>920</width>
+                    <height>180</height>
+                    <texture>common/container-item.png</texture>
+                    <colordiffuse>FF2F2F2F</colordiffuse>
+                    <aspectratio>stretch</aspectratio>
+                </control> -->
+                <control type="textbox" id="2000">
+                    <description>Description of TV Show</description>
+                    <posx>4</posx>
+                    <posy>0</posy>
+                    <width>900</width>
+                    <height>180</height>
+                    <label>Unavailable</label>
+                    <font>font20</font>
+                    <textcolor>white</textcolor>
+                    <autoscroll delay="3000" time="1000" repeat="10000">true</autoscroll>
+                    <align>justify</align>
+                </control>
+            </control>
+            <control type="group" id="6002">
+                <control type="button" id="4000">
+                    <description>watch</description>
+                    <posx>310</posx>
+                    <posy>360</posy>
+                    <width>120</width>
+                    <height>40</height>
+                    <texturefocus>common/color/red.png</texturefocus>
+                    <texturenofocus>common/color/darkgrey.png</texturenofocus>
+                    <label>Watch Now</label>
+                    <font>font20</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <ondown>SetFocus(34001)</ondown>
+                </control>
+                <control type="label" id="1004">
+                    <description>Audio language</description>
+                    <posx>1040</posx>
+                    <posy>360</posy>
+                    <height>40</height>
+                    <label>Audio Language: </label>
+                    <font>font20</font>
+                    <aligny>center</aligny>
+                </control>
+                <control type="image" id="3003">
+                    <description>Audio icon</description>
+                    <posx>1210</posx>
+                    <posy>365</posy>
+                    <width>32</width>
+                    <height>32</height>
+                    <aspectratio>stretch</aspectratio>
+                    <texture>icons/english.png</texture>
+                    <aligny>center</aligny>
+                </control>
+            </control>
+        </control>
+        <control type="group">
+			<description>Gamepad buttons</description>	
+			<posx>32</posx>
+			<posy>670</posy>
+			<!-- a.button -->
+			<control type="image">
+				<posy>0</posy>
+				<posx>0</posx>
+				<width>32</width>
+				<height>32</height>
+				<texture>buttons/gamepad/a.png</texture>
+			</control>
+			<control type="label">
+				<posy>-3</posy>
+				<posx>34</posx>
+				<width>580</width>
+				<height>35</height>
+				<font>font.13</font>
+				<textcolor>white</textcolor>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>Select</label>
+			</control>
+			<!-- b.button -->
+			<control type="image">			
+				<posy>0</posy>
+				<posx>126</posx>
+				<width>32</width>
+				<height>32</height>
+				<texture>buttons/gamepad/b.png</texture>
+			</control>
+			<control type="label">
+				<posy>-3</posy>
+				<posx>160</posx>
+				<width>580</width>
+				<height>35</height>
+				<font>font.13</font>
+				<textcolor>white</textcolor>
+				<align>left</align>
+				<aligny>center</aligny>
+				<label>Back</label>
+			</control>
+		</control>
+    </controls>
+</window>
