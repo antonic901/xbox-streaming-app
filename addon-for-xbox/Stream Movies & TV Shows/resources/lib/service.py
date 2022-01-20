@@ -6,7 +6,7 @@ import ListItemCreator as create
 import utils as utils
 
 API = 'http://api.themoviedb.org/3'
-API_KEY = 'b05365fc9e6222647f949031cbb9f759'
+API_KEY = 'f0d9239acde293e5222746bf11d1a3dc'
 
 def getMoviesInTheatres(page):
     response = requests.get("%s/movie/now_playing?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
