@@ -3,7 +3,7 @@ import os, sys
 import xbmc
 import xbmcgui
 import service
-import CGUIActorInfo
+import CGUIActorInfo, CGUIStream
 
 class CGUITvShowInfo(xbmcgui.WindowXML):
 
@@ -52,7 +52,20 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
             populateTextBox(self, self.cTextBoxOverview, item.getProperty('overview'))
         
         elif id == self.cButtonWatchEpisode:
-            xbmcgui.Dialog().ok("Stream Movies and TV Shows", "This function is in development.")
+            season = self.getControl(self.cContainerSeasons).getSelectedPosition() + 1
+            episode = self.getControl(self.cContainerEpisodes).getSelectedPosition() + 1
+
+            if season < 10:
+                season = "0%s" % season
+
+            if episode < 10:
+                episode = "0%s" % episode
+
+            name = "%s s%se%s" % (self.entity.getProperty('title'), season, episode)
+            streams, listitems = service.getStreams(name, "TV")
+            ui = CGUIStream.CGUIStream('stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=name)
+            ui.doModal()
+            del ui
     
     def onFocus(self, controlId):
         pass

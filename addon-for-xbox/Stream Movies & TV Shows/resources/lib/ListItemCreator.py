@@ -148,6 +148,17 @@ def createEpisodeListItem(entity):
 
     return item
 
+def createStreamListItem(entity):
+    item = xbmcgui.ListItem()
+
+    item.setProperty('title', entity.title)
+    item.setProperty('seeds', entity.seeds)
+    item.setProperty('peers', entity.peers)
+    item.setProperty('size', entity.size)
+    item.setProperty('provider', entity.provider)
+
+    return item
+
 def extractNamesFromList(list):
     string = ''
     i = 0

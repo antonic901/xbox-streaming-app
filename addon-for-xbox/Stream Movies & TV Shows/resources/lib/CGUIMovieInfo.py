@@ -3,7 +3,7 @@ import os, sys
 import xbmc
 import xbmcgui
 import service
-import CGUIActorInfo
+import CGUIActorInfo, CGUIStream
 
 class CGUIMovieInfo(xbmcgui.WindowXML):
 
@@ -27,7 +27,11 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
 
     def onClick(self, id):
         if id == self.cButtonWatch:
-            xbmcgui.Dialog().ok("Stream Movies and TV Shows", "This function is in development.")
+            name = self.entity.getProperty('title')
+            streams, listitems = service.getStreams(name, "Movies")
+            ui = CGUIStream.CGUIStream('stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=name)
+            ui.doModal()
+            del ui
         elif id == self.cContainerActors:
             onClickContainerActors(self, id)
     def onFocus(self, controlId):
