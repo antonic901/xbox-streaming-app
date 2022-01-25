@@ -1,0 +1,102 @@
+<window id="127">
+    <controls>
+        <control type="image">
+            <description>Background image</description>
+            <posx>25</posx>
+            <posy>35</posy>
+            <width>1240</width>
+            <height>665</height>
+            <texture>common/container-item.png</texture>
+            <colordiffuse>FF2F2F2F</colordiffuse>
+            <aspectratio>stretch</aspectratio>
+            <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+        </control>
+        <control type="grouplist">
+            <posx>25</posx>
+            <posy>30</posy>
+            <control type="label" id="1000">
+                <description>Title</description>
+                <posx>0</posx>
+                <width>1240</width>
+                <height>100</height>
+                <font>font30_title</font>
+                <textcolor>white</textcolor>
+                <align>center</align>
+                <aligny>center</aligny>
+            </control>
+            <control type="list" id="34000">
+				<description>List of streams</description>
+				<posx>0</posx>
+				<width>1240</width>
+				<height>565</height>
+				<orientation>vertical</orientation>
+				<focusposition>0</focusposition>
+                <itemlayout height="70" width="1240">
+                    <control type="group">
+                        <control type="label">
+                            <description>Info</description>
+                            <posy>0</posy>
+                            <posx>10</posx>
+                            <width>1240</width>
+                            <height>35</height>
+                            <font>font16</font>
+                            <label>($INFO[ListItem.Property(seeds)] / $INFO[ListItem.Property(peers)]) [[B]$INFO[ListItem.Property(size)][/B]] - [UPPERCASE]$INFO[ListItem.Property(provider)][/UPPERCASE]</label>
+                            <textcolor>white</textcolor>
+                            <align>left</align>
+                        </control>
+                        <control type="label">
+                            <description>Title</description>
+                            <posy>35</posy>
+                            <posx>10</posx>
+                            <width>1240</width>
+                            <height>35</height>
+                            <font>font14</font>
+                            <info>ListItem.Property(title)</info>
+                            <textcolor>white</textcolor>
+                            <align>left</align>
+                        </control>
+                    </control>
+                </itemlayout>
+                <focusedlayout height="70" width="1240">
+                    <control type="group">
+                        <control type="image">
+                            <description>Containter for Icon + Text. Represents one menu item</description>		
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>1240</width>
+                            <height>70</height>
+                            <texture>common/container-item.png</texture>
+                            <colordiffuse>FFE62118</colordiffuse>
+                            <aspectratio>stretch</aspectratio>
+                        </control>
+                        <control type="label">
+                            <description>Info</description>
+                            <posy>0</posy>
+                            <posx>20</posx>
+                            <width>1230</width>
+                            <height>35</height>
+                            <font>font16</font>
+                            <label>($INFO[ListItem.Property(seeds)] / $INFO[ListItem.Property(peers)]) [[B]$INFO[ListItem.Property(size)][/B]] - [UPPERCASE]$INFO[ListItem.Property(provider)][/UPPERCASE]</label>
+                            <textcolor>white</textcolor>
+                            <align>left</align>
+                            <scroll>true</scroll>
+                        </control>
+                        <control type="label">
+                            <description>Title</description>
+                            <posy>35</posy>
+                            <posx>20</posx>
+                            <width>1230</width>
+                            <height>35</height>
+                            <font>font14</font>
+                            <info>ListItem.Property(title)</info>
+                            <textcolor>white</textcolor>
+                            <align>left</align>
+                            <scroll>true</scroll>
+                        </control>
+                    </control>
+                </focusedlayout>
+			</control>
+        </control>
+    </controls>
+</window>
