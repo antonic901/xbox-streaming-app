@@ -65,7 +65,7 @@
                         <description>Label for rating</description>
                         <posy>260</posy>
                         <posx>6</posx>
-                        <width>103</width>
+                        <width>97</width>
                         <height>16</height>
                         <label>Rating: $INFO[ListItem.rating]</label>
                         <font>font10</font>
@@ -75,8 +75,8 @@
                     <control type="label">
                         <description>Label for year</description>
                         <posy>260</posy>
-                        <posx>130</posx>
-                        <width>103</width>
+                        <posx>122</posx>
+                        <width>80</width>
                         <height>16</height>
                         <label>$INFO[ListItem.premiered]</label>
                         <font>font10</font>
@@ -84,7 +84,7 @@
                     </control>
                 </control>
             </itemlayout>
-            <focusedlayout>
+            <focusedlayout width="236" height="300">
                 <control type="group">
                     <description>Container for one movie</description>
                     <posx>10</posx>
@@ -124,7 +124,7 @@
                         <description>Label for rating</description>
                         <posy>260</posy>
                         <posx>6</posx>
-                        <width>103</width>
+                        <width>97</width>
                         <height>16</height>
                         <label>Rating: $INFO[ListItem.rating]</label>
                         <font>font10</font>
@@ -134,11 +134,12 @@
                     <control type="label">
                         <description>Label for year</description>
                         <posy>260</posy>
-                        <posx>130</posx>
-                        <width>103</width>
+                        <posx>122</posx>
+                        <width>80</width>
                         <height>16</height>
                         <label>$INFO[ListItem.premiered]</label>
                         <font>font10</font>
+                        <align>left</align>
                         <textcolor>FFF1F1F1</textcolor>
                     </control>
                 </control>
