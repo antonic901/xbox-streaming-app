@@ -80,9 +80,9 @@ Status values:
 ## Some images
 ![Movies](https://i.postimg.cc/jScq6RNM/screenshot000.png)
 ![TV Shows](https://i.postimg.cc/ZYLTzTs4/screenshot001.png)
-![Movies search](https://i.postimg.cc/90XHQ7gV/screenshot005.png)
+![Search movies](https://i.ibb.co/TTp5JL0/screenshot005.png)
 ![Movie info](https://i.postimg.cc/tJDy35nY/screenshot006.png)
-![TV Shows search](https://i.postimg.cc/Wbbs2Qxr/screenshot003.png)
+![TV Search](https://i.ibb.co/y0w6dLn/screenshot003.png)
 ![TV Show info](https://i.postimg.cc/BQY4tmGz/screenshot004.png)
 ![Actor info](https://i.postimg.cc/BvD0Ys1W/screenshot007.png)
 ![Actor Info](https://i.postimg.cc/3xzhFWNC/screenshot008.png)
