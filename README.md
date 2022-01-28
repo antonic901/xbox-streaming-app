@@ -1,7 +1,7 @@
 # Stream Movies & TV Shows
 ###### Stream Movies & TV Shows on your Original Xbox!
 
-###### Hello to all! This is a project I have been working on for some time. Everything started with my motivation to learn how to make skins for Kodi, and because Kodi originated on Original Xbox (then called XBMC) I came to great idea to make program witch will stream Movies and TV Shows on this dated hardware. Motivation also came from desire to show why Xbox was a big deal back in the day and why it is such a great system. This console was ahed of it's time!
+###### Hello to all! This is a project I have been working on for some time. Everything started with my motivation to learn how to make skins for Kodi, and because Kodi originated on Original Xbox (then called XBMC) I came to great idea to make program witch will stream Movies and TV Shows on this dated hardware. Motivation also came from desire to show why Xbox was a big deal back in the day and why it is such a great system. This console was ahead of it's time!
 
 ## Table of Contents
 - [Info](#info)
