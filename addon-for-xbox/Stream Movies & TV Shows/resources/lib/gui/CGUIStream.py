@@ -1,7 +1,9 @@
 import os, sys, urllib
 import xbmc, xbmcgui
-import service
 import CGUIMovieInfo, CGUITvShowInfo
+
+from resources.lib.utils import utils
+from resources.lib import service
 
 class CGUIStream(xbmcgui.WindowXMLDialog):
 
@@ -12,17 +14,10 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
         self.name = kwargs['name']
         xbmcgui.WindowXMLDialog.__init__(self, *args, **kwargs)
 
-    def __del__(self):
-        print("CGUIStream windows is destroyed.")
-
     def onInit(self):
-        self.action_exitkeys_id = [10, 92]
-        self.cListStream = 34000
-        self.cLabelTitle = 1000
-
+        assingIDs(self)
         self.getControl(self.cLabelTitle).setLabel("Available streams for %s" % self.name)
-        populateContainer(self, self.cListStream, self.items)
-
+        utils.populateContainer(self, self.cListStream, self.items)
         self.setFocusId(self.cListStream)
 
     def onAction(self, action):
@@ -54,7 +49,6 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
 
             link = service.getStreamLink(infoHash)
             title = urllib.unquote_plus(self.name)
-            # thumb = urllib.unquote_plus(thumb)
             item = xbmcgui.ListItem(title)
             xbmc.Player().play(link, item)
             
@@ -63,8 +57,7 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
 
             self.close()
 
-def populateContainer(self, id, items):
-	container = self.getControl(id)
-	container.reset()
-	for item in items:
-		container.addItem(item)
+def assingIDs(self):
+    self.action_exitkeys_id = [10, 92]
+    self.cListStream = 34000
+    self.cLabelTitle = 1000

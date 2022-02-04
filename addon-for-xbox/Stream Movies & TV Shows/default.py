@@ -7,18 +7,12 @@ __addon_ver__ 	= __addon__.getAddonInfo('version')
 __addon_ico__ 	= __addon__.getAddonInfo('icon')
 __language__	= xbmc.getLanguage()
 __cwd__			= __addon__.getAddonInfo('path').decode('utf-8')
-# __resources__	= xbmc.translatePath(os.path.join(__cwd__, 'resources', 'lib').encode('utf-8') ).decode('utf-8')
 __its_xbox__ 	= xbmc.getCondVisibility( 'System.Platform.Xbox' )
-
-# sys.path.append( __resources__ )
 
 def log( msg ):
 	print ('::Streaming:Default: ' + msg)
 	message = '::Streaming:Default:%s' % msg
 	xbmc.log(msg=message, level=xbmc.LOGDEBUG)
-
-# getLocalizedString = __addon__.getLocalizedString
-# getSetting = __addon__.getSetting
 
 if (__name__ == "__main__"):
 	this = '__main__->'
@@ -31,12 +25,7 @@ if (__name__ == "__main__"):
 	log('Language	: %s' % __language__)
 	log('==================================')
 
-	import resources.lib.__init__ as __init__
-	ui = __init__.GUI('main.xml', __cwd__, 'default', __cwd__=__cwd__)
+	import resources.lib.gui.CGUIMain as __init__
+	ui = __init__.CGUIMain('main.xml', __cwd__, 'default', __cwd__=__cwd__)
 	ui.doModal()
 	del ui
-
-	# import resources.lib.test as test
-	# ui = test.TestWindow('test.xml', __cwd__, 'default')
-	# ui.doModal()
-	# del ui
