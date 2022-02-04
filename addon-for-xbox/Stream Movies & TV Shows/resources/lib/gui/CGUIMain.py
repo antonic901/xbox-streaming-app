@@ -9,15 +9,17 @@ class CGUIMain(xbmcgui.WindowXML):
 
 	def __init__(self, *args, **kwargs):
 		self.__cwd__ = kwargs['__cwd__']
+		self.DETECTOR = 0
 		xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
 	def onInit(self):
-		assignIDs(self)
-		createLeftMenu(self)
-		getMoviesForHomeScreen(self)
-		self.setFocusId(self.control_id_menu)
-		print ("Ponovo sam pozvao onInit(self).")
-		xbmc.sleep(2000)
+		if self.DETECTOR is 0:
+			assignIDs(self)
+			createLeftMenu(self)
+			getMoviesForHomeScreen(self)
+			self.setFocusId(self.control_id_menu)
+			self.DETECTOR = 1
+			xbmc.sleep(2000)
 
 	def onAction(self, action):
 		if action in self.action_exitkeys_id:
@@ -120,17 +122,14 @@ def onClickControlPanelMenu(self):
 
 def onClickControlPanelContainer(self, id):
 	item = self.getControl(id).getSelectedItem()
-	ui2 = None
+	ui = None
 	if "Movie" in item.getLabel():
 		entity = service.getInfoAboutMovie(item.getProperty("id"))
 		actors = service.getActorsForMovie(item.getProperty("id"))
-		ui2 = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
 	else:
 		entity = service.getInfoAboutTvShow(item.getProperty("id"))
 		actors = service.getActorsForTvShow(item.getProperty("id"))
-		ui2 = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
-	print ("Kreiram novi prozor...")
-	ui2.doModal()
-	print ("...prozor je zatvoren. Brisem ga...")
-	del ui2
-	print ("...prozor je obrisan.")
+		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+	ui.doModal()
+	del ui

@@ -12,14 +12,18 @@ class CGUISearch(xbmcgui.WindowXML):
         self.query = kwargs['query']
         self.type = kwargs['type']
         self.items = kwargs['items']
+        self.DETECTOR = 0
         xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
     def onInit(self):
-        assignIDs(self)
-        self.getControl(self.cLabelSearch).setLabel("Search results for: %s" % self.query)
-        self.getControl(self.cLabelType).setLabel("%s" % self.type)
-        utils.populateContainer(self, self.cContainer, self.items)
-        self.setFocusId(self.cContainer)
+        if self.DETECTOR is 0:
+            assignIDs(self)
+            self.getControl(self.cLabelSearch).setLabel("Search results for: %s" % self.query)
+            self.getControl(self.cLabelType).setLabel("%s" % self.type)
+            utils.populateContainer(self, self.cContainer, self.items)
+            self.setFocusId(self.cContainer)
+            self.DETECTOR = 1
+            xbmc.sleep(2000)
 
     def onAction(self, action):
         if action in self.action_exitkeys_id:

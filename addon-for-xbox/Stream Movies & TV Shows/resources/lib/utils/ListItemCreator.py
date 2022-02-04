@@ -99,7 +99,7 @@ def FullTvShowListItem(entity):
     item.setProperty('release_date', entity.first_air_date)
     item.setProperty('genres', extractNamesFromList(entity.genres))
     item.setProperty('id', entity.id)
-    item.setProperty('status', entity.in_production)
+    item.setProperty('status', getStatus(entity.in_production))
     item.setProperty('title', entity.name)
     item.setProperty('number_of_episodes', entity.number_of_episodes)
     item.setProperty('number_of_seasons', entity.number_of_seasons)
@@ -176,3 +176,9 @@ def getGender(id):
         3: 'Unknown'
     }
     return dict[id]
+
+def getStatus(status):
+    if status:
+        return 'Returning Series'
+    else:
+        return 'Ended'

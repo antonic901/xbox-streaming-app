@@ -13,15 +13,18 @@ class CGUIActorInfo(xbmcgui.WindowXML):
         self.entity = kwargs['actor']
         self.movies = kwargs['movies']
         self.tv_shows = kwargs['tv_shows']
+        self.DETECTOR = 0
         xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
     def onInit(self):
-        assignIDs(self)
-        populateWithContent(self)
-        utils.populateContainer(self, self.cPanelMovies, self.movies)
-        utils.populateContainer(self, self.cPanelTvShows, self.tv_shows)
-        self.setFocusId(5000)
-        xbmc.sleep(2000)
+        if self.DETECTOR is 0:
+            assignIDs(self)
+            populateWithContent(self)
+            utils.populateContainer(self, self.cPanelMovies, self.movies)
+            utils.populateContainer(self, self.cPanelTvShows, self.tv_shows)
+            self.setFocusId(5000)
+            self.DETECTOR = 1
+            xbmc.sleep(2000)
 
     def onAction(self, action):
         if action in self.action_exitkeys_id:

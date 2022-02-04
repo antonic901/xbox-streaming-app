@@ -12,13 +12,16 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
         self.__cwd__ = kwargs['__cwd__']
         self.entity = kwargs['entity']
         self.actors = kwargs['actors']
+        self.DETECTOR = 0
         xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
     def onInit(self):
-        assignIDs(self)
-        populateWithContent(self)
-        self.setFocusId(self.cButtonWatch)
-        xbmc.sleep(2000)
+        if self.DETECTOR is 0:
+            assignIDs(self)
+            populateWithContent(self)
+            self.setFocusId(self.cButtonWatch)
+            self.DETECTOR = 1
+            xbmc.sleep(2000)
 
     def onAction(self, action):
         if action == self.action_exitkeys_id[0]:
