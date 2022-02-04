@@ -5,6 +5,7 @@ import CGUIActorInfo, CGUIStream
 
 from resources.lib.utils import utils
 from resources.lib import service
+from resources.lib.xbmcgui import DialogProgress
 
 class CGUITvShowInfo(xbmcgui.WindowXML):
 
@@ -19,9 +20,11 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
         if self.DETECTOR is 0:
             assignIDs(self)
             populateWithContent(self)
+            DialogProgress.update(99, 'Finishing...')
             self.setFocusId(self.cButtonWatch)
             self.DETECTOR = 1
             xbmc.sleep(2000)
+            DialogProgress.close()
 
     def onAction(self, action):
         if action == self.action_exitkeys_id[0]:
@@ -120,9 +123,14 @@ def populateTextBox(self, id, text):
 
 def onClickContainerActors(self, id):
     item = self.getControl(id).getSelectedItem()
+    DialogProgress.create("XMBC4Xbox", 'Calling TMDB API...')
+    DialogProgress.update(25, 'Fetching info about actor...')
     actor = service.getInfoAboutActor(item.getProperty('id'))
+    DialogProgress.update(50, 'Fetching Movies for actor...')
     movies = service.getMoviesForActor(item.getProperty('id'))
+    DialogProgress.update(75, 'Fetching TV Shows for actor...')
     tv_shows = service.getTvShowsForActor(item.getProperty('id'))
+    DialogProgress.update(80, 'Opening actor...')
     ui = CGUIActorInfo.CGUIActorInfo("ActorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
     ui.doModal()
     del ui

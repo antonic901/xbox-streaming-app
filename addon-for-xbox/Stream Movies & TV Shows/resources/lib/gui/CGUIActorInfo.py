@@ -5,6 +5,7 @@ import CGUIMovieInfo, CGUITvShowInfo
 
 from resources.lib.utils import utils
 from resources.lib import service
+from resources.lib.xbmcgui import DialogProgress
 
 class CGUIActorInfo(xbmcgui.WindowXML):
 
@@ -22,9 +23,11 @@ class CGUIActorInfo(xbmcgui.WindowXML):
             populateWithContent(self)
             utils.populateContainer(self, self.cPanelMovies, self.movies)
             utils.populateContainer(self, self.cPanelTvShows, self.tv_shows)
+            DialogProgress.update(99, 'Finishing...')
             self.setFocusId(5000)
             self.DETECTOR = 1
             xbmc.sleep(2000)
+            DialogProgress.close()
 
     def onAction(self, action):
         if action in self.action_exitkeys_id:
@@ -64,14 +67,23 @@ def populateWithContent(self):
 def onClickControlPanelContainer(self, id):
 	item = self.getControl(id).getSelectedItem()
 	ui = None
+	DialogProgress.create("XBMC4Xbox", "Calling TMDB API...")
 	if "Movie" in item.getLabel():
+		DialogProgress.update(25, 'Fetching info about Movie...')
 		entity = service.getInfoAboutMovie(item.getProperty("id"))
+		DialogProgress.update(50, 'Fetching actors...')
 		actors = service.getActorsForMovie(item.getProperty("id"))
+		DialogProgress.update(75, 'Opening Movie...')
 		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+
 	else:
+		DialogProgress.update(25, 'Fetching info about TV Show...')
 		entity = service.getInfoAboutTvShow(item.getProperty("id"))
+		DialogProgress.update(50, 'Fetching actors...')
 		actors = service.getActorsForTvShow(item.getProperty("id"))
+		DialogProgress.update(75, 'Opening Movie...')
 		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		
 	ui.doModal()
 	del ui
 
