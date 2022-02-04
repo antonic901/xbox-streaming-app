@@ -1,9 +1,9 @@
 import os, sys
-import requests
+import packages.requests as requests
 import urllib
 import json
-import ListItemCreator as create
-import utils as utils
+import utils.ListItemCreator as create
+import utils.utils as utils
 
 API = 'http://api.themoviedb.org/3'
 API_KEY = 'f0d9239acde293e5222746bf11d1a3dc'
@@ -16,7 +16,7 @@ def getMoviesInTheatres(page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(create.createBasicMovieListItem(movie))
+        movies.append(create.BasicMovieListItem(movie))
     return movies
 
 def getPopularMovies(page):
@@ -24,7 +24,7 @@ def getPopularMovies(page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(create.createBasicMovieListItem(movie))
+        movies.append(create.BasicMovieListItem(movie))
     return movies
 
 def getUpcomingMovies(page):
@@ -32,7 +32,7 @@ def getUpcomingMovies(page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(create.createBasicMovieListItem(movie))
+        movies.append(create.BasicMovieListItem(movie))
     return movies
 
 def getTopRatedMovies(page):
@@ -40,7 +40,7 @@ def getTopRatedMovies(page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(create.createBasicMovieListItem(movie))
+        movies.append(create.BasicMovieListItem(movie))
     return movies
 
 def getOnTheAirTvShows(page):
@@ -48,7 +48,7 @@ def getOnTheAirTvShows(page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(create.createBasicTvShowItem(tv_show))
+        tv_shows.append(create.BasicTvShowItem(tv_show))
     return tv_shows
 
 def getPopularTvShows(page):
@@ -56,7 +56,7 @@ def getPopularTvShows(page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(create.createBasicTvShowItem(tv_show))
+        tv_shows.append(create.BasicTvShowItem(tv_show))
     return tv_shows
 
 def getAiringTodayTvShows(page):
@@ -64,7 +64,7 @@ def getAiringTodayTvShows(page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(create.createBasicTvShowItem(tv_show))
+        tv_shows.append(create.BasicTvShowItem(tv_show))
     return tv_shows
 
 def getTopRatedTvShows(page):
@@ -72,7 +72,7 @@ def getTopRatedTvShows(page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(create.createBasicTvShowItem(tv_show))
+        tv_shows.append(create.BasicTvShowItem(tv_show))
     return tv_shows
 
 def searchMovies(input, page):
@@ -80,7 +80,7 @@ def searchMovies(input, page):
     data = response.json()
     movies = []
     for movie in data['results']:
-        movies.append(create.createBasicMovieListItem(movie))
+        movies.append(create.BasicMovieListItem(movie))
     return movies
 
 def searchTvShows(input, page):
@@ -88,30 +88,30 @@ def searchTvShows(input, page):
     data = response.json()
     tv_shows = []
     for tv_show in data['results']:
-        tv_shows.append(create.createBasicTvShowItem(tv_show))
+        tv_shows.append(create.BasicTvShowItem(tv_show))
     return tv_shows
 
 def getInfoAboutMovie(id):
     response = requests.get("%s/movie/%s?api_key=%s&language=en-US" % (API, id, API_KEY))
     movie = utils.createObject(response.text)
-    return create.createFullMovieListItem(movie)
+    return create.FullMovieListItem(movie)
 
 def getInfoAboutTvShow(id):
     response = requests.get("%s/tv/%s?api_key=%s&language=en-US" % (API, id, API_KEY))
     tv_show = utils.createObject(response.text)
-    return create.createFullTvShowListItem(tv_show)
+    return create.FullTvShowListItem(tv_show)
 
 def getInfoAboutActor(id):
     response = requests.get("%s/person/%s?api_key=%s&language=en-US" % (API, id, API_KEY))
     actor = utils.createObject(response.text)
-    return create.createFullActorListItem(actor)
+    return create.FullActorListItem(actor)
 
 def getActorsForMovie(id):
     response = requests.get("%s/movie/%s/credits?api_key=%s&language=en-US" % (API, id, API_KEY))
     dict = response.json()
     listitems = []
     for actor in dict.get('cast'):
-        listitems.append(create.createBasicActorListItem(actor))
+        listitems.append(create.BasicActorListItem(actor))
     return listitems[:20]
 
 def getActorsForTvShow(id):
@@ -119,7 +119,7 @@ def getActorsForTvShow(id):
     dict = response.json()
     listitems = []
     for actor in dict.get('cast'):
-        listitems.append(create.createBasicActorListItem(actor))
+        listitems.append(create.BasicActorListItem(actor))
     return listitems[:20]
 
 def getMoviesForActor(id):
@@ -127,7 +127,7 @@ def getMoviesForActor(id):
     dict = response.json()
     listitems = []
     for movie in dict.get('cast'):
-        listitems.append(create.createBasicMovieListItem(movie))
+        listitems.append(create.BasicMovieListItem(movie))
     return listitems[:20]
 
 def getTvShowsForActor(id):
@@ -135,7 +135,7 @@ def getTvShowsForActor(id):
     dict = response.json()
     listitems = []
     for movie in dict.get('cast'):
-        listitems.append(create.createBasicTvShowItem(movie))
+        listitems.append(create.BasicTvShowItem(movie))
     return listitems
 
 def getInfoAboutSeason(id, number):
@@ -143,7 +143,7 @@ def getInfoAboutSeason(id, number):
     season = utils.createObject(response.text)
     listitems = []
     for episode in season.episodes:
-        listitems.append(create.createEpisodeListItem(episode))
+        listitems.append(create.EpisodeListItem(episode))
     return listitems
 
 def getStreams(query, category):
@@ -151,7 +151,7 @@ def getStreams(query, category):
     streams = utils.createObject(response.text)
     listitems = []
     for stream in streams:
-        listitems.append(create.createStreamListItem(stream))
+        listitems.append(create.StreamListItem(stream))
     return streams, listitems
 
 def getMagnet(torrent):

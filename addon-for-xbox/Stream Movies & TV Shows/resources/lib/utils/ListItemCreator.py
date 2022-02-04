@@ -1,12 +1,10 @@
 import os, sys
-import xbmc
-import xbmcgui
+import xbmc, xbmcgui
 
 IMAGE_BACKDROP = 'http://image.tmdb.org/t/p/w780'
 IMAGE_POSTER = 'http://image.tmdb.org/t/p/w185'
 
-#represents basic information about some movie
-def createBasicMovieListItem(dict):
+def BasicMovieListItem(dict):
     item = xbmcgui.ListItem('Movie', 
         iconImage="%s%s" % (IMAGE_POSTER, dict.get('poster_path')),
         thumbnailImage="%s%s" % (IMAGE_BACKDROP, dict.get('backdrop_path')))
@@ -21,7 +19,7 @@ def createBasicMovieListItem(dict):
 
     return item
 
-def createFullMovieListItem(entity):
+def FullMovieListItem(entity):
     item = xbmcgui.ListItem('Movie', 
         iconImage="%s%s" % (IMAGE_POSTER, entity.poster_path),
         thumbnailImage="%s%s" % (IMAGE_BACKDROP, entity.backdrop_path))
@@ -65,7 +63,7 @@ def createFullMovieListItem(entity):
     return item
 
 #represents basic information about some tv show
-def createBasicTvShowItem(dict):
+def BasicTvShowItem(dict):
     item = xbmcgui.ListItem('TV Show', 
         iconImage="%s%s" % (IMAGE_POSTER, dict.get('poster_path')),
         thumbnailImage="%s%s" % (IMAGE_BACKDROP, dict.get('backdrop_path')))
@@ -80,7 +78,7 @@ def createBasicTvShowItem(dict):
 
     return item
 
-def createFullTvShowListItem(entity):
+def FullTvShowListItem(entity):
     item = xbmcgui.ListItem('TV Show',
         iconImage="%s%s" % (IMAGE_POSTER, entity.poster_path),
         thumbnailImage="%s%s" % (IMAGE_BACKDROP, entity.backdrop_path))
@@ -111,7 +109,7 @@ def createFullTvShowListItem(entity):
 
     return item
 
-def createBasicActorListItem(dict):
+def BasicActorListItem(dict):
     item = xbmcgui.ListItem('Actor',
         iconImage="%s%s" % (IMAGE_POSTER, dict.get('profile_path')))
 
@@ -121,7 +119,7 @@ def createBasicActorListItem(dict):
     
     return item
 
-def createFullActorListItem(entity):
+def FullActorListItem(entity):
     item = xbmcgui.ListItem('Actor',
         iconImage="%s%s" % (IMAGE_POSTER, entity.profile_path))
 
@@ -138,7 +136,7 @@ def createFullActorListItem(entity):
     
     return item
 
-def createEpisodeListItem(entity):
+def EpisodeListItem(entity):
     item = xbmcgui.ListItem(entity.name)
 
     item.setProperty('name', entity.name)
@@ -148,8 +146,8 @@ def createEpisodeListItem(entity):
 
     return item
 
-def createStreamListItem(entity):
-    item = xbmcgui.ListItem()
+def StreamListItem(entity):
+    item = xbmcgui.ListItem('Stream')
 
     item.setProperty('title', entity.title)
     item.setProperty('seeds', entity.seeds)

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import os, sys
-import xbmc
-import xbmcgui
-import service
+import xbmc, xbmcgui
 import CGUIMovieInfo, CGUITvShowInfo
+
+from resources.lib.utils import utils
+from resources.lib import service
 
 class CGUIActorInfo(xbmcgui.WindowXML):
 
@@ -15,11 +16,10 @@ class CGUIActorInfo(xbmcgui.WindowXML):
         xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
     def onInit(self):
-        self.action_exitkeys_id = [10, 92]
-        generateIDs(self)
+        assignIDs(self)
         populateWithContent(self)
-        populateContainer(self, self.cPanelMovies, self.movies)
-        populateContainer(self, self.cPanelTvShows, self.tv_shows)
+        utils.populateContainer(self, self.cPanelMovies, self.movies)
+        utils.populateContainer(self, self.cPanelTvShows, self.tv_shows)
         self.setFocusId(5000)
         xbmc.sleep(2000)
 
@@ -38,11 +38,8 @@ class CGUIActorInfo(xbmcgui.WindowXML):
         elif id in [self.cPanelMovies, self.cPanelTvShows]:
             onClickControlPanelContainer(self, id)
 
-#1000 - labels
-#2000 - textboxs
-#3000 - images
-#4000 - buttons
-def generateIDs(self):
+def assignIDs(self):
+    self.action_exitkeys_id = [10, 92]
     self.cLabelActorName = 1000
     self.cLabelBasicInformation = 1001
     self.cLabelAge = 1002
@@ -56,7 +53,6 @@ def generateIDs(self):
 def populateWithContent(self):
     self.getControl(self.cLabelActorName).setLabel(self.entity.getProperty('name'))
     self.getControl(self.cLabelBasicInformation).setLabel(createTextForBasicInformation(self))
-    # self.getControl(self.cLabelAge).setLabel(self.entity.getProperty(23))
     self.getControl(self.cLabelBorn).setLabel(self.entity.getProperty('birthday'))
     self.getControl(self.cLabelPlaceOfBirth).setLabel(self.entity.getProperty('place_of_birth'))
     self.getControl(self.cTextBoxBiography).setText(self.entity.getProperty('biography'))
@@ -64,25 +60,17 @@ def populateWithContent(self):
 
 def onClickControlPanelContainer(self, id):
 	item = self.getControl(id).getSelectedItem()
-	entity = []
-	actors = []
 	ui = None
 	if "Movie" in item.getLabel():
 		entity = service.getInfoAboutMovie(item.getProperty("id"))
 		actors = service.getActorsForMovie(item.getProperty("id"))
-		ui = CGUIMovieInfo.CGUIMovieInfo("movieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
 	else:
 		entity = service.getInfoAboutTvShow(item.getProperty("id"))
 		actors = service.getActorsForTvShow(item.getProperty("id"))
-		ui = CGUITvShowInfo.CGUITvShowInfo("tvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
 	ui.doModal()
 	del ui
-
-def populateContainer(self, id, items):
-    container = self.getControl(id)
-    container.reset()
-    for item in items:
-        container.addItem(item)
 
 def createTextForBasicInformation(self):
     return "%s  •  Known for: %s  •  %s  •  %s" % (self.entity.getProperty('gender'), self.entity.getProperty('known_for_department'), self.entity.getProperty('place_of_birth'), self.entity.getProperty('birthday'))

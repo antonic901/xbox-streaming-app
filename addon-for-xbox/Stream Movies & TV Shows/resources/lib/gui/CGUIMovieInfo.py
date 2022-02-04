@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import os, sys
-import xbmc
-import xbmcgui
-import service
+import xbmc, xbmcgui
 import CGUIActorInfo, CGUIStream
+
+from resources.lib.utils import utils
+from resources.lib import service
 
 class CGUIMovieInfo(xbmcgui.WindowXML):
 
@@ -14,11 +15,10 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
         xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
     def onInit(self):
-        self.action_exitkeys_id = [10, 92]
         assignIDs(self)
         populateWithContent(self)
-        populateContainer(self, self.cContainerActors, self.actors)
-        self.setFocusId(4000)
+        utils.populateContainer(self, self.cContainerActors, self.actors)
+        self.setFocusId(self.cButtonWatch)
         xbmc.sleep(2000)
 
     def onAction(self, action):
@@ -29,19 +29,17 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
         if id == self.cButtonWatch:
             name = self.entity.getProperty('title')
             streams, listitems = service.getStreams(name, "Movies")
-            ui = CGUIStream.CGUIStream('stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=name)
+            ui = CGUIStream.CGUIStream('Stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=name)
             ui.doModal()
             del ui
         elif id == self.cContainerActors:
             onClickContainerActors(self, id)
+
     def onFocus(self, controlId):
         pass
 
-#1000 - labels
-#2000 - textboxs
-#3000 - images
-#4000 - buttons
 def assignIDs(self):
+    self.action_exitkeys_id = [10, 92]
     self.cLabelTitle = 1000
     self.cLabelBasicInformation = 1001
     self.cLabelDot = 1002
@@ -64,18 +62,12 @@ def populateWithContent(self):
     self.getControl(self.cImagePoster).setImage(self.entity.getProperty('iconImage'))
     self.getControl(self.cTextBoxDescription).setText(self.entity.getProperty('overview'))
 
-def populateContainer(self, id, items):
-    container = self.getControl(id)
-    container.reset()
-    for item in items:
-        container.addItem(item)
-
 def onClickContainerActors(self, id):
     item = self.getControl(id).getSelectedItem()
     actor = service.getInfoAboutActor(item.getProperty('id'))
     movies = service.getMoviesForActor(item.getProperty('id'))
     tv_shows = service.getTvShowsForActor(item.getProperty('id'))
-    ui = CGUIActorInfo.CGUIActorInfo("actorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
+    ui = CGUIActorInfo.CGUIActorInfo("ActorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
     ui.doModal()
     del ui
 

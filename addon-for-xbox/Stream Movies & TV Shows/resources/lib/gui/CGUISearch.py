@@ -1,8 +1,9 @@
 import os, sys
-import xbmc
-import xbmcgui
-import service
+import xbmc, xbmcgui
 import CGUIMovieInfo, CGUITvShowInfo
+
+from resources.lib.utils import utils
+from resources.lib import service
 
 class CGUISearch(xbmcgui.WindowXML):
 
@@ -14,16 +15,11 @@ class CGUISearch(xbmcgui.WindowXML):
         xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
     def onInit(self):
-        self.action_exitkeys_id = [10, 92]
-
-        self.control_id_container = 34200
-
-        self.getControl(34100).setLabel("Search results for: %s" % self.query)
-        self.getControl(34002).setLabel("%s" % self.type)
-
-        populateContainer(self, self.control_id_container, self.items)
-
-        self.setFocusId(34200)
+        assignIDs(self)
+        self.getControl(self.cLabelSearch).setLabel("Search results for: %s" % self.query)
+        self.getControl(self.cLabelType).setLabel("%s" % self.type)
+        utils.populateContainer(self, self.cContainer, self.items)
+        self.setFocusId(self.cContainer)
 
     def onAction(self, action):
         if action in self.action_exitkeys_id:
@@ -33,28 +29,26 @@ class CGUISearch(xbmcgui.WindowXML):
         pass
 
     def onClick(self, id):
-        if id == self.control_id_container:
+        if id == self.cContainer:
             item = self.getControl(id).getSelectedItem()
             onClickControlPanelContainer(self, id)
 
-def populateContainer(self, id, items):
-	container = self.getControl(id)
-	container.reset()
-	for item in items:
-		container.addItem(item)
+def assignIDs(self):
+    self.action_exitkeys_id = [10, 92]
+    self.cLabelSearch = 34100
+    self.cLabelType = 34002
+    self.cContainer = 34200
 
 def onClickControlPanelContainer(self, id):
 	item = self.getControl(id).getSelectedItem()
-	entity = []
-	actors = []
 	ui = None
 	if "Movie" in item.getLabel():
 		entity = service.getInfoAboutMovie(item.getProperty("id"))
 		actors = service.getActorsForMovie(item.getProperty("id"))
-		ui = CGUIMovieInfo.CGUIMovieInfo("movieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
 	else:
 		entity = service.getInfoAboutTvShow(item.getProperty("id"))
 		actors = service.getActorsForTvShow(item.getProperty("id"))
-		ui = CGUITvShowInfo.CGUITvShowInfo("tvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
 	ui.doModal()
 	del ui

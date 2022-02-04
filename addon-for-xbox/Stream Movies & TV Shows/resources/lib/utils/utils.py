@@ -10,3 +10,9 @@ def createObject(jsonObject):
             return obj
 
     return json.loads(jsonObject, object_hook=Generic.from_dict)
+
+def populateContainer(self, id, items):
+	container = self.getControl(id)
+	container.reset()
+	for item in items:
+		container.addItem(item)
