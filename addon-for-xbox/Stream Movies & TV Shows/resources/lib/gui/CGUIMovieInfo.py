@@ -5,6 +5,7 @@ import CGUIActorInfo, CGUIStream
 
 from resources.lib.utils import utils
 from resources.lib import service
+from resources.lib.xbmcgui import DialogProgress
 
 class CGUIMovieInfo(xbmcgui.WindowXML):
 
@@ -20,9 +21,11 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
             assignIDs(self)
             populateWithContent(self)
             utils.populateContainer(self, self.cContainerActors, self.actors)
+            DialogProgress.update(99, 'Finishing...')
             self.setFocusId(self.cButtonWatch)
             self.DETECTOR = 1
             xbmc.sleep(2000)
+            DialogProgress.close()
 
     def onAction(self, action):
         if action in self.action_exitkeys_id:
@@ -30,7 +33,9 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
 
     def onClick(self, id):
         if id == self.cButtonWatch:
+            DialogProgress.create('XBMC4Xbox', 'Calling local API...')
             name = self.entity.getProperty('title')
+            DialogProgress.update(50, 'Finding available streams...')
             streams, listitems = service.getStreams(name, "Movies")
             ui = CGUIStream.CGUIStream('Stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=name)
             ui.doModal()
@@ -67,9 +72,14 @@ def populateWithContent(self):
 
 def onClickContainerActors(self, id):
     item = self.getControl(id).getSelectedItem()
+    DialogProgress.create("XMBC4Xbox", 'Calling TMDB API...')
+    DialogProgress.update(25, 'Fetching info about actor...')
     actor = service.getInfoAboutActor(item.getProperty('id'))
+    DialogProgress.update(50, 'Fetching Movies for actor...')
     movies = service.getMoviesForActor(item.getProperty('id'))
+    DialogProgress.update(75, 'Fetching TV Shows for actor...')
     tv_shows = service.getTvShowsForActor(item.getProperty('id'))
+    DialogProgress.update(80, 'Opening actor...')
     ui = CGUIActorInfo.CGUIActorInfo("ActorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
     ui.doModal()
     del ui

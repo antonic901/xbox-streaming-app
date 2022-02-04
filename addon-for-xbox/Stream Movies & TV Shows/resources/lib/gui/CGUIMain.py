@@ -4,6 +4,7 @@ import CGUISearch, CGUIMovieInfo, CGUITvShowInfo
 
 from resources.lib.utils import utils
 from resources.lib import service
+from resources.lib.xbmcgui import DialogProgress
 
 class CGUIMain(xbmcgui.WindowXML):
 
@@ -14,15 +15,22 @@ class CGUIMain(xbmcgui.WindowXML):
 
 	def onInit(self):
 		if self.DETECTOR is 0:
+			DialogProgress.create('XBMC4Xbox', 'Initializing home page...')
+			DialogProgress.update(25, 'Assigning IDs...')
 			assignIDs(self)
+			DialogProgress.update(50, 'Creating left menu...')
 			createLeftMenu(self)
+			DialogProgress.update(75, 'Getting movies for home screen...')
 			getMoviesForHomeScreen(self)
+			DialogProgress.update(99, 'Finishing...')
 			self.setFocusId(self.control_id_menu)
 			self.DETECTOR = 1
 			xbmc.sleep(2000)
+			DialogProgress.close()
 
 	def onAction(self, action):
 		if action in self.action_exitkeys_id:
+			DialogProgress.delete()
 			self.close()
 
 	def onFocus(self, controlId):
@@ -91,13 +99,21 @@ def onClickControlPanelMenu(self):
 	item = self.control_menu.getSelectedItem()
 	position = self.control_menu.getSelectedPosition()
 	if position == 0:
+		DialogProgress.create("XBMC4Xbox", "Calling TMDB API...")
+		DialogProgress.update(50, "Fetching Movies...")
 		getMoviesForHomeScreen(self)
+		DialogProgress.update(99, "Finishing...")
 		self.getControl(self.control_id_label1).setLabel(item.getLabel())
 		changeLabelsForPanels(self, 'In Theatres', 'Popular Movies', 'Upcoming Movies', 'Top Rated')
+		DialogProgress.close()
 	elif position == 1:
+		DialogProgress.create("XBMC4Xbox", "Calling TMDB API...")
+		DialogProgress.update(50, "Fetching TV Shows...")
 		getTvShowsForHomeScreen(self)
+		DialogProgress.update(99, "Finishing...")
 		self.getControl(self.control_id_label1).setLabel(item.getLabel())
 		changeLabelsForPanels(self, 'On The Air', 'Popular TV Shows', 'Airing Today', 'Top Rated')
+		DialogProgress.close()
 	elif position in [2,3]:
 		keyboard = xbmc.Keyboard()
 		keyboard.doModal()
@@ -107,11 +123,17 @@ def onClickControlPanelMenu(self):
 		if(keyboardConfirmed and enteredText != ""):
 			ui = None		
 			items = []
+			DialogProgress.create("XBMC4Xbox", "Calling TMDB API...")
 			if position == 2:
+				DialogProgress.update(50, "Searching Movies...")
 				items = service.searchMovies(enteredText, 1)
+				DialogProgress.update(75, "Opening search results...")
 				ui = CGUISearch.CGUISearch('Search.xml', self.__cwd__, 'default', __cwd__=self.__cwd__, query=enteredText, type='Movies', items=items)
+
 			else:
+				DialogProgress.update(50, "Searching TV Shows...")
 				items = service.searchTvShows(enteredText, 1)
+				DialogProgress.update(99, "Opening search results...")
 				ui = CGUISearch.CGUISearch('Search.xml', self.__cwd__, 'default', __cwd__=self.__cwd__, query=enteredText, type='TV Shows', items=items)
 
 			ui.doModal()
@@ -123,13 +145,22 @@ def onClickControlPanelMenu(self):
 def onClickControlPanelContainer(self, id):
 	item = self.getControl(id).getSelectedItem()
 	ui = None
+	DialogProgress.create("XBMC4Xbox", "Calling TMDB API...")
 	if "Movie" in item.getLabel():
+		DialogProgress.update(25, 'Fetching info about Movie...')
 		entity = service.getInfoAboutMovie(item.getProperty("id"))
+		DialogProgress.update(50, 'Fetching actors...')
 		actors = service.getActorsForMovie(item.getProperty("id"))
+		DialogProgress.update(75, 'Opening Movie...')
 		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+
 	else:
+		DialogProgress.update(25, 'Fetching info about TV Show...')
 		entity = service.getInfoAboutTvShow(item.getProperty("id"))
+		DialogProgress.update(50, 'Fetching actors...')
 		actors = service.getActorsForTvShow(item.getProperty("id"))
+		DialogProgress.update(75, 'Opening TV Show...')
 		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+
 	ui.doModal()
 	del ui
