@@ -10,12 +10,14 @@ var rangeParser = require('range-parser'),
   fs = require('fs'),
   archiver = require('archiver'),
   store = require('./store'),
+  bin = require('./bin'),
   progress = require('./progressbar'),
   stats = require('./stats'),
   TorrentSearchApi = require('torrent-search-api'),
   api = express();
 
 TorrentSearchApi.enablePublicProviders();
+TorrentSearchApi.disableProvider('Torrent9');
 
 api.use(bodyParser.json())
 api.use(logger('dev'));
@@ -228,7 +230,13 @@ api.get('/search/:query/:category', async function (req, res) {
 api.get('/magnet', async function (req, res) {
   var torrent = req.body.torrent;
   const magnet = await TorrentSearchApi.getMagnet(torrent);
+  console.log(magnet)
   res.send(magnet)
+});
+
+api.get('/host-port', async function(req, res) {
+  console.log(bin.host + bin.port)
+  res.send('ok')
 });
 
 module.exports = api;

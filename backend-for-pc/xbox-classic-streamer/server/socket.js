@@ -9,6 +9,28 @@ module.exports = function (server) {
     store = require('./store');
 
   io.sockets.on('connection', function (socket) {
+    socket.on('stop', function(infoHash, index) {
+      console.log('stopping ' + infoHash);
+      var torrent = store.get(infoHash);
+      if(index >= 0 && index < torrent.files.length) {
+        torrent.files[index].deselect();
+      } else {
+        torrent.files.forEach(function (f) {
+          f.deselect();
+        });
+      }
+    });
+    socket.on('start', function(infoHash, index) {
+      console.log('starting ' + infoHash);
+      var torrent = store.get(infoHash);
+      if(index >= 0 && index < torrent.files.length) {
+        torrent.files[index].select();
+      } else {
+        torrent.files.forEach(function (f) {
+          f.select();
+        });
+      }
+    });
     socket.on('pause', function (infoHash) {
       console.log('pausing ' + infoHash);
       var torrent = store.get(infoHash);
