@@ -361,6 +361,12 @@
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
+        <v-list-item link v-on:click="rightMenuClick(5)">
+          <v-icon>mdi-play</v-icon>
+          <v-list-item-title class="ml-2">
+            Play on Xbox
+          </v-list-item-title>
+        </v-list-item>
         <v-list-item link v-on:click="rightMenuClick(4)">
           <v-icon>mdi-information</v-icon>
           <v-list-item-title class="ml-2">
@@ -405,6 +411,7 @@ module.exports = {
         torrents: [],
         torrent: null,
         API: 'http://192.168.0.14:9005',
+        XBOX_ADDRESS: 'http://192.168.0.19:80',
         showMenu: false,
         x: 0,
         y: 0,
@@ -482,10 +489,32 @@ module.exports = {
         } else if(action === 2) {
           socket.emit(this.torrent.stats.paused ? 'resume' : 'pause', this.torrent.infoHash);
           this.torrent.stats.paused = !this.torrent.stats.paused;
-        } else if (action ===3) {
+        } else if (action === 3) {
           axios.delete(this.API + "/torrents/" + this.torrent.infoHash)
-        } else if (action ===4) {
+        } else if (action === 4) {
           alert('This funcionality is in development.');
+        } else if (action === 5) {
+
+          var video_file;
+
+          for (var i = 0; i < this.torrent.files.length; i++) {
+            ['.mkv', '.mp4', '.avi'].forEach(extension => {
+              if (this.torrent.files[i].name.includes(extension)) {
+                video_file = this.torrent.files[i]
+                return
+              }
+            })
+          }
+
+          var stream_link = this.API + video_file.link + '?ffmpeg=remux';
+
+          axios.get(this.XBOX_ADDRESS + '/xbmcCmds/xbmcHttp?command=ExecBuiltIn(PlayMedia(' + encodeURIComponent(stream_link) + '))')
+            .then(r => {
+              console.log("Succesfully started streaming on Xbox.");
+            })
+            .catch(e => {
+              console.log("Error when playing file. Log: " + e);            
+            })
         }
       },
       show(e) {
@@ -499,10 +528,6 @@ module.exports = {
       },
       getTime(seconds) {
         seconds = Number(seconds);
-
-        // if(seconds < 0 || seconds === null) {
-        //   return '∞'
-        // }
 
         var d = Math.floor(seconds / (3600*24));
         var h = Math.floor(seconds % (3600*24) / 3600);

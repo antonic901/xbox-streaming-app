@@ -40,3 +40,6 @@ if (__name__ == "__main__"):
 	ui = __init__.CGUIMain('Main.xml', __cwd__, 'default', __cwd__=__cwd__)
 	ui.doModal()
 	del ui
+
+	log('terminating...')
+	log('==================================')

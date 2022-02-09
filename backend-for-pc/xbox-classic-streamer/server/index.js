@@ -10,7 +10,6 @@ var rangeParser = require('range-parser'),
   fs = require('fs'),
   archiver = require('archiver'),
   store = require('./store'),
-  bin = require('./bin'),
   progress = require('./progressbar'),
   stats = require('./stats'),
   TorrentSearchApi = require('torrent-search-api'),
@@ -60,7 +59,8 @@ function serialize(torrent) {
         })
       };
     }),
-    progress: progress(torrent.bitfield.buffer)
+    progress: progress(torrent.bitfield.buffer),
+    stats: stats(torrent)
   };
 }
 
@@ -235,11 +235,6 @@ api.get('/magnet', async function (req, res) {
   var torrent = req.body.torrent;
   const magnet = await TorrentSearchApi.getMagnet(torrent);
   res.send(magnet)
-});
-
-api.get('/host-port', async function(req, res) {
-  console.log(bin.host + bin.port)
-  res.send('ok')
 });
 
 module.exports = api;
