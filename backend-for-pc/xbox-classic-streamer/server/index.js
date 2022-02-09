@@ -16,8 +16,12 @@ var rangeParser = require('range-parser'),
   TorrentSearchApi = require('torrent-search-api'),
   api = express();
 
-TorrentSearchApi.enablePublicProviders();
-TorrentSearchApi.disableProvider('Torrent9');
+let enableProviders = ['1337x', 'Rarbg', 'ThePirateBay', 'Yts'];
+
+enableProviders.forEach(provider => {
+  TorrentSearchApi.enableProvider(provider);
+  console.log(TorrentSearchApi.isProviderActive(provider) ? provider + ' is active.'  : provider + ' is not active.')
+});
 
 api.use(bodyParser.json())
 api.use(logger('dev'));
@@ -230,7 +234,6 @@ api.get('/search/:query/:category', async function (req, res) {
 api.get('/magnet', async function (req, res) {
   var torrent = req.body.torrent;
   const magnet = await TorrentSearchApi.getMagnet(torrent);
-  console.log(magnet)
   res.send(magnet)
 });
 

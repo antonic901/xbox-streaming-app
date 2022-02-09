@@ -58,6 +58,8 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
             populateTextBox(self, self.cTextBoxOverview, item.getProperty('overview'))
         
         elif id == self.cButtonWatchEpisode:
+            DialogProgress.create('XBMC4Xbox', 'Calling local API...')
+            name = self.entity.getProperty('title')
             season = self.getControl(self.cContainerSeasons).getSelectedPosition() + 1
             episode = self.getControl(self.cContainerEpisodes).getSelectedPosition() + 1
 
@@ -66,7 +68,8 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
 
             if episode < 10:
                 episode = "0%s" % episode
-
+            
+            DialogProgress.update(50, 'Finding available streams...')
             streams, listitems = service.getStreams("%s s%se%s" % (self.entity.getProperty('title'), season, episode), "TV")
             ui = CGUIStream.CGUIStream('Stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=name)
             ui.doModal()

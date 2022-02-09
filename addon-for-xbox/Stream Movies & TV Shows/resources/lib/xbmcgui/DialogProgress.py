@@ -7,7 +7,7 @@ def create(title, info):
     global pDialog
     pDialog.create(title, info)
     pDialog.update(0, info)
-    xbmcgui.lock()
+    # xbmcgui.lock()
 
 def update(percentage, info):
     global pDialog
@@ -16,7 +16,7 @@ def update(percentage, info):
 def close():
     global pDialog
     pDialog.close()
-    xbmcgui.unlock()
+    # xbmcgui.unlock()
 
 def delete():
     global pDialog

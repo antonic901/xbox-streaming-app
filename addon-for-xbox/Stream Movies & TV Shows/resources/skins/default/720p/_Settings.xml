@@ -1,0 +1,120 @@
+<window id="726">
+    <controls>
+        <control type="image">
+            <description>Background image</description>
+            <posx>478</posx>
+            <posy>100</posy>
+            <width>375</width>
+            <height>460</height>
+            <texture>common/container-item.png</texture>
+            <colordiffuse>FF2F2F2F</colordiffuse>
+            <aspectratio>stretch</aspectratio>
+            <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+        </control>
+        <control type="list" id="34000">
+            <posx>488</posx>
+            <posy>100</posy>
+            <width>350</width>
+            <height>400</height>
+            <orientation>vertical</orientation>
+            <focusposition>0</focusposition>
+            <onleft>SetFocus(4000)</onleft>
+            <onright>SetFocus(4000)</onright>
+            <itemlayout height="100" width="350">
+                <control type="group">
+                    <control type="textbox">
+                        <posy>0</posy>
+                        <posx>5</posx>
+                        <width>345</width>
+                        <height>40</height>
+                        <font>font16</font>
+                        <info>ListItem.Label</info>
+                        <textcolor>white</textcolor>
+                        <align>left</align>
+                    </control>
+                    <control type="image">
+                        <posx>0</posx>
+                        <posy>40</posy>
+                        <width>350</width>
+                        <height>40</height>
+                        <texture>common/container-item.png</texture>
+                        <colordiffuse>FF262626</colordiffuse>
+                        <aspectratio>stretch</aspectratio>
+                    </control>
+                </control>
+                <control type="label">
+                    <posy>38</posy>
+                    <posx>5</posx>
+                    <width>350</width>
+                    <height>40</height>
+                    <font>font14</font>
+                    <info>ListItem.Label2</info>
+                    <textcolor>white</textcolor>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>True</scroll>
+                </control>
+            </itemlayout>
+            <focusedlayout height="100" width="350">
+                <control type="group">
+                    <control type="textbox">
+                        <posy>0</posy>
+                        <posx>5</posx>
+                        <width>345</width>
+                        <height>40</height>
+                        <font>font16</font>
+                        <info>ListItem.Label</info>
+                        <textcolor>white</textcolor>
+                        <align>left</align>
+                    </control>
+                    <control type="image">
+                        <visible>!Control.HasFocus(4000)</visible>
+                        <posx>0</posx>
+                        <posy>40</posy>
+                        <width>350</width>
+                        <height>40</height>
+                        <texture>common/container-item.png</texture>
+                        <colordiffuse>FFFF0000</colordiffuse>
+                        <aspectratio>stretch</aspectratio>
+                    </control>
+                    <control type="image">
+                        <visible>Control.HasFocus(4000)</visible>
+                        <posx>0</posx>
+                        <posy>40</posy>
+                        <width>350</width>
+                        <height>40</height>
+                        <texture>common/container-item.png</texture>
+                        <colordiffuse>FF262626</colordiffuse>
+                        <aspectratio>stretch</aspectratio>
+                    </control>    
+                </control>
+                <control type="label">
+                    <posy>38</posy>
+                    <posx>5</posx>
+                    <width>350</width>
+                    <height>40</height>
+                    <font>font14</font>
+                    <info>ListItem.Label2</info>
+                    <textcolor>white</textcolor>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <scroll>True</scroll>
+                </control>
+            </focusedlayout>
+        </control>
+        <control type="button" id="4000">
+            <posx>565</posx>
+            <posy>505</posy>
+            <width>200</width>
+            <height>40</height>
+            <texturefocus>common/color/red.png</texturefocus>
+            <texturenofocus>common/color/262626.png</texturenofocus>
+            <label>Save Settings</label>
+            <font>font16</font>
+            <align>center</align>
+            <aligny>center</aligny>
+            <onup>SetFocus(34000)</onup>
+        </control>
+    </controls>
+</window>
