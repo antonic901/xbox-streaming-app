@@ -4,7 +4,22 @@
 var STATIC_OPTIONS = { maxAge: 3600000 };
 
 var process = require('process');
-process.title = 'peerflix-server';
+process.title = 'xbox-streaming-server';
+
+var host = process.env.HOST || getHostAddress();
+var port = process.env.PORT || 9005;
+
+var configuration = require('./configuration')
+
+if (!configuration.readConfigurationFile("./", 'configuration.json')) {
+  console.log('Configuration file is not found. Creating one...')
+  if (!configuration.writeConfigurationFile("./", configuration.createConfigurationFile(host, port), 'configuration.json')) {
+    return
+  }
+}
+console.log('Configuration file is founded.')
+
+configuration.readConfigurationFile('configuration.json', host, port);
 
 var express = require('express'),
   http = require('http'),
@@ -18,6 +33,16 @@ var express = require('express'),
 
 var server = http.createServer(api);
 socket(server);
+
+server.listen(port, host).on('error', function (e) {
+  if (e.code !== 'EADDRINUSE' && e.code !== 'EACCES') {
+    throw e;
+  }
+  console.error('Port ' + port + ' is busy. Trying the next available port...');
+  server.listen(++port);
+}).on('listening', function () {
+  console.log('Listening on http://' + host + ':' + port);
+});
 
 function getHostAddress() {
   const os = require('os');
@@ -39,16 +64,3 @@ function getHostAddress() {
   }
   return host;
 };
-
-var host = process.env.HOST || getHostAddress();
-var port = process.env.PORT || 9005;
-
-server.listen(port, host).on('error', function (e) {
-  if (e.code !== 'EADDRINUSE' && e.code !== 'EACCES') {
-    throw e;
-  }
-  console.error('Port ' + port + ' is busy. Trying the next available port...');
-  server.listen(++port);
-}).on('listening', function () {
-  console.log('Listening on http://' + host + ':' + port);
-});

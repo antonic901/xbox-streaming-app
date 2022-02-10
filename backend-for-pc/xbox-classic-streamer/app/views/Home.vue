@@ -100,7 +100,7 @@
               class="mr-0 ml-0"
               aria-label="Settings"
               v-on="on"
-              v-on:click="openSettings()"
+              @click.stop="showDialog=true"
             >
               <v-icon color="grey">mdi-cog</v-icon>
             </v-btn>
@@ -388,6 +388,7 @@
         </v-btn>
       </template>
     </v-snackbar>
+    <SettingsModal v-model="showDialog"></SettingsModal>
   </div>
 </template>
 
@@ -396,6 +397,9 @@
 module.exports = {
     name: 'Home',
     computed: {
+      XBOX_ADDRESS() {
+        return this.$store.getters.getXboxAddress;
+      },
       getTorrents() {
         let torrents = this.torrents.filter(torrent => {
           if (torrent.stats) {
@@ -410,8 +414,6 @@ module.exports = {
       return {
         torrents: [],
         torrent: null,
-        API: 'http://192.168.0.14:9005',
-        XBOX_ADDRESS: 'http://192.168.0.19:80',
         showMenu: false,
         x: 0,
         y: 0,
@@ -436,7 +438,8 @@ module.exports = {
           }
         ],
         searchFilterEnabled: false,
-        selectMode: false
+        selectMode: false,
+        showDialog: false
       }
     },
     watch: {
@@ -557,13 +560,13 @@ module.exports = {
         }
       },
       async load() {
-        await axios.get(this.API + "/torrents")
+        await axios.get("/torrents")
           .then(r => {
               this.torrents = r.data.reverse()
           })
       },
       async loadTorrent(hash) {
-        return await axios.get(this.API + "/torrents/" + hash)
+        return await axios.get("/torrents/" + hash)
           .then(r => {
             torrent = r.data;
             var existing = this.torrents.find(t => t.infoHash === hash);
@@ -590,6 +593,8 @@ module.exports = {
       let self = this;
 
       this.load();
+
+      axios.get("/configuration").then(r => {this.$store.dispatch('updateConfiguration', r.data);})
 
       socket.on('verifying', function (hash) {
         // console.log('Verifying...')

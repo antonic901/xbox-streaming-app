@@ -26,7 +26,7 @@ class CGUIActorInfo(xbmcgui.WindowXML):
             DialogProgress.update(99, 'Finishing...')
             self.setFocusId(5000)
             self.DETECTOR = 1
-            xbmc.sleep(2000)
+            xbmc.sleep(3000)
             DialogProgress.close()
 
     def onAction(self, action):

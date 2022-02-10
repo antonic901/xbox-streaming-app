@@ -13,6 +13,7 @@ var rangeParser = require('range-parser'),
   progress = require('./progressbar'),
   stats = require('./stats'),
   TorrentSearchApi = require('torrent-search-api'),
+  configuration = require('./configuration'),
   api = express();
 
 let enableProviders = ['1337x', 'Rarbg', 'ThePirateBay', 'Yts'];
@@ -44,7 +45,6 @@ function serialize(torrent) {
     interested: torrent.amInterested,
     ready: torrent.ready,
     files: torrent.files.map(function (f) {
-      // jshint -W016
       var start = f.offset / pieceLength | 0;
       var end = (f.offset + f.length - 1) / pieceLength | 0;
 
@@ -71,6 +71,15 @@ function findTorrent(req, res, next) {
   }
   next();
 }
+
+api.get('/configuration', function(req, res) {
+  res.send(configuration.readConfigurationFile('./', 'configuration.json'));
+});
+
+api.post('/configuration', function(req, res){
+  if(configuration.writeConfigurationFile('./', JSON.stringify(req.body), 'configuration.json')) res.status(200).send("Updated configuration file.");
+  else res.status(404).send("Path is not found.");
+});
 
 api.get('/torrents', function (req, res) {
   res.send(store.list().map(serialize));
