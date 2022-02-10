@@ -34,10 +34,10 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
     def onClick(self, id):
         if id == self.cButtonWatch:
             DialogProgress.create('XBMC4Xbox', 'Calling local API...')
-            name = self.entity.getProperty('title')
+            query = self.entity.getProperty('title') + " " + self.entity.getProperty('release_date').split("-")[0]
             DialogProgress.update(50, 'Finding available streams...')
-            streams, listitems = service.getStreams(name, "Movies")
-            ui = CGUIStream.CGUIStream('Stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=name)
+            streams, listitems = service.getStreams(query, "Movies")
+            ui = CGUIStream.CGUIStream('Stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=query)
             ui.doModal()
             del ui
         elif id == self.cContainerActors:

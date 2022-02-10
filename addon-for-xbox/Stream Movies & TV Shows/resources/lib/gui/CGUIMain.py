@@ -33,6 +33,19 @@ class CGUIMain(xbmcgui.WindowXML):
 			DialogProgress.delete()
 			self.close()
 
+		#274 is 'Start' button
+		elif action.getButtonCode() == 274:
+			# upamtimo komponentu koja je imala fokus
+			focusId = self.getFocusId()
+			
+			import resources.lib.gui.CGUISettings as CGUISettings
+			ui = CGUISettings.CGUISettings('_Settings.xml', self.__cwd__, 'default', allow_cancel=True)
+			ui.doModal()
+			del ui
+
+			#vratimo fokus komponenti
+			self.setFocusId(focusId)
+
 	def onFocus(self, controlId):
 		pass
 

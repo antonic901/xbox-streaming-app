@@ -21,6 +21,7 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
         utils.populateContainer(self, self.cListStream, self.items)
         DialogProgress.update(99, 'Finishing...')
         self.setFocusId(self.cListStream)
+        xbmc.sleep(2000)
         DialogProgress.close()
 
     def onAction(self, action):

@@ -16,7 +16,7 @@ def log( msg ):
 
 if (__name__ == "__main__"):
 	this = '__main__->'
-		
+	
 	log('==================================')
 	log('initializing...')
 	log('Addon Id	: %s' % __addon_id__)
@@ -25,7 +25,21 @@ if (__name__ == "__main__"):
 	log('Language	: %s' % __language__)
 	log('==================================')
 
+	#check is configuration file created
+	if os.path.isfile(__cwd__ + "\\configuration.json"):
+		print ("Configuration file is found!")
+
+	else:
+		#if not found, promt user to create one
+		import resources.lib.gui.CGUISettings as CGUISettings
+		ui = CGUISettings.CGUISettings('_Settings.xml', __cwd__, 'default', allow_cancel=False)
+		ui.doModal()
+		del ui
+
 	import resources.lib.gui.CGUIMain as __init__
-	ui = __init__.CGUIMain('main.xml', __cwd__, 'default', __cwd__=__cwd__)
+	ui = __init__.CGUIMain('Main.xml', __cwd__, 'default', __cwd__=__cwd__)
 	ui.doModal()
 	del ui
+
+	log('terminating...')
+	log('==================================')

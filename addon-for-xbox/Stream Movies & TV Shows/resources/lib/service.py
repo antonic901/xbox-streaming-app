@@ -5,11 +5,32 @@ import json
 import utils.ListItemCreator as create
 import utils.utils as utils
 
-API = 'http://api.themoviedb.org/3'
-API_KEY = 'f0d9239acde293e5222746bf11d1a3dc'
+path = "%s\\configuration.json" % os.getcwd()
+print(path)
+json_data = open(path).read()
+conf = utils.createObject(json_data)
 
-IP_ADDRESS = '192.168.0.10'
-PORT = '9005'
+API = conf.API
+API_KEY = conf.API_KEY
+
+HOST_ADDRESS = conf.HOST_ADDRESS
+PORT = conf.PORT
+
+def changeApi(new_api):
+    global API
+    API = new_api
+
+def changeApiKey(new_api_key):
+    global API_KEY
+    API_KEY = new_api_key
+
+def changeHostAddress(new_host_address):
+    global HOST_ADDRESS
+    HOST_ADDRESS = new_host_address
+
+def changePort(new_port):
+    global PORT
+    PORT = new_port
 
 def getMoviesInTheatres(page):
     response = requests.get("%s/movie/now_playing?api_key=%s&language=en-US&page=%s" % (API, API_KEY, page))
@@ -147,7 +168,7 @@ def getInfoAboutSeason(id, number):
     return listitems
 
 def getStreams(query, category):
-    response = requests.get("http://%s:%s/search/%s/%s" % (IP_ADDRESS, PORT, query, category))
+    response = requests.get("http://%s:%s/search/%s/%s" % (HOST_ADDRESS, PORT, query, category))
     streams = utils.createObject(response.text)
     listitems = []
     for stream in streams:
@@ -158,7 +179,7 @@ def getMagnet(torrent):
     payload = {
         "torrent": torrent.__dict__
     }
-    response = requests.get("http://%s:%s/magnet" % (IP_ADDRESS, PORT), headers={'Content-Type':'application/json', 'Accept': 'text/plain'}, json=payload)
+    response = requests.get("http://%s:%s/magnet" % (HOST_ADDRESS, PORT), headers={'Content-Type':'application/json', 'Accept': 'text/plain'}, json=payload)
     magnet = response.text
     return magnet
 
@@ -166,12 +187,12 @@ def startStreaming(magnet):
     payload = {
         "link": magnet
     }
-    response = requests.post("http://%s:%s/torrents" % (IP_ADDRESS, PORT), headers={'Content-Type':'application/json', 'Accept': 'text/plain'}, json=payload)
+    response = requests.post("http://%s:%s/torrents" % (HOST_ADDRESS, PORT), headers={'Content-Type':'application/json', 'Accept': 'text/plain'}, json=payload)
     infoHash = response.json().get('infoHash')
     return infoHash
 
 def getInfoAboutStream(infoHash):
-    response = requests.get("http://%s:%s/torrents/%s" % (IP_ADDRESS, PORT, infoHash))
+    response = requests.get("http://%s:%s/torrents/%s" % (HOST_ADDRESS, PORT, infoHash))
     info = utils.createObject(response.text)
     return info
 
@@ -180,5 +201,5 @@ def getStreamLink(infoHash):
     for file in info.files:
         for extension in [".mp4", ".mkv", ".avi"]:
             if extension in file.name:
-                return "http://%s:%s%s?ffmpeg=remux" % (IP_ADDRESS, PORT, file.link)
+                return "http://%s:%s%s?ffmpeg=remux" % (HOST_ADDRESS, PORT, file.link)
     return None
