@@ -49,7 +49,7 @@ class CGUISettings(xbmcgui.WindowXMLDialog):
             for key, value in self.dict.items():
                 if value in ['', None]:
                     xbmc.executebuiltin('Notification(Settings,%s is not valid!,5000,DefaultIconInfo.png)' % key)
-                    break
+                    return
             
             print ("Updating configuration file...")
             with open(self.path, "w+") as configuration:

@@ -397,8 +397,13 @@
 module.exports = {
     name: 'Home',
     computed: {
+      API() {
+        let conf = this.$store.getters.getConfiguration;
+        return "http://" + conf.PC.IP_ADDRESS + ":" + conf.PC.PORT;
+      },
       XBOX_ADDRESS() {
-        return this.$store.getters.getXboxAddress;
+        let conf = this.$store.getters.getConfiguration;
+        return "http://" + conf.XBOX.IP_ADDRESS + ":" + conf.XBOX.PORT;
       },
       getTorrents() {
         let torrents = this.torrents.filter(torrent => {
@@ -447,10 +452,9 @@ module.exports = {
     },
     methods: {
       addTorrent() {
-        var link = "magnet:?xt=urn:btih:B6ABEA6BAC7DEBB9BCF845983727FA6EDFCED29D&dn=Spider-Man+%282002%29+1080p+BrRip+x264+-+YIFY&tr=udp%3A%2F%2Ftracker.yify-torrents.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969&tr=udp%3A%2F%2Ftracker.istole.it%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.publichd.eu%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce";
         let magnet = prompt('Enter magnet link:');
-        if(magnet) { link = magnet }
-        axios.post(this.API + "/torrents", {"link": link})
+        if(!magnet) { return }
+        axios.post("/torrents", {"link": magnet})
           .catch(error => {
             console.log(error)
           })
@@ -493,7 +497,7 @@ module.exports = {
           socket.emit(this.torrent.stats.paused ? 'resume' : 'pause', this.torrent.infoHash);
           this.torrent.stats.paused = !this.torrent.stats.paused;
         } else if (action === 3) {
-          axios.delete(this.API + "/torrents/" + this.torrent.infoHash)
+          axios.delete("/torrents/" + this.torrent.infoHash)
         } else if (action === 4) {
           alert('This funcionality is in development.');
         } else if (action === 5) {

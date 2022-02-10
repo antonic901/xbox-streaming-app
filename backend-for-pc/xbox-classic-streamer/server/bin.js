@@ -29,7 +29,7 @@ var express = require('express'),
   api = require('./')
     .use(serveStatic(path.join(__dirname, '../dist'), STATIC_OPTIONS))
     .use(serveStatic(path.join(__dirname, '../.tmp'), STATIC_OPTIONS))
-    .use(serveStatic(path.join(__dirname, '../app'), STATIC_OPTIONS));
+    .use(serveStatic(path.join(__dirname, '../frontend'), STATIC_OPTIONS));
 
 var server = http.createServer(api);
 socket(server);
