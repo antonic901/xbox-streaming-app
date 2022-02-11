@@ -1,38 +1,51 @@
 const { app, BrowserWindow } = require("electron");
 
+// closes windows that keeps poping up when installing app on windows
+if (require('electron-squirrel-startup')) return app.quit();
+
 const server = require("./server/bin");
 
-let mainWindow;
+let window;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 700,
+  window = new BrowserWindow({
+    width: 1280,
+    height: 720,
+    // icon: path.join(app.getAppPath(), './assets/icon.png'),
     webPreferences: {
       nodeIntegration: true,
     },
   });
 
-  mainWindow.loadURL('http://' + server.host + ':' + server.port);
-  mainWindow.on("closed", function () {
-    mainWindow = null;
+  window.loadURL('http://' + server.host + ':' + server.port);
+  window.on("closed", function () {
+    window = null;
   });
 }
 
-app.on("ready", createWindow);
+app.whenReady().then(() => {
+  createWindow()
 
-app.on("resize", function (e, x, y) {
-  mainWindow.setSize(x, y);
+  // Use this if app is for macOS
+  // app.on('activate', () => {
+  //   if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  // })
+
+})
+
+app.on("resize", (e, x, y) => {
+  window.setSize(x, y);
 });
 
-app.on("window-all-closed", function () {
+app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on("activate", function () {
-  if (mainWindow === null) {
+// Use this if app is for WIN/Linux
+app.on("activate", () => {
+  if (window === null) {
     createWindow();
   }
 });

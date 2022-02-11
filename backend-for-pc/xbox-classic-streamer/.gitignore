@@ -26,5 +26,6 @@ node_modules
 
 /app/bower_components
 /dist
+/out
 /.tmp
 /.idea
