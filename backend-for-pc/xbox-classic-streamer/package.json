@@ -1,19 +1,29 @@
 {
   "name": "xbox-streaming",
-  "version": "0.0.1",
-  "author": "Nikola Antonic <pcserviskac@gmail.com>",
+  "displayName": "Stream Movies & TV Shows",
   "description": "Streaming torrent client for Xbox Classic.",
+  "icon": "./assets/icon.png",
+  "version": "0.0.1",
+  "author": "Nikola Antonić",
   "bin": {
     "xbox-streaming": "./server/bin.js"
   },
   "scripts": {
-    "start": "node ./server/bin.js"
+    "start": "electron-forge start",
+    "console": "node ./server/bin.js",
+    "gui": "electron main.js",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "make-linux": "npx electron-forge make --platform linux --targets @electron-forge/maker-deb,@electron-forge/maker-rpm,@electron-forge/maker-zip",
+    "make-windows": "npx electron-forge make --platform win32 --targets @electron-forge/maker-squirrel,@electron-forge/maker-zip",
+    "make-darwin": "npx electron-forge make --platform darwin --targets @electron-forge/maker-zip"
   },
-  "main": "./server/bin.js",
+  "main": "main.js",
   "dependencies": {
     "archiver": "^3.0.0",
     "body-parser": "^1.19.0",
     "connect-multiparty": "^2.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.1",
     "lodash": "^4",
     "mkdirp": "^0.5.5",
@@ -32,5 +42,66 @@
   "license": "MIT",
   "engines": {
     "node": ">=6"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "electron": "^17.0.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "categories": ["Utility"],
+            "depends": ["ffmpeg"],
+            "description": "Streaming torrent client for Original Xbox.",
+            "genericName": "Original Xbox",
+            "icon": "assets/icon.png",
+            "homepage": "https://github.com/antonic901/xbox-streaming-app",
+            "maintainer": "Nikola Antonić",
+            "name": "xbox-streaming",
+            "preDepends": ["ffmpeg"],
+            "priority": "required",
+            "productDescription": "Used to monitor streams and to control Xbox via XBMC4Xbox HTTP API server.",
+            "productName": "Original Xbox"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {
+            "categories": ["Utility"],
+            "description": "Streaming torrent client for Original Xbox.",
+            "genericName": "Original Xbox",
+            "icon": "assets/icon.png",
+            "homepage": "https://github.com/antonic901/xbox-streaming-app",
+            "name": "xbox-streaming",
+            "productDescription": "Used to monitor streams and to control Xbox via XBMC4Xbox HTTP API server.",
+            "productName": "Original Xbox",
+            "requires": ["ffmpeg"]
+          }
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "format": "ULFO",
+            "icon": "assets/icon.icns",
+            "name": "Original Xbox"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "icon": "assets/icon.ico",
+            "setupExe": "Install Original Xbox Client.exe"
+          }
+        }
+      ]
+    }
   }
 }

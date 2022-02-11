@@ -48,6 +48,7 @@
         Vue.use(httpVueLoader);
 
         Vue.component("navbar", httpVueLoader("components/Navbar.vue"))
+        Vue.component("addtorrentmodal", httpVueLoader("/components/Modals/AddTorrentModal/AddTorrentModal.vue"))
         Vue.component("settingsmodal", httpVueLoader("components/Modals/SettingsModal/SettingsModal.vue"))
         Vue.component("basicsettings", httpVueLoader("components/Modals/SettingsModal/Tabs/BasicSettings.vue"))
         Vue.component("xboxsettings", httpVueLoader("components/Modals/SettingsModal/Tabs/XboxSettings.vue"))

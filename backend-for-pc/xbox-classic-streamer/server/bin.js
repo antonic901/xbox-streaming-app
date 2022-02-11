@@ -64,3 +64,5 @@ function getHostAddress() {
   }
   return host;
 };
+
+module.exports = {host, port}

@@ -19,7 +19,7 @@
               class="mr-0 ml-0"
               aria-label="Add torrent"
               v-on="on"
-              v-on:click="addTorrent()"
+              v-on:click.stop="showAddTorrent = true"
             >
               <v-icon color="grey">mdi-plus</v-icon>
             </v-btn>
@@ -100,7 +100,7 @@
               class="mr-0 ml-0"
               aria-label="Settings"
               v-on="on"
-              @click.stop="showDialog=true"
+              @click.stop="showSettings=true"
             >
               <v-icon color="grey">mdi-cog</v-icon>
             </v-btn>
@@ -388,7 +388,8 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <SettingsModal v-model="showDialog"></SettingsModal>
+    <SettingsModal v-model="showSettings"></SettingsModal>
+    <AddTorrentModal v-model="showAddTorrent"></AddTorrentModal>
   </div>
 </template>
 
@@ -444,7 +445,8 @@ module.exports = {
         ],
         searchFilterEnabled: false,
         selectMode: false,
-        showDialog: false
+        showAddTorrent: false,
+        showSettings: false
       }
     },
     watch: {
