@@ -78,6 +78,9 @@ Status values:
 | Frontend                                          |   ✗    |
 ## Video
  - TODO
+
+## Support
+<a href="https://www.buymeacoffee.com/antonic901"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=wdaan&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff"></a>
 ## Some images
 ![PC Dashboard](https://i.postimg.cc/cHLxYg8Z/Screenshot-from-2022-02-11-18-01-27.png)
 ![PC Settings](https://i.postimg.cc/50Kxm4wz/Screenshot-from-2022-02-11-18-01-49.png)
