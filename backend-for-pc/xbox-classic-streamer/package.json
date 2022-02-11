@@ -2,7 +2,7 @@
   "name": "xbox-streaming",
   "displayName": "Stream Movies & TV Shows",
   "description": "Streaming torrent client for Xbox Classic.",
-  "icon": "assets/icon.png",
+  "icon": "./assets/icon.png",
   "version": "0.0.1",
   "author": "Nikola Antonić",
   "bin": {
@@ -10,13 +10,13 @@
   },
   "scripts": {
     "start": "electron-forge start",
-    "console": "npm ./server/bin.js",
+    "console": "node ./server/bin.js",
     "gui": "electron main.js",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "make-linux": "npx electron-forge make --platform linux --targets @electron-forge/maker-deb electron-forge/maker-rpm @electron-forge/maker-zip",
-    "make-windows": "npx electron-forge make --platform win32 --targets @electron-forge/maker-squirrel @electron-forge/maker-zip",
-    "make-darwin": "npx electron-forge make --platform darwin --targets @electron-forge/maker-dmg @electron-forge/maker-zip"
+    "make-linux": "npx electron-forge make --platform linux --targets @electron-forge/maker-deb,@electron-forge/maker-rpm,@electron-forge/maker-zip",
+    "make-windows": "npx electron-forge make --platform win32 --targets @electron-forge/maker-squirrel,@electron-forge/maker-zip",
+    "make-darwin": "npx electron-forge make --platform darwin --targets @electron-forge/maker-zip"
   },
   "main": "main.js",
   "dependencies": {
@@ -47,7 +47,6 @@
     "@electron-forge/cli": "^6.0.0-beta.63",
     "@electron-forge/maker-deb": "^6.0.0-beta.63",
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "electron": "^17.0.0"
@@ -91,16 +90,15 @@
           "name": "@electron-forge/maker-dmg",
           "config": {
             "format": "ULFO",
-            "icon": "/assets/icon.icns",
+            "icon": "assets/icon.icns",
             "name": "Original Xbox"
           }
         },
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "iconUrl": "assets/icon.ico",
-            "setupExe": "Install Original Xbox Client",
-            "name": "Original Xbox"
+            "icon": "assets/icon.ico",
+            "setupExe": "Install Original Xbox Client.exe"
           }
         }
       ]
