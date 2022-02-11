@@ -79,6 +79,8 @@ Status values:
 ## Video
  - TODO
 ## Some images
+![PC Dashboard](https://i.postimg.cc/cHLxYg8Z/Screenshot-from-2022-02-11-18-01-27.png)
+![PC Settings](https://i.postimg.cc/50Kxm4wz/Screenshot-from-2022-02-11-18-01-49.png)
 ![Movies](https://i.postimg.cc/jScq6RNM/screenshot000.png)
 ![TV Shows](https://i.postimg.cc/ZYLTzTs4/screenshot001.png)
 ![Search movies](https://i.ibb.co/TTp5JL0/screenshot005.png)
