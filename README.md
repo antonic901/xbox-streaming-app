@@ -17,6 +17,7 @@
  - This project have two main applications. One is for PC coded in Node.js and other is program (script) for XBMC4Xbox coded in XML/Python. PC app is API which    serves requests from Xbox and it offeres torrent search engine, torrent stream and on-the-fly video convertion from H.264/265 to H.263 using ffmpeg. It also provides frontend coded in Vue.js which help you to easily organize and observe all torrents and to change some API config parameters like IP ADDRESS and PORT. Xbox app is a script for XBMC4Xbox where GUI is coded using XBMCGUI library and backend in python which communicate with TMDB and Trakt API.
  
  - GUI insipration is taken from XBMC Origins, Embuary Skin and Xbox Series S/X UI
+ - Frontend GUI inspiration is taken from [VueTorrent](https://github.com/WDaan/VueTorrent)
   
 ## Requirements
 - **Xbox**
