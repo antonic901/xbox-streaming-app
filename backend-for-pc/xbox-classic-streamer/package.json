@@ -6,11 +6,11 @@
   "version": "0.0.1",
   "author": "Nikola Antonić",
   "bin": {
-    "xbox-streaming": "./server/bin.js"
+    "xbox-streaming": "./backend/bin.js"
   },
   "scripts": {
     "start": "electron-forge start",
-    "console": "node ./server/bin.js",
+    "console": "node ./backend/bin.js",
     "gui": "electron main.js",
     "package": "electron-forge package",
     "make": "electron-forge make",

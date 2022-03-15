@@ -59,7 +59,7 @@ module.exports = {
             magnet: '',
             rules: [
                 v => !!v || 'Required.',
-
+                // Create REGEX for Magnet Link validation
             ],
             valid: true
         }

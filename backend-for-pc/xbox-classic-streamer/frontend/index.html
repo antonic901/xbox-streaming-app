@@ -3,10 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>Stream Movies & TV Shows</title>
-    <!-- <link src="css/roboto.css" rel="stylesheet"/>
-    <link src="css/materialdesignicons.min.css" rel="stylesheet"/>
-    <link src="css/vuetify.min.css" rel="stylesheet"/>
-    <link rel="icon" src="img/icon.png" type="image/x-icon"/> -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet"/>
@@ -47,11 +43,51 @@
 
         Vue.use(httpVueLoader);
 
-        Vue.component("navbar", httpVueLoader("components/Navbar.vue"))
+        Vue.component("navbar", httpVueLoader("components/Navbar/Navbar.vue"))
+          Vue.component("currentspeed", httpVueLoader("components/Navbar/CurrentSpeed/CurrentSpeed.vue"))
+            Vue.component("downloadspeed", httpVueLoader("components/Navbar/CurrentSpeed/Cards/DownloadSpeed.vue"))
+            Vue.component("uploadspeed", httpVueLoader("components/Navbar/CurrentSpeed/Cards/UploadSpeed.vue"))
+          Vue.component("sessionstats", httpVueLoader("components/Navbar/SessionStats/SessionStats.vue"))
+            Vue.component("downloadedstats", httpVueLoader("components/Navbar/SessionStats/Cards/Downloaded.vue"))
+            Vue.component("freespace", httpVueLoader("components/Navbar/SessionStats/Cards/FreeSpace.vue"))
+            Vue.component("uploadedstats", httpVueLoader("components/Navbar/SessionStats/Cards/Uploaded.vue"))
+          Vue.component("bottommenu", httpVueLoader("components/Navbar/BottomMenu/BottomMenu.vue"))
+            Vue.component("altspeeds", httpVueLoader("components/Navbar/BottomMenu/Buttons/AltSpeeds.vue"))
+            Vue.component("exit", httpVueLoader("components/Navbar/BottomMenu/Buttons/Exit.vue"))
+            Vue.component("toogledarklight", httpVueLoader("components/Navbar/BottomMenu/Buttons/ToogleDarkLight.vue"))
         Vue.component("addtorrentmodal", httpVueLoader("/components/Modals/AddTorrentModal/AddTorrentModal.vue"))
         Vue.component("settingsmodal", httpVueLoader("components/Modals/SettingsModal/SettingsModal.vue"))
-        Vue.component("basicsettings", httpVueLoader("components/Modals/SettingsModal/Tabs/BasicSettings.vue"))
-        Vue.component("xboxsettings", httpVueLoader("components/Modals/SettingsModal/Tabs/XboxSettings.vue"))
+          Vue.component("basicsettings", httpVueLoader("components/Modals/SettingsModal/Tabs/BasicSettings.vue"))
+          Vue.component("xboxsettings", httpVueLoader("components/Modals/SettingsModal/Tabs/XboxSettings.vue"))
+        Vue.component("menubar", httpVueLoader("components/Home/MenuBar/MenuBar.vue"))
+          Vue.component("addtorrent", httpVueLoader("components/Home/MenuBar/Buttons/AddTorrent.vue"))
+          Vue.component("pauseselected", httpVueLoader("components/Home/MenuBar/Buttons/PauseSelected.vue"))
+          Vue.component("removeselected", httpVueLoader("components/Home/MenuBar/Buttons/RemoveSelected.vue"))
+          Vue.component("resumeselected", httpVueLoader("components/Home/MenuBar/Buttons/ResumeSelected.vue"))
+          Vue.component("searchtorrents", httpVueLoader("components/Home/MenuBar/Buttons/SearchTorrents.vue"))
+          Vue.component("settings", httpVueLoader("components/Home/MenuBar/Buttons/Settings.vue"))
+        Vue.component("dashboard", httpVueLoader("components/Home/Dashboard/Dashboard.vue"))
+          Vue.component("topbar", httpVueLoader("components/Home/Dashboard/TopBar/TopBar.vue"))
+            Vue.component("searchfilter", httpVueLoader("components/Home/Dashboard/TopBar/Buttons/SearchFilter.vue"))
+            Vue.component("selection", httpVueLoader("components/Home/Dashboard/TopBar/Buttons/Selection.vue"))
+            Vue.component("sorting", httpVueLoader("components/Home/Dashboard/TopBar/Buttons/Sorting.vue"))
+          Vue.component("torrents", httpVueLoader("components/Home/Dashboard/Torrents/Torrents.vue"))
+            Vue.component("downloaditem", httpVueLoader("components/Home/Dashboard/Torrents/Items/Download.vue"))
+            Vue.component("downloadeditem", httpVueLoader("components/Home/Dashboard/Torrents/Items/Downloaded.vue"))
+            Vue.component("etaitem", httpVueLoader("components/Home/Dashboard/Torrents/Items/ETA.vue"))
+            Vue.component("peersitem", httpVueLoader("components/Home/Dashboard/Torrents/Items/Peers.vue"))
+            Vue.component("progressitem", httpVueLoader("components/Home/Dashboard/Torrents/Items/Progress.vue"))
+            Vue.component("sizeitem", httpVueLoader("components/Home/Dashboard/Torrents/Items/Size.vue"))
+            Vue.component("statusitem", httpVueLoader("components/Home/Dashboard/Torrents/Items/Status.vue"))
+            Vue.component("uploaditem", httpVueLoader("components/Home/Dashboard/Torrents/Items/Upload.vue"))
+            Vue.component("uploadeditem", httpVueLoader("components/Home/Dashboard/Torrents/Items/Uploaded.vue"))
+            Vue.component("rightclickmenu", httpVueLoader("components/Home/Dashboard/Torrents/RightClickMenu/RightClickMenu.vue"))
+              Vue.component("delete", httpVueLoader("components/Home/Dashboard/Torrents/RightClickMenu/Items/Delete.vue"))
+              Vue.component("play", httpVueLoader("components/Home/Dashboard/Torrents/RightClickMenu/Items/Play.vue"))
+              Vue.component("resumepause", httpVueLoader("components/Home/Dashboard/Torrents/RightClickMenu/Items/ResumePause.vue"))
+              Vue.component("showinfo", httpVueLoader("components/Home/Dashboard/Torrents/RightClickMenu/Items/ShowInfo.vue"))
+              Vue.component("startstop", httpVueLoader("components/Home/Dashboard/Torrents/RightClickMenu/Items/StartStop.vue"))
+        Vue.component("basicnotification", httpVueLoader("components/Notifications/BasicNotification.vue"))
 
         const routes = [
             {
