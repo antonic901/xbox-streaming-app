@@ -3,7 +3,8 @@
 var path = require('path'),
   fs = require('fs'),
   pump = require('pump'),
-  logger = require('./utils/logger');
+  logger = require('./utils/logger'),
+  rangeParser = require('range-parser');
 
 module.exports = function (req, res, torrent, file) {
   var param = req.query.ffmpeg,
@@ -30,7 +31,7 @@ module.exports = function (req, res, torrent, file) {
 
     var filePath = path.join(torrent.path, file.path);
 
-    var command = ffmpeg(file.createReadStream())
+    var command = ffmpeg(filePath)
       .audioCodec('aac')
       .videoCodec('mpeg4')
       .videoBitrate(3000)
@@ -56,7 +57,7 @@ module.exports = function (req, res, torrent, file) {
   }
 
   function xbox() {
-    throw new Error('Not impemented');
+    throw new Error('To be implemented.');
   }
 
   switch (param) {
