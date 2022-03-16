@@ -1,22 +1,16 @@
 'use strict';
-const fs = require('fs');
 
-function readConfigurationFile(path, file_name) {
-    if (!fs.existsSync(path + file_name)) {
-      return null;
-    }
-    let data = fs.readFileSync(path + file_name);
-    let configuration = JSON.parse(data);
-    return configuration;
+let path = "./";
+let name = "configuration.json";
+
+const file = require('./utils/file');
+
+function readConfigurationFile() {
+    return JSON.parse(file.read(path,name));
   }
 
-function writeConfigurationFile(path, data, file_name) {
-    if (!fs.existsSync(path)) {
-        console.log("Path: '" + path + "' is not valid.");
-        return null;
-    }
-    fs.writeFileSync(path + file_name, data);
-    return data;
+function writeConfigurationFile(data) {
+    return file.write(path, name, data);
 }
 
 function createConfigurationFile(host, port) {

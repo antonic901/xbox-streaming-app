@@ -19,7 +19,7 @@
       </v-col>
     </v-row>
     <Dashboard></Dashboard>
-    <!-- <BasicNotification v-bind:show-notification="snackbar" v-bind:text="notificationText" v-on:close="snackbar = false, notificationText=''"></BasicNotification> -->
+    <BasicNotification v-bind:show-notification="snackbar" v-bind:text="notificationText" v-on:close="snackbar = false, notificationText=''"></BasicNotification>
   </div>
 </template>
 

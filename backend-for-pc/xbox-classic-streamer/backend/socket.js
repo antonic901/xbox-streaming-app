@@ -1,6 +1,7 @@
 'use strict';
 
-var stats = require('./stats');
+var stats = require('./stats'),
+  logger = require('./utils/logger');
 
 module.exports = function (server) {
   var io = require('socket.io').listen(server),
@@ -10,7 +11,7 @@ module.exports = function (server) {
 
   io.sockets.on('connection', function (socket) {
     socket.on('stop', function(infoHash, index) {
-      console.log('stopping ' + infoHash);
+      logger.log('NOTICE', 'stopping ' + infoHash);
       var torrent = store.get(infoHash);
       if(index >= 0 && index < torrent.files.length) {
         torrent.files[index].deselect();
@@ -21,7 +22,7 @@ module.exports = function (server) {
       }
     });
     socket.on('start', function(infoHash, index) {
-      console.log('starting ' + infoHash);
+      logger.log('NOTICE', 'starting ' + infoHash);
       var torrent = store.get(infoHash);
       if(index >= 0 && index < torrent.files.length) {
         torrent.files[index].select();
@@ -32,14 +33,14 @@ module.exports = function (server) {
       }
     });
     socket.on('pause', function (infoHash) {
-      console.log('pausing ' + infoHash);
+      logger.log('NOTICE', 'pausing ' + infoHash);
       var torrent = store.get(infoHash);
       if (torrent && torrent.swarm) {
         torrent.swarm.pause();
       }
     });
     socket.on('resume', function (infoHash) {
-      console.log('resuming ' + infoHash);
+      logger.log('NOTICE', 'resuming ' + infoHash);
       var torrent = store.get(infoHash);
       if (torrent && torrent.swarm) {
         torrent.swarm.resume();
@@ -47,9 +48,9 @@ module.exports = function (server) {
     });
     socket.on('select', function (infoHash, file) {
       if (typeof file === 'number') {
-        console.log('selected ' + infoHash + '/' + file);
+        logger.log('NOTICE', 'selected ' + infoHash + '/' + file);
       } else {
-        console.log('selected ' + infoHash);
+        logger.log('NOTICE', 'selected ' + infoHash);
       }
       var torrent = store.get(infoHash);
       if (torrent && torrent.files) {
@@ -65,9 +66,9 @@ module.exports = function (server) {
     });
     socket.on('deselect', function (infoHash, file) {
       if (typeof file === 'number') {
-        console.log('deselected ' + infoHash + '/' + file);
+        logger.log('NOTICE', 'deselected ' + infoHash + '/' + file);
       } else {
-        console.log('deselected ' + infoHash);
+        logger.log('NOTICE', 'deselected ' + infoHash);
       }
       var torrent = store.get(infoHash);
       if (torrent && torrent.files) {

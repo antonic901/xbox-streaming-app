@@ -4,7 +4,7 @@ var rangeParser = require('range-parser'),
   pump = require('pump'),
   _ = require('lodash'),
   express = require('express'),
-  logger = require('morgan'),
+  morgan = require('morgan'),
   bodyParser = require('body-parser'),
   multipart = require('connect-multiparty'),
   fs = require('fs'),
@@ -14,17 +14,18 @@ var rangeParser = require('range-parser'),
   stats = require('./stats'),
   TorrentSearchApi = require('torrent-search-api'),
   configuration = require('./configuration'),
-  api = express();
+  api = express(),
+  logger = require('./utils/logger');
 
 let enableProviders = ['1337x', 'Rarbg', 'ThePirateBay', 'Yts'];
-
+logger.log('NOTICE', 'Enabling providers: ' + enableProviders);
 enableProviders.forEach(provider => {
   TorrentSearchApi.enableProvider(provider);
-  console.log(TorrentSearchApi.isProviderActive(provider) ? provider + ' is active.'  : provider + ' is not active.')
+  logger.log('NOTICE', TorrentSearchApi.isProviderActive(provider) ? provider + ' is active.'  : provider + ' is not active.')
 });
 
 api.use(bodyParser.json())
-api.use(logger('dev'));
+api.use(morgan('dev'));
 api.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'OPTIONS, POST, GET, PUT, DELETE');
@@ -73,11 +74,11 @@ function findTorrent(req, res, next) {
 }
 
 api.get('/configuration', function(req, res) {
-  res.send(configuration.readConfigurationFile('./', 'configuration.json'));
+  res.send(configuration.readConfigurationFile());
 });
 
 api.post('/configuration', function(req, res){
-  if(configuration.writeConfigurationFile('./', JSON.stringify(req.body), 'configuration.json')) res.status(200).send("Updated configuration file.");
+  if(configuration.writeConfigurationFile(JSON.stringify(req.body))) res.status(200).send("Updated configuration file.");
   else res.status(404).send("Path is not found.");
 });
 
@@ -88,7 +89,7 @@ api.get('/torrents', function (req, res) {
 api.post('/torrents', function (req, res) {
   store.add(req.body.link, function (err, infoHash) {
     if (err) {
-      console.error(err);
+      logger.log('ERROR', err);
       res.status(500).send(err);
     } else {
       res.send({ infoHash: infoHash });
@@ -103,14 +104,14 @@ api.post('/upload', multipart(), function (req, res) {
   }
   store.add(file.path, function (err, infoHash) {
     if (err) {
-      console.error(err);
+      logger.log('ERROR', err);
       res.status(500).send(err);
     } else {
       res.send({ infoHash: infoHash });
     }
     fs.unlink(file.path, function (err) {
       if (err) {
-        console.error(err);
+        logger.log('ERROR', err);
       }
     });
   });
@@ -218,7 +219,7 @@ api.get('/torrents/:infoHash/archive', findTorrent, function (req, res) {
 
   var archive = archiver('zip');
   archive.on('warning', function (err) {
-    console.error(err);
+    logger.log('ERROR', err);
   });
   archive.on('error', function (err) {
     throw err;

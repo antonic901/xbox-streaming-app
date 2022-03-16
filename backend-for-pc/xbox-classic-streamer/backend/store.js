@@ -12,7 +12,8 @@ var fs = require('fs'),
   configFile = path.join(configPath, 'config.json'),
   storageFile = path.join(configPath, 'torrents.json'),
   torrents = {},
-  options = {};
+  options = {},
+  logger = require('./utils/logger');
 
 function save() {
   mkdirp(configPath, function (err) {
@@ -24,7 +25,7 @@ function save() {
       if (err) {
         throw err;
       }
-      console.log('current state saved');
+      logger.log('NOTICE', 'current state saved');
     });
   });
 }
@@ -44,7 +45,7 @@ var store = _.extend(new events.EventEmitter(), {
         return callback(null, infoHash);
       }
 
-      console.log('adding ' + infoHash);
+      logger.log('NOTICE', 'adding ' + infoHash);
 
       try {
         var e = engine(torrent, options);
@@ -75,7 +76,7 @@ var store = _.extend(new events.EventEmitter(), {
     });
   },
   load: function (infoHash) {
-    console.log('loading ' + infoHash);
+    logger.log('NOTICE', 'loading ' + infoHash);
     var e = engine({ infoHash: infoHash }, options);
     store.emit('torrent', infoHash, e);
     torrents[infoHash] = e;
@@ -93,19 +94,19 @@ mkdirp(configPath, function (err) {
       }
     } else {
       options = JSON.parse(data);
-      console.log('options: ' + JSON.stringify(options));
+      logger.log('NOTICE', 'options: ' + JSON.stringify(options));
     }
 
     fs.readFile(storageFile, function (err, data) {
       if (err) {
         if (err.code === 'ENOENT') {
-          console.log('previous state not found');
+          logger.log('NOTICE', 'previous state not found');
         } else {
           throw err;
         }
       } else {
         var torrents = JSON.parse(data);
-        console.log('resuming from previous state');
+        logger.log('NOTICE', 'resuming from previous state');
         torrents.forEach(function (infoHash) {
           store.load(infoHash);
         });
@@ -116,7 +117,7 @@ mkdirp(configPath, function (err) {
 
 function shutdown(signal) {
   if (signal) {
-    console.log(signal);
+    logger.log('NOTICE', signal);
   }
 
   var keys = Object.keys(torrents);

@@ -1,25 +1,32 @@
 #!/usr/bin/env node
 'use strict';
 
+var logger = require('./utils/logger'),
+  process = require('process'),
+  network = require('./utils/network'),
+  configuration = require('./configuration');
+
+logger.create();
+logger.log('NOTICE', 'Starting API...');
+
 var STATIC_OPTIONS = { maxAge: 3600000 };
 
-var process = require('process');
 process.title = 'xbox-streaming-server';
 
-var host = process.env.HOST || getHostAddress();
+var host = process.env.HOST || network.getHostAddress();
 var port = process.env.PORT || 9005;
 
-var configuration = require('./configuration')
-
-if (!configuration.readConfigurationFile("./", 'configuration.json')) {
-  console.log('Configuration file is not found. Creating one...')
-  if (!configuration.writeConfigurationFile("./", configuration.createConfigurationFile(host, port), 'configuration.json')) {
-    return
+if (!configuration.readConfigurationFile()) {
+  logger.log('NOTICE', 'Configuration file is not found. Creating one...');
+  if (!configuration.writeConfigurationFile(configuration.createConfigurationFile(host, port))) {
+    logger.log('ERROR', 'Error while creating configuration while. Maybe path is wrong?');
+    process.exit(1);
+  } else {
+    logger.log('NOTICE', 'Configuration file is successfully created.');
   }
+} else {
+  logger.log('NOTICE', 'Configuration file is founded.');
 }
-console.log('Configuration file is founded.')
-
-configuration.readConfigurationFile('configuration.json', host, port);
 
 var express = require('express'),
   http = require('http'),
@@ -38,31 +45,10 @@ server.listen(port, host).on('error', function (e) {
   if (e.code !== 'EADDRINUSE' && e.code !== 'EACCES') {
     throw e;
   }
-  console.error('Port ' + port + ' is busy. Trying the next available port...');
+  logger.log('ERROR', 'Port ' + port + ' is busy. Trying the next available port...');
   server.listen(++port);
 }).on('listening', function () {
-  console.log('Listening on http://' + host + ':' + port);
+  logger.log('NOTICE', 'API is successfully started. Listening on http://' + host + ':' + port);
 });
-
-function getHostAddress() {
-  const os = require('os');
-  const nets = os.networkInterfaces();
-  const results = Object.create(null); // Or just '{}', an empty object
-  var host = null;
-
-  for (const name of Object.keys(nets)) {
-      for (const net of nets[name]) {
-          // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
-          if (net.family === 'IPv4' && !net.internal) {
-              if (!results[name]) {
-                  results[name] = [];
-              }
-              results[name].push(net.address);
-              host = net.address;
-          }
-      }
-  }
-  return host;
-};
 
 module.exports = {host, port}

@@ -2,7 +2,8 @@
 
 var path = require('path'),
   fs = require('fs'),
-  pump = require('pump');
+  pump = require('pump'),
+  logger = require('./utils/logger');
 
 module.exports = function (req, res, torrent, file) {
   var param = req.query.ffmpeg,
@@ -16,7 +17,7 @@ module.exports = function (req, res, torrent, file) {
       }
       return ffmpeg.ffprobe(filePath, function (err, metadata) {
         if (err) {
-          console.error(err);
+          logger.log('ERROR', err);
           return res.status(500).send(err.toString());
         }
         res.send(metadata);
@@ -46,12 +47,16 @@ module.exports = function (req, res, torrent, file) {
       ])
       .format('matroska')
       .on('start', function (cmd) {
-        console.log(cmd);
+        logger.log('NOTICE', cmd);
       })
       .on('error', function (err) {
-        console.error(err);
+        logger.log('ERROR', err);
       });
     pump(command, res);
+  }
+
+  function xbox() {
+    throw new Error('Not impemented');
   }
 
   switch (param) {
@@ -59,6 +64,8 @@ module.exports = function (req, res, torrent, file) {
       return probe();
     case 'remux':
       return remux();
+    case 'xbox':
+      return xbox();
     default:
       res.status(501).send('Not supported.');
   }
