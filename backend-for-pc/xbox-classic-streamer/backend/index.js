@@ -15,6 +15,7 @@ var rangeParser = require('range-parser'),
   TorrentSearchApi = require('torrent-search-api'),
   configuration = require('./configuration'),
   api = express(),
+  axios = require('axios'),
   logger = require('./utils/logger');
 
 let enableProviders = ['1337x', 'Rarbg', 'ThePirateBay', 'Yts'];
@@ -118,7 +119,11 @@ api.post('/upload', multipart(), function (req, res) {
 });
 
 api.get('/torrents/:infoHash', findTorrent, function (req, res) {
-  res.send(serialize(req.torrent));
+  if(!req.torrent.torrent) {
+    res.status(304).send(serialize(req.torrent));
+  } else {
+    res.send(serialize(req.torrent));
+  }
 });
 
 api.post('/torrents/:infoHash/start/:index?', findTorrent, function (req, res) {
@@ -246,5 +251,3 @@ api.get('/magnet', async function (req, res) {
   const magnet = await TorrentSearchApi.getMagnet(torrent);
   res.send(magnet)
 });
-
-module.exports = api;

@@ -32,11 +32,12 @@ module.exports = function (req, res, torrent, file) {
     var filePath = path.join(torrent.path, file.path);
 
     var command = ffmpeg(filePath)
-      .audioCodec('aac')
+      // .audioCodec('aac')
       .videoCodec('mpeg4')
       .videoBitrate(3000)
       .outputOptions([
         //'-threads 2',
+        '-acodec mp3',
         '-scodec copy',
         '-maxrate 5000k',
         '-bufsize 4096k',

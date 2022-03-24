@@ -1,12 +1,16 @@
-import os, sys
+import os, sys, time
+# import requests
 import packages.requests as requests
 import urllib
 import json
 import utils.ListItemCreator as create
 import utils.utils as utils
+import xbmcgui.DialogProgress as DialogProgress
+
+# in MB
+BUFFER_SIZE = 50
 
 path = "%s\\configuration.json" % os.getcwd()
-print(path)
 json_data = open(path).read()
 conf = utils.createObject(json_data)
 
@@ -192,14 +196,66 @@ def startStreaming(magnet):
     return infoHash
 
 def getInfoAboutStream(infoHash):
-    response = requests.get("http://%s:%s/torrents/%s" % (HOST_ADDRESS, PORT, infoHash))
-    info = utils.createObject(response.text)
-    return info
+    while True:
+        response = requests.get("http://%s:%s/torrents/%s" % (HOST_ADDRESS, PORT, infoHash))
+        if response.status_code == 200:
+            info = utils.createObject(response.text)
+            return info
+        else:
+            DialogProgress.update(30, "Torrent is not ready. Retrying in 2 seconds...")
+            if DialogProgress.iscanceled():
+                return None
+            time.sleep(2)
 
 def getStreamLink(infoHash):
     info = getInfoAboutStream(infoHash)
+    if info == None: return None, "Files couldn't be created. Probably not enough seeders."
     for file in info.files:
         for extension in [".mp4", ".mkv", ".avi"]:
             if extension in file.name:
-                return "http://%s:%s%s?ffmpeg=remux" % (HOST_ADDRESS, PORT, file.link)
+                # check is this file created on File System (HDD)
+                while True:
+                    response = requests.get("http://%s:%s%s?ffmpeg=probe" % (HOST_ADDRESS, PORT, file.link))
+                    if response.status_code == 404:
+                        DialogProgress.update(50, "File is not created. Retrying in 5 seconds...")
+                        if DialogProgress.iscanceled():
+                            return None, "User cancelled"
+                        time.sleep(5)
+
+                    else:
+                        DialogProgress.update(65, "Buffering...")
+                        break
+
+                # wait to download first 50MB of file
+                while True:
+                    info = getInfoAboutStream(infoHash)
+
+                    buffered = utils.convertTo('MB', (file.length * info.progress[0]/100))
+
+                    if  buffered < BUFFER_SIZE:
+                        message = "Buffering: {:.2f} / {} Down: {:.2f} Up: {:.2f}".format(buffered, BUFFER_SIZE, utils.convertTo('KB', info.stats.speed.down), utils.convertTo('KB', info.stats.speed.up))
+                        DialogProgress.update(65, message)
+                        if DialogProgress.iscanceled():
+                            return None, "User cancelled"
+                        time.sleep(2)
+
+                    else:
+                        DialogProgress.update(70, "Checking status of 'MOOV ATOM'...")
+                        break
+
+                # check status of moov atom and move it if needed
+                while True:
+                    response = requests.get("http://%s:%s%s?ffmpeg=probe" % (HOST_ADDRESS, PORT, file.link))
+
+                    if response.status_code == 500:
+                        DialogProgress.update(75, "I have to  move 'MOOV ATOM'. Proceeding...")
+                        # TODO Figure out how to move this shit
+                        if DialogProgress.iscanceled():
+                            return None, "User cancelled"
+                        time.sleep(5)
+
+                    else:
+                        DialogProgress.update(95, "Succesfully generated stream link")
+                        return "http://%s:%s%s?ffmpeg=remux" % (HOST_ADDRESS, PORT, file.link), response.status_code
+
     return None

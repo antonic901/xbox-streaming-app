@@ -1,0 +1,172 @@
+<window id="1009">
+    <!-- <defaultcontrol>130</defaultcontrol> -->
+    <controls>
+        <control type="image">
+            <description>Background image</description>
+            <posx>25</posx>
+            <posy>35</posy>
+            <width>1240</width>
+            <height>665</height>
+            <texture>common/container-item.png</texture>
+            <colordiffuse>FF2F2F2F</colordiffuse>
+            <aspectratio>stretch</aspectratio>
+            <animation effect="fade" start="0" end="100" time="200">WindowOpen</animation>
+            <animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+        </control>
+        <control type="group">
+            <control type="label">
+                <description>Services</description>
+                <posx>160</posx>
+                <posy>50</posy>
+                <width>180</width>
+                <height>40</height>
+                <font>font35_title</font>
+                <label>Services</label>
+                <textcolor>white</textcolor>
+                <align>center</align>
+                <aligny>center</aligny>
+            </control>
+            <control type="image">
+                <description>Background image</description>
+                <posx>50</posx>
+                <posy>100</posy>
+                <width>400</width>
+                <height>500</height>
+                <texture>common/container-item.png</texture>
+                <colordiffuse>FF141718</colordiffuse>
+                <aspectratio>stretch</aspectratio>
+            </control>
+            <control type="list" id="120">
+                <description>Menu bar on left</description>
+                <posx>50</posx>
+                <posy>100</posy>
+                <width>400</width>
+                <height>500</height>
+                <orientation>vertical</orientation>
+                <onright>SetFocus(130)</onright>
+                <onleft>SetFocus(4000)</onleft>
+                <focusposition>0</focusposition>
+                    <itemlayout height="75" width="400">
+                        <control type="textbox">
+                            <description>Name of the menu item</description>
+                            <posy>20</posy>
+                            <posx>0</posx>
+                            <width>400</width>
+                            <height>50</height>
+                            <font>font30</font>
+                            <info>ListItem.Label</info>
+                            <textcolor>white</textcolor>
+                            <align>center</align>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="75" width="400">
+                        <control type="textbox">
+                            <description>Name of the menu item</description>
+                            <posy>20</posy>
+                            <posx>0</posx>
+                            <width>400</width>
+                            <height>50</height>
+                            <font>font30_title</font>
+                            <info>ListItem.Label</info>
+                            <textcolor>white</textcolor>
+                            <align>center</align>
+                        </control>
+                    </focusedlayout>
+            </control>
+        </control>
+        <control type="button" id="4000">
+            <description>Manual Search</description>
+            <posx>50</posx>
+            <posy>625</posy>
+            <width>400</width>
+            <height>50</height>
+            <texturefocus>common/color/red.png</texturefocus>
+            <texturenofocus>common/color/141718.png</texturenofocus>
+            <label>Manual Search</label>
+            <font>font35_title</font>
+            <align>center</align>
+            <aligny>center</aligny>
+            <onup>SetFocus(120)</onup>
+            <onleft>SetFocus(120)</onleft>
+        </control>
+        <control type="group">
+            <description>Subtitles</description>
+            <posx>475</posx>
+            <posy>100</posy>
+            <control type="image">
+                <description>Background image</description>
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>770</width>
+                <height>575</height>
+                <texture>common/container-item.png</texture>
+                <colordiffuse>FF141718</colordiffuse>
+                <aspectratio>stretch</aspectratio>
+            </control>
+            <control type="list" id="130">
+                <description>List of subtitles</description>
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>770</width>
+                <height>575</height>
+                <orientation>vertical</orientation>
+                <onleft>SetFocus(120)</onleft>
+                <focusposition>0</focusposition>
+                    <itemlayout height="75" width="770">
+                        <control type="label">
+                            <description>Name of the menu item</description>
+                            <posx>10</posx>
+                            <posy>5</posy>
+                            <width>760</width>
+                            <height>35</height>
+                            <font>font30</font>
+                            <info>ListItem.Property(release)</info>
+                            <textcolor>white</textcolor>
+                        </control>
+                        <control type="label">
+                            <description>Additional information</description>
+                            <posx>10</posx>
+                            <posy>40</posy>
+                            <width>760</width>
+                            <height>20</height>
+                            <font>font14</font>
+                            <label>Uploaded by: $INFO[ListItem.Property(uploader)] Download count: $INFO[ListItem.Property(download_count)] Language: $INFO[ListItem.Property(language)]</label>
+                            <textcolor>white</textcolor>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="75" width="770">
+                        <control type="image">
+                            <description>Background image</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>770</width>
+                            <height>75</height>
+                            <texture>common/container-item.png</texture>
+                            <colordiffuse>blue</colordiffuse>
+                            <aspectratio>stretch</aspectratio>
+                        </control>
+                        <control type="label">
+                            <description>Name of the menu item</description>
+                            <posx>10</posx>
+                            <posy>5</posy>
+                            <width>760</width>
+                            <height>35</height>
+                            <font>font30</font>
+                            <info>ListItem.Property(release)</info>
+                            <textcolor>white</textcolor>
+                        </control>
+                        <control type="label">
+                            <description>Additional information</description>
+                            <posx>10</posx>
+                            <posy>40</posy>
+                            <width>760</width>
+                            <height>20</height>
+                            <font>font14</font>
+                            <label>Uploaded by: $INFO[ListItem.Property(uploader)] Download count: $INFO[ListItem.Property(download_count)] Language: $INFO[ListItem.Property(language)]</label>
+                            <textcolor>white</textcolor>
+                        </control>
+                    </focusedlayout>
+            </control>
+        </control>
+    </controls>
+</window>

@@ -6,7 +6,7 @@ from resources.lib.utils import utils
 class CGUISettings(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
-        self.path = "%s\\configuration.json" % os.getcwd()
+        self.path = "%s\\configuration.json" % utils.getScriptPath()
         if os.path.isfile(self.path):
             print ("Configuration file is found! Reading...")
             with open(self.path) as configuration_file:

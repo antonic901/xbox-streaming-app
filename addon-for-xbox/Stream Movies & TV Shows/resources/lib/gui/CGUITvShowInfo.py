@@ -10,7 +10,6 @@ from resources.lib.xbmcgui import DialogProgress
 class CGUITvShowInfo(xbmcgui.WindowXML):
 
     def __init__(self, *args, **kwargs):
-        self.__cwd__ = kwargs['__cwd__']
         self.entity = kwargs['entity']
         self.actors = kwargs['actors']
         self.DETECTOR = 0
@@ -71,7 +70,26 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
             
             DialogProgress.update(50, 'Finding available streams...')
             streams, listitems = service.getStreams("%s s%se%s" % (self.entity.getProperty('title'), season, episode), "TV")
-            ui = CGUIStream.CGUIStream('Stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=name)
+
+            item = xbmcgui.ListItem("TV Show",
+                iconImage=self.entity.getProperty('iconImage'),
+                thumbnailImage=self.entity.getProperty('thumbImage')
+            )
+
+            item.setInfo('video', {
+                'year': self.entity.getProperty('release_date').split("-")[0],
+                'title': self.entity.getProperty('title'),
+                # we are using this as container for TMDB_ID
+                'tagline': self.entity.getProperty('id'),
+                # we are using this as container for IMDB_ID
+                'director': self.entity.getProperty('imdb_id'),
+                # we are using this as container for episode number
+                'plot': episode,
+                # we are using this as container for season number
+                'genre': season
+            })
+
+            ui = CGUIStream.CGUIStream('Stream.xml', utils.getScriptPath(), items=listitems, streams=streams, name=name, video_item=item)
             ui.doModal()
             del ui
     
@@ -134,7 +152,7 @@ def onClickContainerActors(self, id):
     DialogProgress.update(75, 'Fetching TV Shows for actor...')
     tv_shows = service.getTvShowsForActor(item.getProperty('id'))
     DialogProgress.update(80, 'Opening actor...')
-    ui = CGUIActorInfo.CGUIActorInfo("ActorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
+    ui = CGUIActorInfo.CGUIActorInfo("ActorInfo.xml", utils.getScriptPath(), 'default', actor=actor, movies=movies, tv_shows=tv_shows)
     ui.doModal()
     del ui
 
