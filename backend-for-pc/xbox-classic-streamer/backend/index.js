@@ -251,3 +251,5 @@ api.get('/magnet', async function (req, res) {
   const magnet = await TorrentSearchApi.getMagnet(torrent);
   res.send(magnet)
 });
+
+module.exports = api;
