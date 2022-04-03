@@ -17,18 +17,15 @@ if (__name__ == "__main__"):
 	log('==================================')
 
 	if not xbmc.Player().isPlayingVideo():
-		xbmc.executebuiltin('Notification(Subtitles,Settings are in development.,5000,DefaultIconInfo.png)')
-		# from GUISettings import GUISettings
-		# ui = GUISettings("_settings.xml", os.getcwd(), "Default")
-		# ui.doModal()
-		# del ui
-	
+		_settings_ = xbmc.Settings(path=os.getcwd())
+		_settings_.openSettings()
+
 	else:
 		item = xbmc.Player().getVideoInfoTag()
 		meta = {
 			"imdb_id": item.getDirector(),
 			"tmdb_id": item.getTagLine(),
-			# "tmdb_id": "696806",
+			# "tmdb_id": "634649",
 			"title": item.getTitle(),
 			"year": item.getYear(),
 			"season": item.getGenre(),

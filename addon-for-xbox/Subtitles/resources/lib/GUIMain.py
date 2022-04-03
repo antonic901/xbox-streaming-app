@@ -5,6 +5,10 @@ import DialogProgress
 import opensubtitles
 import utils
 
+print(os.getcwd())
+
+_settings_ = xbmc.Settings(path=os.getcwd())
+
 class GUIMain(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):

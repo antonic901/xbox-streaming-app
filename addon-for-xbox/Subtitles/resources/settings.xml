@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="General">
+        <setting id="defservice" type="enum" label="Default Service:" default="1" values="OpenSubtitles|Titlovi.com" />
+        <setting id="Subfolder" type="folder" label="Download path:" default="E:\"/>
+    </category>
+    <category label="OpenSubtitles">
+        <setting id="OSApi" type="text" option="urlencoded" label="API:" default="https://api.opensubtitles.com/api/v1"/>
+        <setting id="OSApiKey" type="text" label="Api-Key:" default=""/>
+        <setting id="OSToken" type="text" label="Token:" default="Not generated."/>
+        <setting id="OSUsername" type="text" label="Username:" default=""/>
+        <setting id="OSPassword" type="text" option="hidden" label="Password:" default=""/>
+    </category>
+    <category label="Titlovi.com">
+        <setting id="TCApi" type="text" option="urlencoded" label="API:" default="https://kodi.titlovi.com/api/subtitles"/>
+        <setting id="TCUsername" type="text" label="Username:" default=""/>
+        <setting id="TCPassword" type="text" option="hidden" label="Password:" default=""/>
+    </category>
+</settings>

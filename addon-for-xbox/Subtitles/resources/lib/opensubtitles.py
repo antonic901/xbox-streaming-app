@@ -4,14 +4,17 @@ import xbmc, xbmcgui
 import requests
 import utils
 
-API = "https://api.opensubtitles.com/api/v1/{}"
-token = "YOUR_TOKEN"
+_settings_ = xbmc.Settings(path=os.getcwd())
 
-DOWNLOAD_PATH = "E:\Subtitles"
+API = _settings_.getSetting("OSApi") + "/{}"
+API_KEY = _settings_.getSetting("OSApiKey")
+token = _settings_.getSetting("OSToken")
+
+DOWNLOAD_PATH = _settings_.getSetting("Subfolder")
 
 headers = {
     "Accept": "application/json",
-    "Api-Key": "YOUR_API_KEY",
+    "Api-Key": API_KEY,
     "Content-Type": "application/json",
     "Authorization": token
 }
@@ -59,7 +62,7 @@ def downloadSubtitle(download_link, file_name):
     return utils.writeFile(os.path.join(DOWNLOAD_PATH, file_name), response.text)
 
 def sendRequest(action, headers, params, json):
-    if "download" in action:
+    if action in ["download", "login"]:
         response = requests.post(API.format(action), headers=headers, params=params, json=json)
     else :
         response = requests.get(API.format(action), headers=headers, params=params, json=json)
@@ -83,3 +86,9 @@ def createListItems(subtitles):
         listitems.append(item)
 
     return listitems
+
+if token in ["", "Not generated", "Refresh", "refresh"]:
+    body = sendRequest('login', {'Api-Key': API_KEY, 'Content-Type': 'application/json'}, None, json={"username": _settings_.getSetting("OSUsername"),"password": _settings_.getSetting("OSPassword")})
+    if body != []:
+        _settings_.setSetting(id="OSToken", value=body.token)
+        token = body.token
