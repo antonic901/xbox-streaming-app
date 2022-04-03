@@ -20,9 +20,9 @@ headers = {
 }
 
 params = {
-    "languages": "sr,bs,hr",
-    "order_by": "download_count",
-    "order_direction": "desc"
+    "languages": "{},{},{}".format(utils.OSGetLangCode(utils.getScriptLang(_settings_.getSetting("Language1"))),utils.OSGetLangCode(utils.getScriptLang(_settings_.getSetting("Language2"))),utils.OSGetLangCode(utils.getScriptLang(_settings_.getSetting("Language3")))),
+    "order_by": "{}".format(utils.OSGetOrderByCode(utils.getScriptOrderBy(_settings_.getSetting("OrderBy")))),
+    "order_direction": "{}".format(utils.OSGetOrderDirectionCode(utils.getSriptOrderDirection(_settings_.getSetting("OrderDirection"))))
 }
 
 def search(meta):
@@ -41,13 +41,11 @@ def search(meta):
         return []
 
 def manualSearch(query):
-    params['query'] = query
-    return createListItems(sendRequest("subtitles", headers, params, None).data)
+    return createListItems(sendRequest("subtitles", headers, {"languages": params['languages'],"order_by": params['order_by'],"order_direction": params['order_direction'],"query": query}, None).data)
 
 def getDownloadLink(id):
     data = sendRequest("download", headers, None, {"file_id":id})
-
-    return data.link, data.file_name 
+    return data.link, data.file_name
 
 def downloadSubtitle(download_link, file_name):
     response = requests.get(download_link, headers={'Content-Type':'application/json'})
@@ -64,6 +62,7 @@ def downloadSubtitle(download_link, file_name):
 def sendRequest(action, headers, params, json):
     if action in ["download", "login"]:
         response = requests.post(API.format(action), headers=headers, params=params, json=json)
+
     else :
         response = requests.get(API.format(action), headers=headers, params=params, json=json)
 
@@ -87,7 +86,7 @@ def createListItems(subtitles):
 
     return listitems
 
-if token in ["", "Not generated", "Refresh", "refresh"]:
+if token in ["", "Not generated.", "Refresh", "refresh"]:
     body = sendRequest('login', {'Api-Key': API_KEY, 'Content-Type': 'application/json'}, None, json={"username": _settings_.getSetting("OSUsername"),"password": _settings_.getSetting("OSPassword")})
     if body != []:
         _settings_.setSetting(id="OSToken", value=body.token)

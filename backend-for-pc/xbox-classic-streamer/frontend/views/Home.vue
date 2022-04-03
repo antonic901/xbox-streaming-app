@@ -41,7 +41,7 @@ module.exports = {
     data() {
       return {
         torrents: [],
-        snackbar: true,
+        snackbar: false,
         notificationText: ''
       }
     },

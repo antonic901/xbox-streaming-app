@@ -20,7 +20,7 @@ class GUIMain(xbmcgui.WindowXMLDialog):
         createServices(self)
         self.setFocusId(130)
         DialogProgress.create('XBMC4Xbox', 'Searching subtitles...')
-        subtitles = opensubtitles.search(self.meta)
+        subtitles = callDefaultService(self.meta)
         DialogProgress.update(50, 'Loading subtitles...')
         utils.populateContainer(self, self.cSubtitlesId, subtitles)
         DialogProgress.update(90, 'Finishing...')
@@ -69,7 +69,38 @@ class GUIMain(xbmcgui.WindowXMLDialog):
             self.close()
         
         elif id == self.cManualSearch:
-            xbmc.executebuiltin('Notification(Subtitles,Not yet implemented,5000,DefaultIconInfo.png)')
+            keyboard = xbmc.Keyboard()
+            keyboard.doModal()
+            keyboardConfirmed = keyboard.isConfirmed()
+            enteredText = keyboard.getText()
+            del keyboard
+
+            if keyboardConfirmed and enteredText != '':
+                item = self.getControl(self.cServicesId).getSelectedItem()
+                if 'OpenSubtitles' in item.getLabel():
+                    DialogProgress.create('XBMC4Xbox', 'Searching subtitles...')
+                    subtitles = opensubtitles.manualSearch(enteredText)
+                    DialogProgress.update(50, 'Loading subtitles...')
+                    utils.populateContainer(self, self.cSubtitlesId, subtitles)
+                    DialogProgress.update(90, 'Finishing...')
+                    xbmc.sleep(2000)
+                    DialogProgress.close()
+
+                else:
+                    xbmc.executebuiltin('Notification(Subtitles,Titlovi.com are under development,5000,DefaultIconInfo.png)')
+            
+            else:
+                xbmc.executebuiltin('Notification(Searching is cancelled,User cancelled search,5000,DefaultIconInfo.png)')
+
+def callDefaultService(meta):
+    subtitles = []
+    if "OpenSubtitles" in utils.getScriptService(_settings_.getSetting("defservice")):  
+        subtitles = opensubtitles.search(meta)
+
+    else:
+        xbmc.executebuiltin('Notification(Subtitles,{} are under development,5000,DefaultIconInfo.png)'.format(_settings_.getSetting("defservice")))
+
+    return subtitles
 
 def assignIDs(self):
     self.action_exitkeys_id = [10, 92]

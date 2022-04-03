@@ -34,8 +34,6 @@ if (__name__ == "__main__"):
 			# "episode": "1"
 		}
 
-		print meta
-
 		from GUIMain import GUIMain
 
 		if not xbmc.getCondVisibility('Player.Paused') : 
