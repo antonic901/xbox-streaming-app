@@ -1,5 +1,7 @@
 'use strict';
 
+const { urlencoded } = require('body-parser');
+
 var rangeParser = require('range-parser'),
   pump = require('pump'),
   _ = require('lodash'),
@@ -16,7 +18,9 @@ var rangeParser = require('range-parser'),
   configuration = require('./configuration'),
   api = express(),
   axios = require('axios'),
-  logger = require('./utils/logger');
+  logger = require('./utils/logger'),
+  fileParser = require('episode-parser'),
+  path = require('path');
 
 let enableProviders = ['1337x', 'Rarbg', 'ThePirateBay', 'Yts'];
 logger.log('NOTICE', 'Enabling providers: ' + enableProviders);
@@ -124,6 +128,75 @@ api.get('/torrents/:infoHash', findTorrent, function (req, res) {
   } else {
     res.send(serialize(req.torrent));
   }
+});
+
+/*
+>> Accept:
+        body: 
+            episode
+            season
+        path: 
+            infoHash -> torrent hash
+        query: empty
+    Used for:
+        Finds file/episode of interest and select it.
+        Deselect all other files/episodes in this torrent.
+*/
+api.post('/torrents/:infoHash/episode', findTorrent, function(req, res) {
+    var season = req.body.season,
+        episode = req.body.episode,
+        path = null;
+    req.torrent.files.forEach(file => {
+        var result = fileParser(file.name)
+        if (!result) {
+            file.deselect();
+        }
+        else if(result.episode == episode && result.season == season) {
+            logger.log('NOTICE', 'selecting ' + file.name)
+            path = file.path;
+            file.select();
+        }
+        else {
+            file.deselect();
+        }
+    })
+    res.send(encodeURI(path));
+});
+
+/*
+>> Accept:
+        body: empty
+        path: 
+            infoHash -> torrent hash
+        query: empty
+    Used for:
+        Finds largest file (which is movie) and select it.
+        Deselect all other files.
+*/
+api.post('/torrents/:infoHash/movie', findTorrent, function(req, res) {
+    var files =  _.orderBy(req.torrent.files, ['length'], ['desc']),
+        path = null;
+    for(var i = 0; i < files.length; i++) {
+        if (i == 0) {
+            logger.log('NOTICE', 'selecting ' + files[i].name);
+            path = files[i].path;
+            files[i].select();
+        } else {
+            files[i].deselect();
+        }
+    }
+    res.send(encodeURI(path));
+});
+
+api.get('/torrents/:infoHash/file', findTorrent, function (req, res) {
+    var filePath = path.join(req.torrent.path, decodeURI(req.body.filePath));
+    console.log(filePath);
+    if(fs.existsSync(filePath)) {
+        var fileSizeInMegabytes = fs.statSync(filePath).size / (1024*1024);
+        res.send(fileSizeInMegabytes.toString());
+    } else {
+        res.sendStatus(404);
+    }
 });
 
 api.post('/torrents/:infoHash/start/:index?', findTorrent, function (req, res) {
@@ -237,7 +310,6 @@ api.get('/torrents/:infoHash/archive', findTorrent, function (req, res) {
   });
   archive.finalize();
 });
-
 
 api.get('/search/:query/:category', async function (req, res) {
   var query = req.params.query;

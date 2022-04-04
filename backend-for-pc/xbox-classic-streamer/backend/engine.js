@@ -47,11 +47,19 @@ module.exports = function (torrent, opts) {
     logger.log('NOTICE', 'ready ' + engine.infoHash);
     engine.ready = true;
 
-    // select the largest file
+    // >> This was before
+    /*// select the largest file
     var file = engine.files.reduce(function (a, b) {
       return a.length > b.length ? a : b;
     });
-    file.select();
+    file.select();*/
+
+    // >> At start deselect all files. If it's movie we want do download largest file. If it's TV Show we want particular episode.
+    engine.files.forEach(file => {
+        logger.log('NOTICE', 'deselecting ' + file.name)
+        file.deselect()
+    })
+
   });
 
   engine.on('uninterested', function () {

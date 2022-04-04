@@ -58,7 +58,7 @@ class unzip:
             if not name.endswith('/') and ".srt" in name:
                 file_name = name
                 if len(name) > 42:
-                    file_name = (name[:38] + '.srt').strip()
+                    file_name = name[:38].strip() + '.srt'
 
                 subtitles.append(file_name)
 
@@ -97,7 +97,7 @@ class unzip:
             if not name.endswith('/') and ".srt" in name:
                 file_name = name
                 if len(name) > 42:
-                    file_name = name[:38] + '.srt'
+                    file_name = name[:38].strip() + '.srt'
 
                 subtitles.append(file_name)
 

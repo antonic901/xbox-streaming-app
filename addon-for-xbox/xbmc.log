@@ -1,0 +1,171 @@
+00:50:15 M:122540032  NOTICE: -----------------------------------------------------------------------
+00:50:16 M:122519552  NOTICE: Starting XBMC4Xbox 3.6-DEV-r33032 (SVN:33032, compiler 1310). Built on Mar  8 2018
+00:50:16 M:122519552  NOTICE: special://xbmc/ is mapped to: Q:\
+00:50:16 M:122519552  NOTICE: special://masterprofile/ is mapped to: Q:\UserData
+00:50:16 M:122519552  NOTICE: special://home/ is mapped to: Q:\
+00:50:16 M:122519552  NOTICE: special://temp/ is mapped to: Z:\
+00:50:16 M:122519552  NOTICE: The executable running is: E:\Apps\XBMC\default.xbe
+00:50:16 M:122519552  NOTICE: Log File is located: Q:\xbmc.log
+00:50:16 M:122519552  NOTICE: -----------------------------------------------------------------------
+00:50:16 M:122519552  NOTICE: Unmapped drive T
+00:50:16 M:122519552  NOTICE: Mapping drive T to Harddisk0\Partition1\Apps\XBMC\UserData\
+00:50:16 M:122519552  NOTICE: 128MB hack enabled
+00:50:16 M:122519552  NOTICE: Setup DirectX
+00:50:16 M:122490880  NOTICE: Mapping drive C to Harddisk0\Partition2
+00:50:16 M:122490880  NOTICE: Mapping drive E to Harddisk0\Partition1
+00:50:16 M:122490880  NOTICE: Unmapped drive D
+00:50:16 M:122490880  NOTICE: Mapping drive D to Cdrom0
+00:50:19 M:122490880  NOTICE:   map extended drive F:
+00:50:19 M:122490880  NOTICE: Mapping drive F to Harddisk0\Partition6
+00:50:22 M:122490880  NOTICE:   map extended drive G:
+00:50:22 M:122490880  NOTICE: Mapping drive G to Harddisk0\Partition7
+00:50:24 M:122490880  NOTICE:   map extended drive R:
+00:50:25 M:122490880  NOTICE: Mapping drive R to Harddisk0\Partition8
+00:50:27 M:122490880  NOTICE:   map extended drive S:
+00:50:27 M:122490880  NOTICE: Mapping drive S to Harddisk0\Partition9
+00:50:30 M:122490880  NOTICE:   map extended drive V:
+00:50:30 M:122490880  NOTICE: Mapping drive V to Harddisk0\Partition10
+00:50:33 M:122486784  NOTICE:   map extended drive W:
+00:50:33 M:122486784  NOTICE: Mapping drive W to Harddisk0\Partition11
+00:50:33 M:122486784  NOTICE:   map extended drive A:
+00:50:34 M:122486784  NOTICE: Mapping drive A to Harddisk0\Partition12
+00:50:34 M:122486784  NOTICE: Mapping drive X to Harddisk0\Partition3
+00:50:34 M:122486784  NOTICE: Mapping drive Y to Harddisk0\Partition4
+00:50:34 M:122486784  NOTICE: Unmapped drive Z
+00:50:34 M:122486784  NOTICE: Mapping drive Z to Harddisk0\Partition5
+00:50:34 M:122486784  NOTICE: load settings...
+00:50:34 M:122486784  NOTICE: Mapping drive P to Harddisk0\Partition1\Apps\XBMC\UserData\
+00:50:34 M:122486784  NOTICE: special://profile/ is mapped to: special://masterprofile/
+00:50:34 M:122486784  NOTICE: loading special://masterprofile/guisettings.xml
+00:50:34 M:122183680  NOTICE: Getting hardware information now...
+00:50:34 M:122183680  NOTICE: Checking resolution 10
+00:50:34 M:122183680  NOTICE: Setting autoresolution mode 1
+00:50:34 M:122183680  NOTICE: Loading player core factory settings from special://xbmc/system/playercorefactory.xml.
+00:50:34 M:122163200  NOTICE: Loaded playercorefactory configuration
+00:50:34 M:122142720  NOTICE: Loading player core factory settings from special://masterprofile/playercorefactory.xml.
+00:50:34 M:122142720  NOTICE: special://masterprofile/playercorefactory.xml does not exist. Skipping.
+00:50:34 M:122142720  NOTICE: No advancedsettings.xml to load (special://masterprofile/advancedsettings.xml)
+00:50:34 M:122142720  NOTICE: Default Video Player: dvdplayer
+00:50:34 M:122142720  NOTICE: Default Audio Player: paplayer
+00:50:34 M:122142720  NOTICE: Per AV pack settings are off
+00:50:34 M:122396672  NOTICE: special://masterprofile/sources.xml
+00:50:34 M:109748224  NOTICE: Network: Using DHCP IP settings
+00:50:34 M:112746496  NOTICE: Using idle thread with HLT (power saving)
+00:50:34 M:112734208  NOTICE: Checking the Date!
+00:50:34 M:112734208  NOTICE: start dvd mediatype detection
+00:50:34 M:112664576  NOTICE: initializing playlistplayer
+00:50:34 M:112664576  NOTICE: DONE initializing playlistplayer
+00:50:34 M:112656384  NOTICE: load default skin:[Confluence Lite]
+00:50:35 M:107487232  NOTICE: initialize done
+00:50:35 M:107487232  NOTICE: Running the application...
+00:50:35 M:103915520 WARNING: old getenv from python.lib called, library check needed
+Previous line repeats 3 times.
+00:50:37 M:103985152 WARNING: start timeserver client
+00:50:37 M:103919616  NOTICE: Webserver: Starting...
+00:50:37 M:103710720  NOTICE: Webserver: Started
+00:50:37 M:103776256  NOTICE: XBFileZilla: Starting...
+00:50:37 M:103706624  NOTICE: ES: Starting event server
+00:50:37 M:103104512  NOTICE: ES: Starting UDP Event server on 0.0.0.0:9777
+00:50:37 M:103067648  NOTICE: UDP: Listening on port 9777
+00:50:37 M:102154240  NOTICE: XBFileZilla: Started
+00:51:28 M: 95707136  NOTICE: -->Python Initialized<--
+00:51:29 M: 94760960  NOTICE: ::Streaming:Default: ==================================
+00:51:29 M: 94760960  NOTICE: ::Streaming:Default: initializing...
+00:51:29 M: 94760960  NOTICE: ::Streaming:Default: Addon Id	: script.popcornbox
+00:51:29 M: 94760960  NOTICE: ::Streaming:Default: Addon Icon	: Q:\scripts\Stream Movies & TV Shows\default.tbn
+00:51:29 M: 94760960  NOTICE: ::Streaming:Default: Addon Ver.	: 0.0.2
+00:51:29 M: 94760960  NOTICE: ::Streaming:Default: Language	: english
+00:51:29 M: 94760960  NOTICE: ::Streaming:Default: ==================================
+00:51:29 M: 94760960  NOTICE: Configuration file is found!
+00:51:31 M: 91574272   ERROR: Exception in python script's onAction
+00:51:31 M: 91574272  NOTICE: Traceback (most recent call last):
+00:51:31 M: 91574272  NOTICE:   File "Q:\scripts\Stream Movies & TV Shows\resources\lib\gui\CGUIMain.py", line 39, in onAction
+00:51:31 M: 91574272  NOTICE: if action in self.action_exitkeys_id:
+00:51:31 M: 91574272  NOTICE: AttributeError
+00:51:31 M: 91574272  NOTICE: :
+00:51:31 M: 91574272  NOTICE: 'CGUIMain' object has no attribute 'action_exitkeys_id'
+00:51:31 M: 91574272   ERROR: Exception in python script's onAction
+00:51:31 M: 91574272  NOTICE: Traceback (most recent call last):
+00:51:31 M: 91574272  NOTICE:   File "Q:\scripts\Stream Movies & TV Shows\resources\lib\gui\CGUIMain.py", line 39, in onAction
+00:51:31 M: 91574272  NOTICE: if action in self.action_exitkeys_id:
+00:51:31 M: 91574272  NOTICE: AttributeError
+00:51:31 M: 91574272  NOTICE: :
+00:51:31 M: 91574272  NOTICE: 'CGUIMain' object has no attribute 'action_exitkeys_id'
+00:51:31 M: 91574272   ERROR: Exception in python script's onAction
+00:51:31 M: 91574272  NOTICE: Traceback (most recent call last):
+00:51:31 M: 91574272  NOTICE:   File "Q:\scripts\Stream Movies & TV Shows\resources\lib\gui\CGUIMain.py", line 39, in onAction
+00:51:31 M: 91574272  NOTICE: if action in self.action_exitkeys_id:
+00:51:31 M: 91574272  NOTICE: AttributeError
+00:51:31 M: 91574272  NOTICE: :
+00:51:31 M: 91574272  NOTICE: 'CGUIMain' object has no attribute 'action_exitkeys_id'
+00:51:31 M: 91574272   ERROR: Exception in python script's onAction
+00:51:31 M: 91574272  NOTICE: Traceback (most recent call last):
+00:51:31 M: 91574272  NOTICE:   File "Q:\scripts\Stream Movies & TV Shows\resources\lib\gui\CGUIMain.py", line 39, in onAction
+00:51:31 M: 91574272  NOTICE: if action in self.action_exitkeys_id:
+00:51:31 M: 91574272  NOTICE: AttributeError
+00:51:31 M: 91574272  NOTICE: :
+00:51:31 M: 91574272  NOTICE: 'CGUIMain' object has no attribute 'action_exitkeys_id'
+00:51:31 M: 91574272   ERROR: Exception in python script's onAction
+00:51:31 M: 91574272  NOTICE: Traceback (most recent call last):
+00:51:31 M: 91574272  NOTICE:   File "Q:\scripts\Stream Movies & TV Shows\resources\lib\gui\CGUIMain.py", line 39, in onAction
+00:51:31 M: 91574272  NOTICE: if action in self.action_exitkeys_id:
+00:51:31 M: 91574272  NOTICE: AttributeError
+00:51:31 M: 91574272  NOTICE: :
+00:51:31 M: 91574272  NOTICE: 'CGUIMain' object has no attribute 'action_exitkeys_id'
+00:51:31 M: 91574272   ERROR: Exception in python script's onAction
+00:51:31 M: 91574272  NOTICE: Traceback (most recent call last):
+00:51:31 M: 91574272  NOTICE:   File "Q:\scripts\Stream Movies & TV Shows\resources\lib\gui\CGUIMain.py", line 39, in onAction
+00:51:31 M: 91574272  NOTICE: if action in self.action_exitkeys_id:
+00:51:31 M: 91574272  NOTICE: AttributeError
+00:51:31 M: 91574272  NOTICE: :
+00:51:31 M: 91574272  NOTICE: 'CGUIMain' object has no attribute 'action_exitkeys_id'
+Previous line repeats 1 times.
+00:51:56 M: 90873856  NOTICE: http://192.168.0.11:9005/torrents/4ac05990388d6c9654255011fc29d389ac67ec95/files/Spider-Man%20No%20Way%20Home%20(2021)%20%5B720p%5D%20%5BBluRay%5D%20%5BYTS.MX%5D/Spider-Man.No.Way.Home.2021.720p.BluRay.x264.AAC-%5BYTS.MX%5D.mp4
+00:52:06 M: 90873856  NOTICE: 2.65625
+00:52:13 M: 90697728  NOTICE: DVDPlayer: Opening: http://192.168.0.11:9005/torrents/4ac05990388d6c9654255011fc29d389ac67ec95/files/Spider-Man%20No%20Way%20Home%20(2021)%20%5B720p%5D%20%5BBluRay%5D%20%5BYTS.MX%5D/Spider-Man.No.Way.Home.2021.720p.BluRay.x264.AAC-%5BYTS.MX%5D.mp4?ffmpeg=remux
+00:52:13 M: 90697728 WARNING: CDVDMessageQueue(player)::Put MSGQ_NOT_INITIALIZED
+00:52:13 M: 90173440  NOTICE: Creating InputStream
+00:52:13 M: 87285760  NOTICE: Creating Demuxer
+00:52:13 M: 80867328  NOTICE: Opening video stream: 0 source: 256
+00:52:13 M: 80867328  NOTICE: Creating video codec with codec id: 13
+00:52:13 M: 80867328  NOTICE: CDVDVideoCodecFFmpeg::Open() Using codec: mpeg4
+00:52:13 M: 80867328  NOTICE: Creating video thread
+00:52:13 M: 80343040  NOTICE: Opening audio stream: 1 source: 256
+00:52:13 M: 80343040  NOTICE: Finding audio codec for: 86017
+00:52:13 M: 80125952  NOTICE: running thread: video_thread
+00:52:13 M: 79974400  NOTICE: Creating audio thread
+00:52:13 M: 79425536  NOTICE: running thread: CDVDPlayerAudio::Process()
+00:52:13 M: 79425536  NOTICE: Creating audio device with codec id: 86017, channels: 2, sample rate: 48000, no pass-through
+00:52:13 M: 76677120  NOTICE:  fps: 23.976025, pwidth: 1280, pheight: 720, dwidth: 1279, dheight: 533
+00:52:13 M: 76689408   ERROR: CLocalizeStrings::ClearBlock: Trying to clear non existent block Q:\scripts\Stream Movies & TV Shows
+00:52:13 M: 76668928  NOTICE: Display resolution AUTO : 720p 16:9 (1)
+00:52:13 M: 73068544   ERROR: CLocalizeStrings::ClearBlock: Trying to clear non existent block Q:\scripts\Stream Movies & TV Shows
+00:52:44 M: 70905856 WARNING: error while seeking
+Previous line repeats 2 times.
+00:52:55 M: 71262208 WARNING: CDVDPlayer::CloseFile()
+00:52:55 M: 71278592  NOTICE: DVDPlayer: waiting for threads to exit
+00:52:55 M: 71303168  NOTICE: CDVDPlayer::OnExit()
+00:52:55 M: 71303168  NOTICE: DVDPlayer: closing audio stream
+00:52:55 M: 71303168  NOTICE: Closing audio stream
+00:52:55 M: 71303168  NOTICE: Waiting for audio thread to exit
+00:52:55 M: 71372800  NOTICE: thread end: CDVDPlayerAudio::OnExit()
+00:52:55 M: 71897088  NOTICE: Closing audio device
+00:52:55 M: 71954432  NOTICE: Deleting audio codec
+00:52:55 M: 72200192  NOTICE: DVDPlayer: closing video stream
+00:52:55 M: 72200192  NOTICE: Closing video stream
+00:52:55 M: 72200192  NOTICE: waiting for video thread to exit
+00:52:55 M: 72216576  NOTICE: thread end: video_thread
+00:52:55 M: 73883648  NOTICE: deleting video codec
+00:52:55 M: 78553088  NOTICE: CDVDPlayer::OnExit() deleting demuxer
+00:52:55 M: 78684160  NOTICE: CDVDPlayer::OnExit() deleting input stream
+00:52:55 M: 82317312  NOTICE: DVDPlayer: finished waiting
+00:52:55 M: 80474112  NOTICE: CDVDPlayer::CloseFile()
+00:52:55 M: 80474112 WARNING: CDVDMessageQueue(player)::Put MSGQ_NOT_INITIALIZED
+00:52:55 M: 80474112  NOTICE: DVDPlayer: waiting for threads to exit
+00:52:56 M: 80474112  NOTICE: DVDPlayer: finished waiting
+00:52:56 M: 80539648  NOTICE: CDVDPlayerVideo::~CDVDPlayerVideo - uninitting video device
+00:52:58 M: 84439040   ERROR: CLocalizeStrings::ClearBlock: Trying to clear non existent block Q:\scripts\Stream Movies & TV Shows
+Previous line repeats 2 times.
+00:53:00 M: 83243008   ERROR: ::Streaming:Default: terminating...
+00:53:00 M: 83218432  NOTICE: ::Streaming:Default: ==================================
+00:53:00 M: 79794176   ERROR: CLocalizeStrings::ClearBlock: Trying to clear non existent block Q:\scripts\Stream Movies & TV Shows

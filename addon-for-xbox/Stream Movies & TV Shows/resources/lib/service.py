@@ -207,55 +207,63 @@ def getInfoAboutStream(infoHash):
                 return None
             time.sleep(2)
 
-def getStreamLink(infoHash):
+def getStreamLink(infoHash, meta):
     info = getInfoAboutStream(infoHash)
-    if info == None: return None, "Files couldn't be created. Probably not enough seeders."
-    for file in info.files:
-        for extension in [".mp4", ".mkv", ".avi"]:
-            if extension in file.name:
-                # check is this file created on File System (HDD)
-                while True:
-                    response = requests.get("http://%s:%s%s?ffmpeg=probe" % (HOST_ADDRESS, PORT, file.link))
-                    if response.status_code == 404:
-                        DialogProgress.update(50, "File is not created. Retrying in 5 seconds...")
-                        if DialogProgress.iscanceled():
-                            return None, "User cancelled"
-                        time.sleep(5)
+    if meta['isMovie']:
+        response = requests.post("http://%s:%s/torrents/%s/movie" % (HOST_ADDRESS, PORT, infoHash), headers={'User-Agent': 'xbox-streaming'})
+        if response.status_code != 200:
+            return None, "API returned {}: {}".format(response.status_code, response.text)
+        filePath = response.text
+        stream_link = "http://{}:{}/torrents/{}/files/{}".format(HOST_ADDRESS, PORT, infoHash, response.text)
+    else:
+        response = requests.post("http://{}:{}/torrents/{}/episode".format(HOST_ADDRESS, PORT, infoHash), headers={'Content-Type':'application/json', 'Accept': 'text/plain'}, json={'episode': meta['episode'], 'season': meta['season']})
+        if response.status_code != 200:
+            return None, "API returned {}: {}".format(response.status_code, response.text)
+        filePath = response.text
+        stream_link = "http://{}:{}/torrents/{}/files/{}".format(HOST_ADDRESS, PORT, infoHash, response.text)
 
-                    else:
-                        DialogProgress.update(65, "Buffering...")
-                        break
+    # check is this file created on File System (HDD)
+    while True:
+        response = requests.get("http://{}:{}/torrents/{}/file".format(HOST_ADDRESS, PORT, infoHash), headers={'User-Agent': 'xbox-streaming', 'Content-Type':'application/json'}, json={'filePath': filePath})
+        if response.status_code == 404:
+            DialogProgress.update(50, "File is not created. Retrying in 5 seconds...")
+            if DialogProgress.iscanceled():
+                return None, "User cancelled"
+            time.sleep(5)
 
-                # wait to download first 50MB of file
-                while True:
-                    info = getInfoAboutStream(infoHash)
+        else:
+            DialogProgress.update(65, "Buffering...")
+            break
 
-                    buffered = utils.convertTo('MB', (file.length * info.progress[0]/100))
+    # wait to download first 50MB of file
+    while True:
+        info = getInfoAboutStream(infoHash)
+        buffered = float(requests.get("http://{}:{}/torrents/{}/file".format(HOST_ADDRESS, PORT, infoHash), headers={'User-Agent': 'xbox-streaming', 'Content-Type':'application/json'}, json={'filePath': filePath}).text)
 
-                    if  buffered < BUFFER_SIZE:
-                        message = "Buffering: {:.2f} / {} Down: {:.2f} Up: {:.2f}".format(buffered, BUFFER_SIZE, utils.convertTo('KB', info.stats.speed.down), utils.convertTo('KB', info.stats.speed.up))
-                        DialogProgress.update(65, message)
-                        if DialogProgress.iscanceled():
-                            return None, "User cancelled"
-                        time.sleep(2)
+        if  buffered < BUFFER_SIZE:
+            message = "Buffering: {:.2f} / {} Down: {:.2f} Up: {:.2f}".format(buffered, BUFFER_SIZE, utils.convertTo('KB', info.stats.speed.down), utils.convertTo('KB', info.stats.speed.up))
+            DialogProgress.update(65, message)
+            if DialogProgress.iscanceled():
+                return None, "User cancelled"
+            time.sleep(1)
 
-                    else:
-                        DialogProgress.update(70, "Checking status of 'MOOV ATOM'...")
-                        break
+        else:
+            DialogProgress.update(70, "Checking status of 'MOOV ATOM'...")
+            break
 
-                # check status of moov atom and move it if needed
-                while True:
-                    response = requests.get("http://%s:%s%s?ffmpeg=probe" % (HOST_ADDRESS, PORT, file.link))
+    # check status of moov atom and move it if needed
+    while True:
+        response = requests.get("{}?ffmpeg=probe".format(stream_link))
 
-                    if response.status_code == 500:
-                        DialogProgress.update(75, "I have to  move 'MOOV ATOM'. Proceeding...")
-                        # TODO Figure out how to move this shit
-                        if DialogProgress.iscanceled():
-                            return None, "User cancelled"
-                        time.sleep(5)
+        if response.status_code == 500:
+            DialogProgress.update(75, "I have to  move 'MOOV ATOM'. Proceeding...")
+            # TODO Figure out how to move this shit
+            if DialogProgress.iscanceled():
+                return None, "User cancelled"
+            time.sleep(5)
 
-                    else:
-                        DialogProgress.update(95, "Succesfully generated stream link")
-                        return "http://%s:%s%s?ffmpeg=remux" % (HOST_ADDRESS, PORT, file.link), response.status_code
+        else:
+            DialogProgress.update(95, "Succesfully generated stream link")
+            break
 
-    return None
+    return "{}?ffmpeg=remux".format(stream_link), "Everything is ready."

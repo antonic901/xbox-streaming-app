@@ -36,7 +36,15 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
             query = self.entity.getProperty('title') + " " + self.entity.getProperty('release_date').split("-")[0]
             DialogProgress.update(50, 'Finding available streams...')
             streams, listitems = service.getStreams(query, "Movies")
-            ui = CGUIStream.CGUIStream('Stream.xml', utils.getScriptPath(), items=listitems, streams=streams, name=query, video_item=self.entity)
+
+            meta = {
+                'season': None,
+                'episode': None,
+                'name': self.entity.getProperty('title'),
+                'isMovie': True
+            }
+
+            ui = CGUIStream.CGUIStream('Stream.xml', utils.getScriptPath(), items=listitems, streams=streams, name=query, video_item=self.entity, meta=meta)
             ui.doModal()
             del ui
         elif id == self.cContainerActors:

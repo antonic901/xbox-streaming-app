@@ -19,7 +19,7 @@ def populateContainer(self, id, items):
 
 def renameFile(file_name):
     if len(file_name) > 42:
-        file_name = (file_name[:38] + '.srt').strip()
+        file_name = file_name[:38].strip() + '.srt'
     return file_name
 
 def writeFile(path, content):

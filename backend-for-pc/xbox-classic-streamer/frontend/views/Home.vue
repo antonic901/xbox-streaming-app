@@ -125,16 +125,16 @@ module.exports = {
 
       socket.on('selection', function (hash, selection) {
         // console.log('Selection...')
-        // self.findTorrent(hash).then(torrent => {
-        //   if (!torrent.files) {
-        //     return;
-        //   }
-        //   for (var i = 0; i < torrent.files.length; i++) {
-        //     var file = torrent.files[i];
-        //     file.selected = selection[i];
-        //   }
-        //   torrent.selected = _.every(torrent.files, 'selected');
-        // });
+        self.findTorrent(hash).then(torrent => {
+          if (!torrent.files) {
+            return;
+          }
+          for (var i = 0; i < torrent.files.length; i++) {
+            var file = torrent.files[i];
+            file.selected = selection[i];
+          }
+          torrent.selected = _.every(torrent.files, 'selected');
+        });
       });
 
       socket.on('destroyed', function (hash) {

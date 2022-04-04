@@ -69,7 +69,8 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
                 episode = "0%s" % episode
             
             DialogProgress.update(50, 'Finding available streams...')
-            streams, listitems = service.getStreams("%s s%se%s" % (self.entity.getProperty('title'), season, episode), "TV")
+            # streams, listitems = service.getStreams("%s s%se%s" % (self.entity.getProperty('title'), season, episode), "TV")
+            streams, listitems = service.getStreams("%s s%s" % (self.entity.getProperty('title'), season), "TV")
 
             item = xbmcgui.ListItem("TV Show",
                 iconImage=self.entity.getProperty('iconImage'),
@@ -89,7 +90,14 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
                 'genre': season
             })
 
-            ui = CGUIStream.CGUIStream('Stream.xml', utils.getScriptPath(), items=listitems, streams=streams, name=name, video_item=item)
+            meta = {
+                'season': season,
+                'episode': episode,
+                'name': self.entity.getProperty('title'),
+                'isMovie': False
+            }
+
+            ui = CGUIStream.CGUIStream('Stream.xml', utils.getScriptPath(), items=listitems, streams=streams, name=name, video_item=item, meta=meta)
             ui.doModal()
             del ui
     

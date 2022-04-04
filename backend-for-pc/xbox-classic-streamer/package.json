@@ -25,6 +25,7 @@
     "body-parser": "^1.19.0",
     "connect-multiparty": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
+    "episode-parser": "^2.0.2",
     "express": "^4.17.1",
     "lodash": "^4",
     "mkdirp": "^0.5.5",

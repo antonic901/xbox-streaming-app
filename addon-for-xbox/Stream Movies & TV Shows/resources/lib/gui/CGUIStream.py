@@ -13,6 +13,7 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
         self.items = kwargs['items']
         self.name = kwargs['name']
         self.video_item = kwargs['video_item']
+        self.meta = kwargs['meta']
         xbmcgui.WindowXMLDialog.__init__(self, *args, **kwargs)
 
     def onInit(self):
@@ -46,7 +47,7 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
 
             DialogProgress.update(25, 'Getting local stream link...')
             # DialogProgress.close()
-            link, message = service.getStreamLink(infoHash)
+            link, message = service.getStreamLink(infoHash, self.meta)
             
             if link is None:
                 DialogProgress.close()
