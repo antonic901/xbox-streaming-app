@@ -257,6 +257,8 @@ api.get('/torrents/:infoHash/files', findTorrent, function (req, res) {
 api.all('/torrents/:infoHash/files/:path([^"]+)', findTorrent, function (req, res) {
   var torrent = req.torrent, file = _.find(torrent.files, { path: req.params.path });
 
+  console.log(req.params.path);
+
   if (!file) {
     return res.sendStatus(404);
   }
@@ -266,7 +268,9 @@ api.all('/torrents/:infoHash/files/:path([^"]+)', findTorrent, function (req, re
   }
 
   var range = req.headers.range;
+  logger.log('NOTICE', 'Range: ' + range)
   range = range && rangeParser(file.length, range)[0];
+  logger.log('NOTICE', 'Range after parsing: ' + JSON.stringify(range))
   res.setHeader('Accept-Ranges', 'bytes');
   res.type(file.name);
   req.connection.setTimeout(3600000);
@@ -287,6 +291,28 @@ api.all('/torrents/:infoHash/files/:path([^"]+)', findTorrent, function (req, re
     return res.end();
   }
   pump(file.createReadStream(range), res);
+});
+
+/*
+>> Body:
+        path (String) -> relative path to file
+        end (size in Bytes) -> tell us how much tu buffer from end of file
+
+    Path:
+        infoHash (String) -> id of torrent
+
+    Query: None
+
+    Purpose:
+        Says torrent-stream engine to download last "end" bytes of file (file.length - end <-> file.length)
+*/
+api.get('/torrents/:infoHash/moov-atom', findTorrent, function (req, res) {
+    var torrent = req.torrent, file = _.find(torrent.files, { path: req.body.path });
+    file.createReadStream({
+        start: file.length - req.body.end,
+        end: file.length
+    })
+    res.sendStatus(200);
 });
 
 api.get('/torrents/:infoHash/archive', findTorrent, function (req, res) {

@@ -5,6 +5,7 @@ var path = require('path'),
   pump = require('pump'),
   logger = require('./utils/logger'),
   rangeParser = require('range-parser');
+const { send } = require('process');
 
 module.exports = function (req, res, torrent, file) {
   var param = req.query.ffmpeg,
@@ -57,17 +58,11 @@ module.exports = function (req, res, torrent, file) {
     pump(command, res);
   }
 
-  function xbox() {
-    throw new Error('To be implemented.');
-  }
-
   switch (param) {
     case 'probe':
       return probe();
     case 'remux':
       return remux();
-    case 'xbox':
-      return xbox();
     default:
       res.status(501).send('Not supported.');
   }

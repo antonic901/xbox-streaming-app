@@ -8,7 +8,8 @@ import utils.utils as utils
 import xbmcgui.DialogProgress as DialogProgress
 
 # in MB
-BUFFER_SIZE = 50
+BUFFER_SIZE_START = 50
+BUFFER_SIZE_END = 10
 
 path = "%s\\configuration.json" % os.getcwd()
 json_data = open(path).read()
@@ -207,6 +208,25 @@ def getInfoAboutStream(infoHash):
                 return None
             time.sleep(2)
 
+#TODO
+"""
+    >> Reimplement buffering algorithm.
+    Current algorithm:
+        1. Start downloading of whole file
+        2. Buffer hard-coded  beggining of file and hope it's enough
+        3. Checks if 'MOOV ATOM' is presented
+            3.1 If not found, buffer hard-coded end of file and hope it containes 'MOOV ATOM'
+        4. Start streaming
+
+    New algorithm:
+        1. Start downloading 'BUFFER_START_SIZE' beggining of file
+        2. Start downloading 'BUFFER_END_SIZE' end of file
+        3. Wait to buffer
+        4. Check status of file 
+            4.1 If error is presented (file corrupted or not found 'MOOV ATOM') repeat steps 1-3 (with multiplied BUFFER sizes with number of iteration) and check again
+        5. Start downloading of whole file
+        6. Start streaming
+"""
 def getStreamLink(infoHash, meta):
     info = getInfoAboutStream(infoHash)
     if meta['isMovie']:
@@ -240,8 +260,8 @@ def getStreamLink(infoHash, meta):
         info = getInfoAboutStream(infoHash)
         buffered = float(requests.get("http://{}:{}/torrents/{}/file".format(HOST_ADDRESS, PORT, infoHash), headers={'User-Agent': 'xbox-streaming', 'Content-Type':'application/json'}, json={'filePath': filePath}).text)
 
-        if  buffered < BUFFER_SIZE:
-            message = "Buffering: {:.2f} / {} Down: {:.2f} Up: {:.2f}".format(buffered, BUFFER_SIZE, utils.convertTo('KB', info.stats.speed.down), utils.convertTo('KB', info.stats.speed.up))
+        if  buffered < BUFFER_SIZE_START:
+            message = "Buffering: {:.2f} / {} Down: {:.2f} Up: {:.2f}".format(buffered, BUFFER_SIZE_START, utils.convertTo('KB', info.stats.speed.down), utils.convertTo('KB', info.stats.speed.up))
             DialogProgress.update(65, message)
             if DialogProgress.iscanceled():
                 return None, "User cancelled"
@@ -258,12 +278,15 @@ def getStreamLink(infoHash, meta):
         if response.status_code == 500:
             DialogProgress.update(75, "I have to  move 'MOOV ATOM'. Proceeding...")
             # TODO Figure out how to move this shit
+            response = requests.get("http://{}:{}/torrents/{}/moov-atom".format(HOST_ADDRESS, PORT, infoHash), headers={'User-Agent': 'xbox-streaming', 'Content-Type': 'application/json'}, json={'path': filePath, 'end': BUFFER_SIZE_END * 1024 * 1024})
+            if response.status_code != 200:
+                return None, "Error on API side"
             if DialogProgress.iscanceled():
                 return None, "User cancelled"
             time.sleep(5)
 
         else:
-            DialogProgress.update(95, "Succesfully generated stream link")
+            DialogProgress.update(95, "Succesfully downloaded MOOV ATOM")
             break
 
     return "{}?ffmpeg=remux".format(stream_link), "Everything is ready."
