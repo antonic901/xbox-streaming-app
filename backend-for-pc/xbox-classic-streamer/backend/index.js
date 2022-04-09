@@ -307,7 +307,7 @@ api.all('/torrents/:infoHash/files/:path([^"]+)', findTorrent, function (req, re
         Says torrent-stream engine to download last "end" bytes of file (file.length - end <-> file.length)
 */
 api.get('/torrents/:infoHash/moov-atom', findTorrent, function (req, res) {
-    var torrent = req.torrent, file = _.find(torrent.files, { path: req.body.path });
+    var torrent = req.torrent, file = _.find(torrent.files, { path: decodeURI(req.body.path) });
     file.createReadStream({
         start: file.length - req.body.end,
         end: file.length
