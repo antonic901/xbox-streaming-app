@@ -25,14 +25,21 @@ def FullMovieListItem(entity):
         thumbnailImage="%s%s" % (IMAGE_BACKDROP, entity.backdrop_path))
 
     item.setInfo('video', {
-        'genre': extractNamesFromList(entity.genres),
-        'imdbid': entity.imdb_id,
-        'audiolanguage': entity.original_language,
-        'plot': entity.overview,
-        'premiered': entity.release_date,
-        'duration': entity.runtime,
+        # 'genre': extractGenres(entity.genres),
+        # 'country': extractCountries(entity.production_countries),
+        'year': entity.release_date.split("-")[0],
+        'rating': entity.vote_average,
         'title': entity.title,
-        'rating': entity.vote_average
+        'originaltitle': entity.original_title,
+        # conflict with episode item (85: CGUITvShowInfo.py)
+        # 'plot': entity.overview,
+        'duration': entity.runtime,
+        'premiered': entity.release_date,
+        'votes': entity.vote_count,
+        # we are using this as container for TMDB_ID
+        'tagline': entity.id,
+        # we are using this as container for IMDB_ID
+        'director': entity.imdb_id
     })
 
     item.setProperty("adult", entity.adult)
@@ -84,13 +91,20 @@ def FullTvShowListItem(entity):
         thumbnailImage="%s%s" % (IMAGE_BACKDROP, entity.backdrop_path))
 
     item.setInfo('video', {
-        'genre': extractNamesFromList(entity.genres),
-        'audiolanguage': entity.original_language,
-        'plot': entity.overview,
-        'premiered': entity.first_air_date,
-        'duration': entity.episode_run_time[0],
+        # 'genre': extractGenres(entity.genres),
+        # 'country': extractCountries(entity.production_countries),
+        'year': entity.first_air_date.split("-")[0],
+        'rating': entity.vote_average,
         'title': entity.name,
-        'rating': entity.vote_average
+        # 'originaltitle': entity.original_title,
+        'plot': entity.overview,
+        'duration': entity.episode_run_time[0],
+        'premiered': entity.first_air_date,
+        'votes': entity.vote_count,
+        # we are using this as container for TMDB_ID
+        'tagline': entity.id
+        # we are using this as container for IMDB_ID
+        # 'director': entity.imdb_id
     })
     
     item.setProperty("iconImage", "%s%s" % (IMAGE_POSTER,entity.poster_path))
@@ -167,6 +181,18 @@ def extractNamesFromList(list):
             string = string + item.name + "/"
         i = i + 1
     return string
+
+def extractGenres(list):
+    genres = []
+    for item in list:
+        genres.append(item.name)
+    return genres
+
+def extractCountries(list):
+    countries = []
+    for item in list:
+        countries.append(item.name)
+    return countries
 
 def getGender(id):
     dict = {

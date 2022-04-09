@@ -3,7 +3,7 @@ const { app, BrowserWindow } = require("electron");
 // closes windows that keeps poping up when installing app on windows
 if (require('electron-squirrel-startup')) return app.quit();
 
-const server = require("./server/bin");
+const server = require("./backend/bin");
 
 let window;
 

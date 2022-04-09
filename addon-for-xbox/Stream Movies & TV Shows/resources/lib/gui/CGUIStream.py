@@ -9,10 +9,11 @@ from resources.lib.xbmcgui import DialogProgress
 class CGUIStream(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
-        self.__cwd__ = kwargs['__cwd__']
         self.streams = kwargs['streams']
         self.items = kwargs['items']
         self.name = kwargs['name']
+        self.video_item = kwargs['video_item']
+        self.meta = kwargs['meta']
         xbmcgui.WindowXMLDialog.__init__(self, *args, **kwargs)
 
     def onInit(self):
@@ -38,25 +39,23 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
             index = self.getControl(id).getSelectedPosition()
             torrent = self.streams[index]
 
-            DialogProgress.update(15, 'Getting magnet link of torrent...')
+            DialogProgress.update(10, 'Getting magnet link of torrent...')
             magnet = service.getMagnet(torrent)
             
-            DialogProgress.update(30, 'Starting stream...')
+            DialogProgress.update(20, 'Starting download...')
             infoHash = service.startStreaming(magnet)
 
-            xbmc.sleep(2500)
-            DialogProgress.update(45, 'Buffering...')
+            DialogProgress.update(25, 'Getting local stream link...')
+            # DialogProgress.close()
+            link, message = service.getStreamLink(infoHash, self.meta)
+            
+            if link is None:
+                DialogProgress.close()
+                xbmc.executebuiltin('Notification(%s, Could not generate stream link,5000,DefaultIconInfo.png)' % message)
+                self.close()
 
-            xbmc.sleep(2500)
-            DialogProgress.update(60, 'Buffering...')
-
-            xbmc.sleep(2500)
-            DialogProgress.update(75, 'Getting local stream link...')
-            link = service.getStreamLink(infoHash)
-            DialogProgress.update(90, 'Starting player...')
-            title = urllib.unquote_plus(self.name)
-            item = xbmcgui.ListItem(title)
-            xbmc.Player().play(link, item)
+            DialogProgress.update(95, 'Starting player...')
+            xbmc.Player().play(link, self.video_item)
             
             DialogProgress.close()
 

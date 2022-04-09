@@ -6,11 +6,11 @@
   "version": "0.0.1",
   "author": "Nikola Antonić",
   "bin": {
-    "xbox-streaming": "./server/bin.js"
+    "xbox-streaming": "./backend/bin.js"
   },
   "scripts": {
     "start": "electron-forge start",
-    "console": "node ./server/bin.js",
+    "console": "node ./backend/bin.js",
     "gui": "electron main.js",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -21,9 +21,11 @@
   "main": "main.js",
   "dependencies": {
     "archiver": "^3.0.0",
+    "axios": "^0.26.1",
     "body-parser": "^1.19.0",
     "connect-multiparty": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
+    "episode-parser": "^2.0.2",
     "express": "^4.17.1",
     "lodash": "^4",
     "mkdirp": "^0.5.5",
@@ -58,15 +60,21 @@
         {
           "name": "@electron-forge/maker-deb",
           "config": {
-            "categories": ["Utility"],
-            "depends": ["ffmpeg"],
+            "categories": [
+              "Utility"
+            ],
+            "depends": [
+              "ffmpeg"
+            ],
             "description": "Streaming torrent client for Original Xbox.",
             "genericName": "Original Xbox",
             "icon": "assets/icon.png",
             "homepage": "https://github.com/antonic901/xbox-streaming-app",
             "maintainer": "Nikola Antonić",
             "name": "xbox-streaming",
-            "preDepends": ["ffmpeg"],
+            "preDepends": [
+              "ffmpeg"
+            ],
             "priority": "required",
             "productDescription": "Used to monitor streams and to control Xbox via XBMC4Xbox HTTP API server.",
             "productName": "Original Xbox"
@@ -75,7 +83,9 @@
         {
           "name": "@electron-forge/maker-rpm",
           "config": {
-            "categories": ["Utility"],
+            "categories": [
+              "Utility"
+            ],
             "description": "Streaming torrent client for Original Xbox.",
             "genericName": "Original Xbox",
             "icon": "assets/icon.png",
@@ -83,7 +93,9 @@
             "name": "xbox-streaming",
             "productDescription": "Used to monitor streams and to control Xbox via XBMC4Xbox HTTP API server.",
             "productName": "Original Xbox",
-            "requires": ["ffmpeg"]
+            "requires": [
+              "ffmpeg"
+            ]
           }
         },
         {

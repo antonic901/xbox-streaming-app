@@ -10,7 +10,6 @@ from resources.lib.xbmcgui import DialogProgress
 class CGUIMovieInfo(xbmcgui.WindowXML):
 
     def __init__(self, *args, **kwargs):
-        self.__cwd__ = kwargs['__cwd__']
         self.entity = kwargs['entity']
         self.actors = kwargs['actors']
         self.DETECTOR = 0
@@ -37,7 +36,15 @@ class CGUIMovieInfo(xbmcgui.WindowXML):
             query = self.entity.getProperty('title') + " " + self.entity.getProperty('release_date').split("-")[0]
             DialogProgress.update(50, 'Finding available streams...')
             streams, listitems = service.getStreams(query, "Movies")
-            ui = CGUIStream.CGUIStream('Stream.xml', self.__cwd__, __cwd__=self.__cwd__, items=listitems, streams=streams, name=query)
+
+            meta = {
+                'season': None,
+                'episode': None,
+                'name': self.entity.getProperty('title'),
+                'isMovie': True
+            }
+
+            ui = CGUIStream.CGUIStream('Stream.xml', utils.getScriptPath(), items=listitems, streams=streams, name=query, video_item=self.entity, meta=meta)
             ui.doModal()
             del ui
         elif id == self.cContainerActors:
@@ -80,7 +87,7 @@ def onClickContainerActors(self, id):
     DialogProgress.update(75, 'Fetching TV Shows for actor...')
     tv_shows = service.getTvShowsForActor(item.getProperty('id'))
     DialogProgress.update(80, 'Opening actor...')
-    ui = CGUIActorInfo.CGUIActorInfo("ActorInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, actor=actor, movies=movies, tv_shows=tv_shows)
+    ui = CGUIActorInfo.CGUIActorInfo("ActorInfo.xml", utils.getScriptPath(), 'default', actor=actor, movies=movies, tv_shows=tv_shows)
     ui.doModal()
     del ui
 

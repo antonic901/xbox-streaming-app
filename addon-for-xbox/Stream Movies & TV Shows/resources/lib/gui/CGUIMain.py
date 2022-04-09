@@ -9,11 +9,18 @@ from resources.lib.xbmcgui import DialogProgress
 class CGUIMain(xbmcgui.WindowXML):
 
 	def __init__(self, *args, **kwargs):
-		self.__cwd__ = kwargs['__cwd__']
 		self.DETECTOR = 0
 		xbmcgui.WindowXML.__init__(self, *args, **kwargs)
 
 	def onInit(self):
+		"""
+			Let's say you opened new window from this window (i.e. you opened some Movie).
+			When closing second Window constructor of this Window will be called again for some reason.
+			This behavior reproduce some weird glitches and sometimes crashes or freezes Xbox.
+			Workaround for this is to have variable 'Detector' which initial value is 0. When constructor is called
+			for the firstime value of 'Detector' will be set to 1. So when you open another window and close it,
+			code inside 'if' statement will not be executed (we only want this code to be executed one time).
+		"""
 		if self.DETECTOR is 0:
 			DialogProgress.create('XBMC4Xbox', 'Initializing home page...')
 			DialogProgress.update(25, 'Assigning IDs...')
@@ -35,15 +42,15 @@ class CGUIMain(xbmcgui.WindowXML):
 
 		#274 is 'Start' button
 		elif action.getButtonCode() == 274:
-			# upamtimo komponentu koja je imala fokus
+			# remember component which have focus
 			focusId = self.getFocusId()
 			
 			import resources.lib.gui.CGUISettings as CGUISettings
-			ui = CGUISettings.CGUISettings('_Settings.xml', self.__cwd__, 'default', allow_cancel=True)
+			ui = CGUISettings.CGUISettings('_Settings.xml', utils.getScriptPath(), 'default', allow_cancel=True)
 			ui.doModal()
 			del ui
 
-			#vratimo fokus komponenti
+			# return focus to component
 			self.setFocusId(focusId)
 
 	def onFocus(self, controlId):
@@ -141,13 +148,13 @@ def onClickControlPanelMenu(self):
 				DialogProgress.update(50, "Searching Movies...")
 				items = service.searchMovies(enteredText, 1)
 				DialogProgress.update(75, "Opening search results...")
-				ui = CGUISearch.CGUISearch('Search.xml', self.__cwd__, 'default', __cwd__=self.__cwd__, query=enteredText, type='Movies', items=items)
+				ui = CGUISearch.CGUISearch('Search.xml', utils.getScriptPath(), 'default', query=enteredText, type='Movies', items=items)
 
 			else:
 				DialogProgress.update(50, "Searching TV Shows...")
 				items = service.searchTvShows(enteredText, 1)
 				DialogProgress.update(99, "Opening search results...")
-				ui = CGUISearch.CGUISearch('Search.xml', self.__cwd__, 'default', __cwd__=self.__cwd__, query=enteredText, type='TV Shows', items=items)
+				ui = CGUISearch.CGUISearch('Search.xml', utils.getScriptPath(), 'default', query=enteredText, type='TV Shows', items=items)
 
 			ui.doModal()
 			del ui
@@ -165,7 +172,7 @@ def onClickControlPanelContainer(self, id):
 		DialogProgress.update(50, 'Fetching actors...')
 		actors = service.getActorsForMovie(item.getProperty("id"))
 		DialogProgress.update(75, 'Opening Movie...')
-		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", utils.getScriptPath(), 'default', entity=entity, actors=actors)
 
 	else:
 		DialogProgress.update(25, 'Fetching info about TV Show...')
@@ -173,7 +180,7 @@ def onClickControlPanelContainer(self, id):
 		DialogProgress.update(50, 'Fetching actors...')
 		actors = service.getActorsForTvShow(item.getProperty("id"))
 		DialogProgress.update(75, 'Opening TV Show...')
-		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", utils.getScriptPath(), 'default', entity=entity, actors=actors)
 
 	ui.doModal()
 	del ui

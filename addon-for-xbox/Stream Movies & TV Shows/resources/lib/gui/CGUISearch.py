@@ -9,7 +9,6 @@ from resources.lib.xbmcgui import DialogProgress
 class CGUISearch(xbmcgui.WindowXML):
 
     def __init__(self, *args, **kwargs):
-        self.__cwd__ = kwargs['__cwd__']
         self.query = kwargs['query']
         self.type = kwargs['type']
         self.items = kwargs['items']
@@ -56,7 +55,7 @@ def onClickControlPanelContainer(self, id):
 		DialogProgress.update(50, 'Fetching actors...')
 		actors = service.getActorsForMovie(item.getProperty("id"))
 		DialogProgress.update(75, 'Opening Movie...')
-		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
+		ui = CGUIMovieInfo.CGUIMovieInfo("MovieInfo.xml", utils.getScriptPath(), 'default', entity=entity, actors=actors)
 
 	else:
 		DialogProgress.update(25, 'Fetching info about TV Show...')
@@ -64,7 +63,7 @@ def onClickControlPanelContainer(self, id):
 		DialogProgress.update(50, 'Fetching actors...')
 		actors = service.getActorsForTvShow(item.getProperty("id"))
 		DialogProgress.update(75, 'Opening TV Show...')
-		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", self.__cwd__, 'default', __cwd__=self.__cwd__, entity=entity, actors=actors)
-		
+		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", utils.getScriptPath(), 'default', entity=entity, actors=actors)
+	
 	ui.doModal()
 	del ui
