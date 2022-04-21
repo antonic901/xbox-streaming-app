@@ -14,7 +14,7 @@ var STATIC_OPTIONS = { maxAge: 3600000 };
 process.title = 'xbox-streaming-server';
 
 var host = process.env.HOST || network.getHostAddress();
-var port = process.env.PORT || 9005;
+var port = process.env.PORT || 9006;
 
 if (!configuration.readConfigurationFile()) {
   logger.log('NOTICE', 'Configuration file is not found. Creating one...');
