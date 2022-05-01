@@ -1,7 +1,5 @@
 'use strict';
 
-const { urlencoded } = require('body-parser');
-
 var rangeParser = require('range-parser'),
   pump = require('pump'),
   _ = require('lodash'),
@@ -151,7 +149,7 @@ api.post('/torrents/:infoHash/episode', findTorrent, function(req, res) {
         if (!result) {
             file.deselect();
         }
-        else if(result.episode == episode && result.season == season) {
+        else if(result.episode == episode && result.season == season && (result.ext == 'mkv' || result.ext == 'mp4' || result.ext == 'avi')) {
             logger.log('NOTICE', 'selecting ' + file.name)
             path = file.path;
             file.select();
