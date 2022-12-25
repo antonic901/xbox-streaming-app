@@ -2,6 +2,8 @@
 ###### Stream Movies & TV Shows on your Original Xbox!
 ![Fanart](https://github.com/antonic901/xbox-streaming-app/blob/master/images/fanart.png?raw=true)
 ###### Hello to all! This is a project I have been working on for some time. Everything started with my motivation to learn how to make skins for Kodi, and because Kodi originated on Original Xbox (then called XBMC) I came to great idea to make program witch will stream Movies and TV Shows on this dated hardware. Motivation also came from desire to show why Xbox was a big deal back in the day and why it is such a great system. This console was ahead of it's time!
+## Support
+<a href="https://www.buymeacoffee.com/antonic901" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ## Table of Contents
 - [Info](#info)
@@ -76,9 +78,6 @@ Status values:
 | Get info about torrent                            |   ✓    |
 | FFmpeg convertion to H.263                        |   ✓    |
 | Frontend                                          |   ✓    |
-
-## Support
-<a href="https://www.buymeacoffee.com/antonic901" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ## Video
 [![Watch the video](https://i.postimg.cc/MHwKGTNw/Screenshot-from-2022-03-24-23-32-49.png)](https://www.youtube.com/watch?v=IKsCAWdUhbw)
