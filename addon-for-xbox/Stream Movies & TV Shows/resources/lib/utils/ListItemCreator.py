@@ -41,10 +41,10 @@ def FullMovieListItem(entity):
         'director': entity.imdb_id
     })
 
-    item.setProperty("adult", entity.adult)
+    item.setProperty("adult", str(entity.adult))
     item.setProperty("iconImage", "%s%s" % (IMAGE_POSTER,entity.poster_path))
     item.setProperty('thumbImage', "%s%s" % (IMAGE_BACKDROP, entity.backdrop_path))
-    item.setProperty("belongs_to_collection", entity.belongs_to_collection)
+    # item.setProperty("belongs_to_collection", entity.belongs_to_collection)
     item.setProperty("budget", str(entity.budget))
     item.setProperty("genres", extractNamesFromList(entity.genres))
     item.setProperty("homepage", entity.homepage)
@@ -54,12 +54,12 @@ def FullMovieListItem(entity):
     item.setProperty("original_title", entity.original_title)
     item.setProperty("overview", entity.overview)
     item.setProperty("popularity", str(entity.popularity))
-    item.setProperty("production_companies", entity.production_companies)
-    item.setProperty("production_countries", entity.production_countries)
+    # item.setProperty("production_companies", entity.production_companies)
+    # item.setProperty("production_countries", entity.production_countries)
     item.setProperty("release_date", entity.release_date)
     item.setProperty("revenue", str(entity.revenue))
     item.setProperty("runtime", str(entity.runtime))
-    item.setProperty("spoken_languages", entity.spoken_languages)
+    # item.setProperty("spoken_languages", entity.spoken_languages)
     item.setProperty("status", entity.status)
     item.setProperty("tagline", entity.tagline)
     item.setProperty("title", entity.title)
@@ -136,7 +136,7 @@ def FullActorListItem(entity):
     item = xbmcgui.ListItem('Actor',
         iconImage="%s%s" % (IMAGE_POSTER, entity.profile_path))
 
-    item.setProperty('also_known_as', entity.also_known_as)
+    # item.setProperty('also_known_as', entity.also_known_as)
     item.setProperty('biography', entity.biography)
     item.setProperty('birthday', entity.birthday)
     item.setProperty('gender', getGender(entity.gender))
