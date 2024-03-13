@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.popcornbox" name="Stream Movies and TV Shows" version="0.0.2" provider-name="antonic901">
+<addon id="script.popcornbox"
+       name="Stream Movies and TV Shows"
+       version="0.0.2"
+       provider-name="Nikola Antonic (antonic901)">
 	<requires>
 		<import addon="xbmc.python" version="2.7.11" />
 	</requires>
@@ -9,6 +12,6 @@
 	<extension point="xbmc.addon.metadata">
 			<summary lang="en">Streaming service for Xbox</summary>
 			<description lang="en">This script is used for streaming movies and TV shows on Xbox.</description>
-			<platform>all</platform>
+			<platform>xbox</platform>
 	</extension>
 </addon>

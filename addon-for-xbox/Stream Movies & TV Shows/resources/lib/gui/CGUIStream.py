@@ -1,6 +1,4 @@
-import os, sys, urllib
 import xbmc, xbmcgui
-import CGUIMovieInfo, CGUITvShowInfo
 
 from resources.lib.utils import utils
 from resources.lib import service
@@ -41,14 +39,14 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
 
             DialogProgress.update(10, 'Getting magnet link of torrent...')
             magnet = service.getMagnet(torrent)
-            
+
             DialogProgress.update(20, 'Starting download...')
             infoHash = service.startStreaming(magnet)
 
             DialogProgress.update(25, 'Getting local stream link...')
             # DialogProgress.close()
             link, message = service.getStreamLink(infoHash, self.meta)
-            
+
             if link is None:
                 DialogProgress.close()
                 xbmc.executebuiltin('Notification(%s, Could not generate stream link,5000,DefaultIconInfo.png)' % message)
@@ -56,7 +54,7 @@ class CGUIStream(xbmcgui.WindowXMLDialog):
 
             DialogProgress.update(95, 'Starting player...')
             xbmc.Player().play(link, self.video_item)
-            
+
             DialogProgress.close()
 
             self.close()

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os, sys
 import xbmc, xbmcgui
 import CGUIActorInfo, CGUIStream
 
@@ -48,14 +47,14 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
 
         elif id == self.cContainerSeasons:
             item = self.getControl(id).getSelectedItem()
-            episodes = service.getInfoAboutSeason(self.entity.getProperty('id'), item.getProperty('season_number'))
+            episodes = service.getInfoAboutSeason(self.entity.getProperty('id'), int(item.getProperty('season_number')))
             utils.populateContainer(self, self.cContainerEpisodes, episodes)
             populateTextBox(self, self.cTextBoxOverview, episodes[0].getProperty('overview'))
 
         elif id == self.cContainerEpisodes:
             item = self.getControl(id).getSelectedItem()
             populateTextBox(self, self.cTextBoxOverview, item.getProperty('overview'))
-        
+
         elif id == self.cButtonWatchEpisode:
             DialogProgress.create('XBMC4Xbox', 'Calling local API...')
             name = self.entity.getProperty('title')
@@ -67,7 +66,7 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
 
             if episode < 10:
                 episode = "0%s" % episode
-            
+
             DialogProgress.update(50, 'Finding available streams...')
             # streams, listitems = service.getStreams("%s s%se%s" % (self.entity.getProperty('title'), season, episode), "TV")
             streams, listitems = service.getStreams("%s s%s" % (self.entity.getProperty('title'), season), "TV")
@@ -100,7 +99,7 @@ class CGUITvShowInfo(xbmcgui.WindowXML):
             ui = CGUIStream.CGUIStream('Stream.xml', utils.getScriptPath(), items=listitems, streams=streams, name=name, video_item=item, meta=meta)
             ui.doModal()
             del ui
-    
+
     def onFocus(self, controlId):
         pass
 
@@ -133,11 +132,11 @@ def populateWithContent(self):
     self.getControl(self.cTextBoxDescription).setText(self.entity.getProperty('overview'))
 
     utils.populateContainer(self, self.cContainerActors, self.actors)
-    
+
     items = []
     for i in range(int(self.entity.getProperty('number_of_seasons'))):
         item = xbmcgui.ListItem('Season')
-        item.setProperty('season_number', i + 1)
+        item.setProperty('season_number', str(i + 1))
         items.append(item)
     utils.populateContainer(self, self.cContainerSeasons, items)
 

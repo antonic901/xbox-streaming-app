@@ -1,4 +1,3 @@
-import os, sys
 import json
 
 script_path = None
@@ -11,7 +10,7 @@ def getScriptPath():
     global script_path
     return script_path
 
-def createObject(jsonObject):    
+def createObject(jsonObject):
     class Generic:
         @classmethod
         def from_dict(cls, dict):

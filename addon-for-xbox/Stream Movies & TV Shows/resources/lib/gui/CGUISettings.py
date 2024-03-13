@@ -1,4 +1,4 @@
-import os, sys
+import os
 import xbmc, xbmcgui
 import json
 from resources.lib.utils import utils
@@ -50,12 +50,12 @@ class CGUISettings(xbmcgui.WindowXMLDialog):
                 if value in ['', None]:
                     xbmc.executebuiltin('Notification(Settings,%s is not valid!,5000,DefaultIconInfo.png)' % key)
                     return
-            
+
             print ("Updating configuration file...")
             with open(self.path, "w+") as configuration:
                 json.dump(self.dict, configuration)
                 configuration.close()
-            
+
             print ("Configuration file is updated!")
 
             xbmc.executebuiltin('Notification(Settings,Settings are saved,5000,DefaultIconInfo.png)')
@@ -65,12 +65,12 @@ class CGUISettings(xbmcgui.WindowXMLDialog):
             item = self.getControl(id).getSelectedItem()
 
             enteredText = ''
-            if item.getProperty('isHostAddress'):
+            if item.getProperty('isHostAddress') == "True":
                 keyboard = xbmcgui.Dialog()
                 enteredText = keyboard.numeric(3, 'Please enter Host Address')
                 del keyboard
 
-            elif item.getProperty('isPort'):
+            elif item.getProperty('isPort') == "True":
                 keyboard = xbmcgui.Dialog()
                 enteredText = keyboard.numeric(0, 'Please enter port')
                 del keyboard
@@ -97,10 +97,10 @@ def createMenu(self):
 
         # sets property to know which type of keyboard to open
         if 'HOST' in key:
-            item.setProperty('isHostAddress', True)
+            item.setProperty('isHostAddress', "True")
 
         elif 'PORT' in key:
-            item.setProperty('isPort', True)
+            item.setProperty('isPort', "True")
 
         cPanel.addItem(item)
 

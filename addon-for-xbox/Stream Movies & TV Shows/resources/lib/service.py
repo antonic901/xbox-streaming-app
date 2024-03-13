@@ -1,8 +1,6 @@
-import os, sys, time
+import os, time
 # import requests
 import packages.requests as requests
-import urllib
-import json
 import utils.ListItemCreator as create
 import utils.utils as utils
 import xbmcgui.DialogProgress as DialogProgress
@@ -222,7 +220,7 @@ def getInfoAboutStream(infoHash):
         1. Start downloading 'BUFFER_START_SIZE' beggining of file
         2. Start downloading 'BUFFER_END_SIZE' end of file
         3. Wait to buffer
-        4. Check status of file 
+        4. Check status of file
             4.1 If error is presented (file corrupted or not found 'MOOV ATOM') repeat steps 1-3 (with multiplied BUFFER sizes with number of iteration) and check again
         5. Start downloading of whole file
         6. Start streaming

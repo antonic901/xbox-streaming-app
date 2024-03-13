@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os, sys
 import xbmc, xbmcgui
 import CGUIMovieInfo, CGUITvShowInfo
 
@@ -82,7 +81,7 @@ def onClickControlPanelContainer(self, id):
 		actors = service.getActorsForTvShow(item.getProperty("id"))
 		DialogProgress.update(75, 'Opening Movie...')
 		ui = CGUITvShowInfo.CGUITvShowInfo("TvShowInfo.xml", utils.getScriptPath(), 'default', entity=entity, actors=actors)
-		
+
 	ui.doModal()
 	del ui
 
